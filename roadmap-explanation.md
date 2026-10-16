@@ -1,17 +1,23 @@
-# 🚀 ROADMAP FULL STACK JAVASCRIPT V2 (Versi Lengkap + Cara Membaca Kode)
+# 🚀 ROADMAP FULL STACK JAVASCRIPT V2 (Versi Lengkap + Panduan Memahami Kode)
 
 Dokumen ini adalah versi yang dilengkapi dari roadmap awal. Setiap materi punya:
 - **Penjelasan** singkat (apa & kenapa)
 - **Contoh kode**
-- **🔍 Cara membaca kode** (urutan membaca, supaya tidak bingung)
+- **Penjelasan konsep dan alur contoh kode**
 
 Materi bertanda 🆕 adalah **tambahan baru** yang tidak ada di roadmap awal.
+
+### Cara memahami istilah di dokumen ini
+
+Istilah yang umum dipakai developer di seluruh dunia—seperti **scope**, **state**, **render**, **endpoint**, dan **migration**—sengaja tetap ditulis dalam bahasa Inggris. Istilah tersebut biasanya muncul dengan nama yang sama di dokumentasi, kode, pesan error, dan diskusi kerja. Penjelasannya ditulis dalam bahasa Indonesia agar maknanya mudah dipahami. Jika dua istilah mirip tetapi tidak sama, perbedaannya dijelaskan secara terpisah, bukan diterjemahkan menjadi satu kata yang berpotensi membingungkan.
+
+Roadmap ini bisa dibaca berurutan atau per topik. Untuk setiap contoh, coba kenali input, proses, dan output-nya; lalu cocokkan penjelasan dengan simbol atau baris kode yang disebut. Glosarium di bagian akhir memberi definisi yang lebih lengkap untuk istilah yang sering muncul.
 
 ---
 
 ## 📌 DAFTAR ISI
 0. [Evaluasi: Apa yang Kurang dari Roadmap Awal](#0-evaluasi-apa-yang-kurang-dari-roadmap-awal)
-1. [Cara Membaca Kode (Aturan Umum)](#1-cara-membaca-kode-aturan-umum)
+1. [Memahami dan Menelusuri Kode](#1-memahami-dan-menelusuri-kode)
 2. [Phase 0 🆕: Fondasi Lingkungan Kerja](#phase-0--fondasi-lingkungan-kerja-minggu-1-2)
 3. [Phase 1: JavaScript Modern & Asynchronous](#phase-1-javascript-modern--asynchronous-bulan-1)
 4. [Phase 2: Tailwind & React](#phase-2-tailwind--react-bulan-2-3)
@@ -19,7 +25,7 @@ Materi bertanda 🆕 adalah **tambahan baru** yang tidak ada di roadmap awal.
 6. [Phase 4: Database, Backend & Keamanan](#phase-4-database-backend--keamanan-bulan-6-7)
 7. [Phase 5: Capstone, Testing & Deployment](#phase-5-capstone-testing--deployment-bulan-8)
 8. [Phase 6 🆕: Persiapan Karier](#phase-6--persiapan-karier-berjalan-paralel)
-9. [Glosarium](#glosarium-ringkas)
+9. [Glosarium](#glosarium-istilah-pemrograman)
 
 ---
 
@@ -56,68 +62,81 @@ Secara urutan, roadmap awal sudah bagus (JS → UI → framework → database �
 
 ---
 
-# 1. Cara Membaca Kode (Aturan Umum)
+# 1. Memahami dan Menelusuri Kode
 
-Banyak pemula merasa kode "sulit dibaca" karena membacanya seperti novel, dari kiri ke kanan, atas ke bawah. Kode sebaiknya dibaca dengan strategi berikut.
+Kode tidak memiliki satu cara khusus untuk "dibaca keras-keras". Developer biasanya memahami kode dengan mengenali struktur program, aturan bahasa, aliran data, dan urutan eksekusinya. Penjelasan di bagian-bagian berikut memberi konteks pada konsep; kode tetap dibaca dan ditelusuri sesuai sintaks bahasa serta tujuan program.
 
-### Aturan 1: Baca tanda `=` dari KANAN ke KIRI
-Tanda `=` bukan "sama dengan", tapi **"simpan hasil sisi kanan ke sisi kiri"**.
+### 1. Mulai dari tujuan dan konteks
+
+Sebelum membaca detail, cari tahu apa tanggung jawab file atau bagian kode tersebut. Periksa nama file, `import` yang dipakai, `export` yang disediakan, serta cara fungsi atau component itu dipanggil. Ini membantu menentukan titik awal penelusuran tanpa harus membaca seluruh proyek sekaligus.
+
+### 2. Ikuti aliran eksekusi
+
+Di dalam satu function, instruksi biasanya dijalankan berurutan dari atas ke bawah, kecuali alur berubah karena `if`, loop, `return`, `throw`, atau operasi asynchronous. Bedakan juga deklarasi dengan pemanggilan: mendefinisikan function belum menjalankannya.
+
+```js
+  function hitungTotal(harga, jumlah) {
+    const total = harga * jumlah;
+  return total;
+}
+
+const hasil = hitungTotal(5000, 3);
+```
+Function `hitungTotal` didefinisikan terlebih dahulu. Saat `hitungTotal(5000, 3)` dipanggil, nilai argument diterima oleh parameter, perkalian dihitung, lalu hasil dikembalikan dan disimpan ke `hasil`.
+
+### 3. Pahami ekspresi berdasarkan sintaks dan prioritas operator
+
+Jangan menganggap semua kode dibaca dengan aturan "kanan ke kiri" atau selalu dari ekspresi paling dalam. Ikuti aturan sintaks bahasa: operator memiliki prioritas, function dipanggil sesuai tanda kurung, dan nilai hasil dapat menjadi input bagi operasi berikutnya. Jika ekspresi terlalu padat, pecah menjadi beberapa variable agar alurnya lebih jelas.
+
 ```js
 const total = harga * jumlah;
+const totalDenganPajak = total * (1 + tarifPajak);
 ```
-🔍 Baca: "Hitung `harga` kali `jumlah`, lalu simpan hasilnya ke variabel bernama `total`."
+Pada assignment, JavaScript mengevaluasi ekspresi di sebelah kanan lalu menetapkan nilainya ke variable di sebelah kiri. `=` adalah assignment, bukan operator untuk memeriksa kesamaan; perbandingan nilai biasanya menggunakan `===`.
 
-### Aturan 2: Baca dari DALAM ke LUAR untuk pemanggilan bertingkat
+### 4. Telusuri aliran data dan nilai balik
+
+Saat sebuah nilai melewati beberapa operasi, identifikasi input setiap operasi dan hasil yang diteruskan ke operasi berikutnya. Method array seperti `filter`, `map`, dan `sort` dapat dirangkai, tetapi masing-masing memiliki peran dan hasil yang berbeda.
+
 ```js
-console.log(Math.max(...angka.map(n => n * 2)));
+const namaProdukTersedia = produk
+  .filter((item) => item.stok > 0)
+  .map((item) => item.nama)
+  .sort();
 ```
-🔍 Baca dari yang paling dalam:
-1. `angka.map(n => n * 2)` → kalikan tiap angka 2, hasilnya array baru.
-2. `...` → sebar array itu jadi argumen terpisah.
-3. `Math.max(...)` → cari yang terbesar.
-4. `console.log(...)` → cetak hasilnya.
+Urutannya: `filter` menghasilkan array produk yang stoknya tersedia; `map` mengubah array tersebut menjadi nama produk; `sort` mengurutkan nama-nama itu. Format beberapa baris tidak mengubah hasil, tetapi membantu melihat setiap tahap transformasi.
 
-### Aturan 3: Baca rantai titik (`.`) satu per satu, urut dari kiri
-```js
-produk.filter(p => p.stok > 0).map(p => p.nama).sort();
-```
-🔍 Baca: "Ambil `produk` → **saring** yang stoknya > 0 → **ambil namanya saja** → **urutkan**." Tiap `.metode()` menerima hasil dari langkah sebelumnya (seperti pipa air).
+### 5. Tafsirkan tanda baca menurut konteks
 
-### Aturan 4: Panah `=>` dibaca "menghasilkan / lalu"
-```js
-const kuadrat = (n) => n * n;
-```
-🔍 Baca: "`kuadrat` adalah fungsi: **jika diberi `n`, maka menghasilkan `n * n`**."
+Simbol yang sama dapat mempunyai fungsi berbeda berdasarkan sintaks di sekitarnya. Misalnya `{}` dapat menjadi blok function, object literal, atau area ekspresi JavaScript di JSX. Tentukan dulu konstruksi yang sedang dibaca, baru tafsirkan simbolnya.
 
-### Aturan 5: Kurung `( )`, kurung kurawal `{ }`, kurung siku `[ ]` punya arti berbeda
+| Bentuk | Fungsi dalam konteks contoh |
+|---|---|
+| `tambah(1, 2)` | Memanggil function dengan dua argument |
+| `if (aktif) { ... }` | Blok pernyataan yang dijalankan saat kondisi benar |
+| `const user = { nama: "Budi" }` | Object literal dengan property `nama` |
+| `const [pertama, kedua] = daftar` | Array destructuring |
+| `<Kartu />` | JSX untuk menggunakan component |
+| `Array<string>` | Generic TypeScript dengan elemen bertipe `string` |
 
-| Simbol | Dibaca sebagai | Contoh |
-|---|---|---|
-| `( )` | argumen / pengelompokan | `tambah(1, 2)` |
-| `{ }` | **blok kode** atau **objek** (tergantung posisi) | `if (x) { ... }` / `{ nama: "Budi" }` |
-| `[ ]` | **array** atau akses indeks | `[1,2,3]` / `daftar[0]` |
-| `< >` | tag JSX atau tipe generic TypeScript | `<Card />` / `Array<string>` |
+### 6. Ikuti alur asynchronous secara terpisah
 
-### Aturan 6: Pertama cari "pintu masuk", jangan baca semua baris
-Saat membuka file asing:
-1. Lihat `import` di atas → file ini memakai apa?
-2. Lihat `export` → apa yang disediakan file ini?
-3. Cari fungsi utama (di React: fungsi yang `return` JSX).
-4. Baru telusuri detailnya.
+Operasi seperti `fetch` tidak selalu selesai saat baris pemanggilannya berjalan. Perhatikan `await`, `.then()`, callback, dan penanganan error untuk mengetahui kapan hasil tersedia dan ke mana alurnya berlanjut. Pada React, `useEffect` juga berjalan pada tahap yang berbeda dari kode render component.
 
-### Aturan 7: Baca pesan error dari ATAS dan cari nama file milikmu
-```
+### 7. Gunakan stack trace untuk menemukan konteks error
+
+Stack trace menunjukkan error dan rangkaian pemanggilan function saat error terjadi. Cari frame yang menunjuk ke file aplikasi sendiri, lalu periksa nilai dan operasi pada lokasi itu. Frame dari library tetap dapat memberi konteks; jangan langsung mengabaikannya jika penyebabnya belum jelas.
+
+```text
 TypeError: Cannot read properties of undefined (reading 'nama')
     at KartuProduk (app/produk/page.tsx:12:20)
     at renderWithHooks (node_modules/react-dom/...)
 ```
-🔍 Baca:
-- Baris 1 = **apa yang salah**: kamu mencoba membaca `.nama` dari sesuatu yang `undefined`.
-- Baris 2 = **di mana**: file `app/produk/page.tsx` baris 12 kolom 20 (file milikmu).
-- Baris `node_modules/...` biasanya bukan sumber masalahnya, abaikan dulu.
+Contoh ini menunjukkan bahwa akses property `nama` gagal karena nilai di depannya `undefined`. Frame `KartuProduk` menunjuk ke file aplikasi pada baris 12, kolom 20; telusuri dari sana nilai apa yang seharusnya tersedia dan mengapa nilainya belum ada.
 
-### Aturan 8: Gunakan notasi "baca keras-keras" (rubber duck)
-Jelaskan tiap baris dengan kalimat sendiri. Kalau tidak bisa dijelaskan, berarti belum paham.
+### 8. Gunakan penjelasan verbal sebagai alat bantu opsional
+
+Menjelaskan alur kepada rekan, menulis catatan, atau memakai teknik *rubber duck debugging* dapat membantu saat menemui bug. Teknik ini adalah alat bantu untuk mengurai masalah, bukan aturan wajib untuk membaca atau menulis setiap baris kode.
 
 ---
 
@@ -134,7 +153,7 @@ cd belajar-js       # masuk ke folder
 cd ..               # naik satu folder
 mkdir proyek-baru   # buat folder
 ```
-🔍 **Cara membaca:** tiap baris = `perintah [opsi] [target]`. Teks setelah `#` adalah komentar, bukan bagian perintah. Pola umum: **kata kerja** (`cd`, `mkdir`) lalu **objek yang dikenai** (nama folder).
+🔍 **Penjelasan:** tiap baris = `perintah [opsi] [target]`. Teks setelah `#` adalah komentar, bukan bagian perintah. Pola umum: **kata kerja** (`cd`, `mkdir`) lalu **objek yang dikenai** (nama folder).
 
 ## 0.2 Node.js & npm
 
@@ -159,7 +178,7 @@ npm run dev                # jalankan script bernama "dev"
   }
 }
 ```
-🔍 **Cara membaca `package.json`:**
+🔍 **Struktur `package.json`:**
 1. `name` → nama proyek.
 2. `scripts` → "singkatan perintah". `npm run dev` akan menjalankan `next dev`.
 3. `dependencies` → daftar library yang dibutuhkan proyek beserta versinya. `^1.7.0` artinya "versi 1.7.0 atau yang lebih baru di rentang 1.x".
@@ -182,7 +201,7 @@ npm run dev                # jalankan script bernama "dev"
   });
 </script>
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 1. `getElementById("btn")` → "cari elemen yang `id`-nya `btn`", simpan ke `tombol`.
 2. `addEventListener("click", ...)` → "**saat** `tombol` diklik, **jalankan** fungsi ini".
 3. Fungsi di dalamnya mengganti teks elemen `hasil`.
@@ -207,7 +226,7 @@ function hitungDiskon(harga, persen) {
   return harga - diskon;
 }
 ```
-🔍 **Cara membaca/menggunakan:** sisipkan `console.log` di titik yang dicurigai, jalankan, lalu bandingkan **nilai yang kamu kira** dengan **nilai sebenarnya**. Bug hampir selalu berada di titik pertama di mana keduanya berbeda.
+🔍 **Debugging:** sisipkan `console.log` di titik yang dicurigai, jalankan, lalu bandingkan **nilai yang kamu kira** dengan **nilai sebenarnya**. Bug hampir selalu berada di titik pertama di mana keduanya berbeda.
 
 ## 0.5 ESLint & Prettier
 
@@ -230,7 +249,7 @@ let umur = 17;
 umur = 18;       // boleh
 nama = "Andi";   // ERROR
 ```
-🔍 **Cara membaca:** `const` = "konstan, nama ini tidak boleh dipindah ke nilai lain". `let` = "boleh diganti". Catatan: `const` pada objek/array hanya mengunci **penunjuknya**, isinya masih bisa diubah:
+🔍 **Penjelasan:** `const` = "konstan, nama ini tidak boleh dipindah ke nilai lain". `let` = "boleh diganti". Catatan: `const` pada objek/array hanya mengunci **penunjuknya**, isinya masih bisa diubah:
 ```js
 const daftar = [1, 2];
 daftar.push(3);     // boleh! isi array berubah
@@ -254,10 +273,10 @@ function contoh() {
 }
 console.log(lokal);   // ERROR: lokal tidak terlihat di luar fungsi
 ```
-🔍 **Cara membaca (aturan "kotak boneka matryoshka"):**
-- Kode bisa melihat variabel di kotaknya sendiri **dan kotak-kotak di luarnya**.
-- Kode **tidak bisa** melihat isi kotak di dalamnya.
-- Setiap pasang `{ }` (fungsi, `if`, `for`) membuat kotak baru untuk `let`/`const`.
+🔍 **Aturan lexical scope:**
+- Kode dapat mengakses deklarasi pada scope saat ini dan scope pembungkusnya.
+- Kode di scope luar tidak dapat mengakses deklarasi yang hanya ada di scope bagian dalam.
+- `let` dan `const` yang dideklarasikan di dalam block hanya tersedia di block tersebut dan block di dalamnya.
 
 **Closure** = fungsi yang tetap "mengingat" variabel dari kotak tempat ia lahir, meski kotaknya sudah selesai dijalankan.
 
@@ -274,7 +293,7 @@ const counterA = buatPenghitung();
 console.log(counterA());  // 1
 console.log(counterA());  // 2
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 1. `buatPenghitung()` membuat variabel `hitung` lalu **mengembalikan fungsi** kecil.
 2. Meski `buatPenghitung` sudah selesai, fungsi kecil itu masih **mengingat** `hitung`.
 3. Tiap pemanggilan `counterA()` menaikkan `hitung` yang sama.
@@ -291,7 +310,7 @@ const tambah3 = (a, b) => { return a + b; };    // pakai { } harus return manual
 const nama = "Budi", umur = 17;
 const siswa = { nama, umur };    // shorthand dari { nama: nama, umur: umur }
 ```
-🔍 **Cara membaca:** `(a, b) => a + b` → "diberi `a` dan `b`, menghasilkan `a + b`". Jika setelah `=>` ada `{`, itu **blok kode** sehingga butuh `return` eksplisit. Jika tidak, hasilnya langsung dikembalikan.
+🔍 **Penjelasan:** `(a, b) => a + b` → "diberi `a` dan `b`, menghasilkan `a + b`". Jika setelah `=>` ada `{`, itu **blok kode** sehingga butuh `return` eksplisit. Jika tidak, hasilnya langsung dikembalikan.
 
 > ⚠️ Jebakan: mengembalikan objek langsung dengan arrow function perlu tanda kurung: `() => ({ nama: "Budi" })`. Tanpa `( )`, JS mengira `{ }` adalah blok.
 
@@ -307,7 +326,7 @@ const { umur = 17 } = user;         // nilai default jika tidak ada
 const warna = ["merah", "biru", "hijau"];
 const [pertama, , ketiga] = warna;  // lewati elemen ke-2 dengan koma kosong
 ```
-🔍 **Cara membaca:** bayangkan **bentuk sisi kiri meniru bentuk data di kanan**. `{ nama, kelas }` artinya "ambil properti bernama `nama` dan `kelas` dari `user`, jadikan variabel". Untuk array, **urutan** yang menentukan, bukan nama.
+🔍 **Penjelasan:** bayangkan **bentuk sisi kiri meniru bentuk data di kanan**. `{ nama, kelas }` artinya "ambil properti bernama `nama` dan `kelas` dari `user`, jadikan variabel". Untuk array, **urutan** yang menentukan, bukan nama.
 
 ## 1.5 Spread & Rest
 
@@ -321,7 +340,7 @@ function jumlah(...angka) {
 }
 jumlah(1, 2, 3);   // 6
 ```
-🔍 **Cara membaca (kunci: lihat posisi `...`):**
+🔍 **Arti `...` bergantung pada posisi sintaksnya:**
 - `...` di sisi **pemanggilan / pembuatan data** (`[...a]`) = **spread**: "tuang isinya di sini".
 - `...` di sisi **definisi parameter / destructuring** (`function f(...angka)`) = **rest**: "kumpulkan sisanya jadi array".
 - Pada `{ ...user, kota: "Malang" }`: tuang semua isi `user`, **lalu timpa** `kota`. Urutan penting: yang belakangan menang.
@@ -335,7 +354,7 @@ const kota = user?.alamat?.kota;        // aman jika alamat tidak ada
 const nama2 = input ?? "Tanpa nama";    // default hanya jika null/undefined
 const nama3 = input || "Tanpa nama";    // default jika "falsy" (0, "", false juga)
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 - Backtick `` ` `` + `${...}` = teks dengan **ekspresi disisipkan**.
 - `?.` = "**jika ada**, lanjut; jika tidak, hentikan dan hasilkan `undefined`" (mencegah error `Cannot read properties of undefined`).
 - `??` = "pakai kanan **hanya jika** kiri `null`/`undefined`". Beda dengan `||` yang juga menolak `0` dan `""`.
@@ -353,7 +372,7 @@ export default function hitungTotal(harga) { return harga * (1 + PPN); }
 // halaman.js
 import hitungTotal, { formatRupiah, PPN } from "./utils/harga.js";
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 - `export` = "izinkan file lain memakai ini".
 - `export default` = satu "isi utama" file, di-import **tanpa** kurung kurawal, nama bebas.
 - `export` biasa = di-import **dengan** `{ }`, nama harus sama persis.
@@ -373,9 +392,9 @@ const tersedia = produk.filter(p => p.stok > 0);
 const topi = produk.find(p => p.nama === "Topi");
 const total = produk.reduce((jumlah, p) => jumlah + p.harga, 0);
 ```
-🔍 **Cara membaca tiap method:**
+🔍 **Ringkasan array methods:**
 
-| Method | Dibaca sebagai | Hasil |
+| Method | Fungsi | Hasil |
 |---|---|---|
 | `.map(p => ...)` | "untuk **setiap** `p`, ubah menjadi ..." | array baru, **jumlah sama** |
 | `.filter(p => syarat)` | "**simpan** `p` yang syaratnya benar" | array baru, **jumlah bisa berkurang** |
@@ -408,7 +427,7 @@ const json = '{"nama":"Budi","umur":17}';
 const objek = JSON.parse(json);        // teks → objek
 const teks = JSON.stringify(objek);    // objek → teks
 ```
-🔍 **Cara membaca:** `parse` = "urai teks menjadi data". `stringify` = "ubah data jadi teks (untuk dikirim)".
+🔍 **Penjelasan:** `parse` = "urai teks menjadi data". `stringify` = "ubah data jadi teks (untuk dikirim)".
 
 ## 1.10 Asynchronous JavaScript
 
@@ -419,7 +438,7 @@ setTimeout(() => console.log("2"), 0);
 console.log("3");
 // Output: 1, 3, 2
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 1. `"1"` langsung dicetak.
 2. `setTimeout` **menitipkan** callback ke antrean, lalu JS lanjut (tidak menunggu).
 3. `"3"` dicetak.
@@ -434,7 +453,7 @@ fetch("https://api.example.com/users")
   .then(data => console.log(data))
   .catch(err => console.error(err));
 ```
-🔍 **Cara membaca:** "Minta data → **lalu** ubah ke JSON → **lalu** cetak → **jika gagal di langkah mana pun**, tangkap di `.catch`." Tiap `.then` menerima hasil `.then` sebelumnya.
+🔍 **Penjelasan:** "Minta data → **lalu** ubah ke JSON → **lalu** cetak → **jika gagal di langkah mana pun**, tangkap di `.catch`." Tiap `.then` menerima hasil `.then` sebelumnya.
 
 ### Async/Await
 ```js
@@ -452,7 +471,7 @@ async function ambilUser(id) {
   }
 }
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 1. `async function` → fungsi ini selalu mengembalikan Promise.
 2. `await fetch(...)` → "**tunggu di sini** sampai selesai, baru lanjut ke baris berikutnya (halaman tidak hang)".
 3. `if (!res.ok) throw ...` → jika respons bukan 2xx, **lempar error** manual.
@@ -466,7 +485,7 @@ const [users, produk] = await Promise.all([
   fetch("/api/produk").then(r => r.json()),
 ]);
 ```
-🔍 **Cara membaca:** "Mulai **dua** request **bersamaan**, tunggu **keduanya** selesai, lalu ambil hasilnya (destructuring array)." Lebih cepat daripada dua `await` berurutan.
+🔍 **Penjelasan:** "Mulai **dua** request **bersamaan**, tunggu **keduanya** selesai, lalu ambil hasilnya (destructuring array)." Lebih cepat daripada dua `await` berurutan.
 
 ## 1.11 Fetch API & Axios
 
@@ -483,7 +502,7 @@ const hasil = await res.json();
 import axios from "axios";
 const { data } = await axios.post("/api/produk", { nama: "Kaos", harga: 50000 });
 ```
-🔍 **Cara membaca `fetch`:** `fetch(ALAMAT, { PENGATURAN })`. Argumen kedua berisi `method` (jenis aksi), `headers` (label pengiriman: "isinya JSON"), dan `body` (isi paketnya, harus teks, makanya `JSON.stringify`).
+🔍 **Argumen `fetch`:** `fetch(ALAMAT, { PENGATURAN })`. Argumen kedua berisi `method` (jenis aksi), `headers` (metadata request, misalnya format JSON), dan `body` (isi request; untuk JSON, ubah data menjadi teks dengan `JSON.stringify`).
 **Axios:** `axios.post(ALAMAT, DATA)`. Lebih ringkas karena JSON diurus otomatis. `{ data }` adalah destructuring dari objek respons.
 
 ## 1.12 Git & GitHub (Termasuk Kerja Tim)
@@ -496,7 +515,7 @@ git branch fitur-keranjang
 git checkout fitur-keranjang
 git push origin fitur-keranjang
 ```
-🔍 **Cara membaca alur:** `add` (siapkan perubahan) → `commit` (simpan snapshot + pesan) → `push` (kirim ke GitHub).
+🔍 **Alur kerja:** `add` (siapkan perubahan) → `commit` (simpan snapshot + pesan) → `push` (kirim ke GitHub).
 
 **🆕 Alur kerja tim:**
 1. Buat branch dari `main` (`git checkout -b fitur-x`).
@@ -511,7 +530,7 @@ versi kamu
 versi orang lain
 >>>>>>> fitur-x
 ```
-🔍 Baca: bagian atas `=======` = milikmu, bagian bawah = milik mereka. Pilih/gabungkan, **hapus ketiga tanda** itu, lalu commit.
+🔍 Penjelasan: bagian atas `=======` = milikmu, bagian bawah = milik mereka. Pilih/gabungkan, **hapus ketiga tanda** itu, lalu commit.
 
 **Format pesan commit:** `feat:` (fitur baru), `fix:` (perbaikan bug), `docs:`, `refactor:`.
 **Wajib:** buat file `.gitignore` berisi `node_modules`, `.env`, `.next`.
@@ -529,7 +548,7 @@ versi orang lain
   Simpan
 </button>
 ```
-🔍 **Cara membaca:** pisahkan per spasi, tiap kata = satu aturan CSS.
+🔍 **Penjelasan:** pisahkan per spasi, tiap kata = satu aturan CSS.
 
 | Kelas | Arti |
 |---|---|
@@ -546,7 +565,7 @@ Pola nama: `[varian:]properti-nilai`. Varian (`hover:`, `md:`, `dark:`) di depan
 ```html
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 ```
-🔍 Baca: "grid dengan 1 kolom; **mulai tablet** jadi 2 kolom; **mulai layar besar** jadi 3 kolom; jarak antar-item 4 unit."
+🔍 Penjelasan: "grid dengan 1 kolom; **mulai tablet** jadi 2 kolom; **mulai layar besar** jadi 3 kolom; jarak antar-item 4 unit."
 
 ## 2.2 React: JSX
 
@@ -558,7 +577,7 @@ const sapaan = (
   </h1>
 );
 ```
-🔍 **Cara membaca:** di dalam tag, teks biasa dibaca sebagai teks. Apa pun di dalam `{ }` dibaca sebagai **JavaScript**. Perbedaan dengan HTML: `class` → `className`, tag harus ditutup (`<img />`), dan satu komponen harus punya **satu elemen pembungkus** (boleh `<> ... </>`).
+🔍 **Penjelasan:** di dalam tag, teks biasa dibaca sebagai teks. Apa pun di dalam `{ }` dibaca sebagai **JavaScript**. Perbedaan dengan HTML: `class` → `className`, tag harus ditutup (`<img />`), dan satu komponen harus punya **satu elemen pembungkus** (boleh `<> ... </>`).
 
 ## 2.3 Komponen & Props
 
@@ -576,7 +595,7 @@ function KartuProduk({ nama, harga, stok = 0 }) {
 // Dipakai:
 <KartuProduk nama="Kaos" harga={50000} />
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 1. Nama komponen **selalu huruf besar** (`KartuProduk`). Huruf kecil dianggap tag HTML.
 2. Parameter `{ nama, harga, stok = 0 }` = destructuring dari objek `props`; `stok` punya nilai default 0.
 3. `return ( ... )` berisi JSX = tampilan yang dihasilkan.
@@ -601,7 +620,7 @@ function DaftarProduk({ produk, loading }) {
   );
 }
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 1. Dua `if` di awal = **penjaga**: tampilkan hal lain lebih dulu jika kondisinya terpenuhi (*early return*).
 2. `{produk.map(...)}` = "untuk setiap produk, **buat satu `<li>`**".
 3. `key={p.id}` = label unik agar React bisa melacak item mana yang berubah. **Wajib** dan harus unik, jangan pakai indeks array jika urutan bisa berubah.
@@ -624,7 +643,7 @@ function Counter() {
   );
 }
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 1. `useState(0)` → "buat state dengan nilai awal `0`".
 2. Hasilnya array berisi dua hal: `[nilai, fungsiPengubah]`, diurai dengan destructuring. Nama `count`/`setCount` bebas, tapi konvensinya `x` dan `setX`.
 3. `onClick={() => setCount(count + 1)}` = "**saat diklik**, panggil `setCount` dengan nilai baru".
@@ -640,7 +659,7 @@ setProduk([...produk, baru]);                           // tambah
 setProduk(produk.filter(p => p.id !== idHapus));        // hapus
 setProduk(produk.map(p => p.id === id ? { ...p, selesai: true } : p));  // ubah satu item
 ```
-🔍 Baca baris terakhir: "untuk tiap `p`: **jika** `id`-nya cocok, **ganti dengan salinan** `p` yang `selesai`-nya `true`; **jika tidak**, biarkan `p`."
+🔍 Penjelasan baris terakhir: "untuk tiap `p`: **jika** `id`-nya cocok, **ganti dengan salinan** `p` yang `selesai`-nya `true`; **jika tidak**, biarkan `p`."
 
 ## 2.6 Side Effect: `useEffect`
 
@@ -672,7 +691,7 @@ function ListProduk() {
   return <ul>{produk.map(p => <li key={p.id}>{p.nama}</li>)}</ul>;
 }
 ```
-🔍 **Cara membaca (urutan eksekusi sebenarnya, bukan urutan penulisan):**
+🔍 **Urutan eksekusi:**
 1. Render pertama: `produk=[]`, `loading=true` → layar menampilkan "Memuat...".
 2. **Setelah** layar muncul, `useEffect` berjalan → memanggil `muat()`.
 3. `muat()` mengambil data → `setProduk(...)` & `setLoading(false)`.
@@ -696,7 +715,7 @@ const inputRef = useRef(null);
 <input ref={inputRef} />
 <button onClick={() => inputRef.current.focus()}>Fokus</button>
 ```
-🔍 Baca: "`inputRef.current` menunjuk elemen `<input>` asli; panggil `.focus()` pada elemen itu."
+🔍 Penjelasan: "`inputRef.current` menunjuk elemen `<input>` asli; panggil `.focus()` pada elemen itu."
 
 **Context**: berbagi data ke banyak komponen tanpa mengoper props berlapis-lapis (misalnya tema atau data user login).
 ```jsx
@@ -715,7 +734,7 @@ function Tombol() {
   return <button className={tema === "gelap" ? "bg-black" : "bg-white"}>OK</button>;
 }
 ```
-🔍 Baca: `Provider` = "**menyiarkan** nilai ke semua komponen di dalamku"; `useContext` = "**menangkap** siaran terdekat".
+🔍 Penjelasan: `Provider` = "**menyiarkan** nilai ke semua komponen di dalamku"; `useContext` = "**menangkap** siaran terdekat".
 
 **Custom Hook**: fungsi berawalan `use` yang membungkus logika berulang.
 ```jsx
@@ -730,7 +749,7 @@ function useFetch(url) {
 
 const { data, loading } = useFetch("/api/produk");
 ```
-🔍 Baca: "Hook ini menerima `url`, mengatur state & efek sendiri, lalu **mengembalikan** `{data, loading}` agar komponen manapun tinggal memakai."
+🔍 Penjelasan: "Hook ini menerima `url`, mengatur state & efek sendiri, lalu **mengembalikan** `{data, loading}` agar komponen manapun tinggal memakai."
 
 ## 2.8 Form Handling & Validasi
 
@@ -764,7 +783,7 @@ function FormLogin() {
   );
 }
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 1. State `form` menyimpan semua input dalam **satu objek**.
 2. `handleChange`: `e.target` = input yang sedang diketik. `name` & `value` diambil dengan destructuring.
 3. `{ ...form, [name]: value }` = salin form lama, lalu **timpa field yang namanya sama dengan `name`**. Tanda `[name]` (kurung siku) berarti "pakai **isi variabel** `name` sebagai nama properti".
@@ -798,7 +817,7 @@ function FormLogin() {
   );
 }
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 1. **Skema Zod** = "aturan bentuk data": email harus string berformat email, password minimal 8.
 2. `z.infer<typeof skema>` = "buat tipe TypeScript **otomatis** dari skema" (satu sumber kebenaran).
 3. `register("email")` = "hubungkan input ini ke field `email`" (tanda `{...}` menyebar atribut `name`, `onChange`, dsb.).
@@ -830,7 +849,7 @@ function sapa(user: User, salam: string = "Halo"): string {
   return `${salam}, ${user.nama}`;
 }
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 - Titik dua `:` dibaca "**bertipe**". `umur: number` = "`umur` bertipe angka".
 - `interface User { ... }` = "cetakan: objek `User` **harus** punya `id` (angka), `nama` (teks), dan **boleh** punya `email`".
 - `"aktif" | "nonaktif"` = "salah satu dari ini saja". Garis `|` dibaca "atau".
@@ -841,7 +860,7 @@ function sapa(user: User, salam: string = "Halo"): string {
 function ambilPertama<T>(arr: T[]): T { return arr[0]; }
 const x = ambilPertama<string>(["a", "b"]);   // x bertipe string
 ```
-🔍 Baca: "`T` adalah **tipe apa pun** yang nanti ditentukan. Jika diberi array `T`, hasilnya satu `T`." Sama seperti `useState<string>("")` atau `Promise<User>`.
+🔍 Penjelasan: "`T` adalah **tipe apa pun** yang nanti ditentukan. Jika diberi array `T`, hasilnya satu `T`." Sama seperti `useState<string>("")` atau `Promise<User>`.
 
 **TypeScript di React:**
 ```tsx
@@ -856,7 +875,7 @@ function Kartu({ nama, harga, onBeli }: KartuProps) {
   return <button onClick={onBeli}>{nama}: Rp{harga}</button>;
 }
 ```
-🔍 Baca: `KartuProps` mendefinisikan bentuk props. `() => void` = "fungsi tanpa argumen yang tidak mengembalikan apa-apa". `useState<number>(0)` = "state bertipe angka".
+🔍 Penjelasan: `KartuProps` mendefinisikan bentuk props. `() => void` = "fungsi tanpa argumen yang tidak mengembalikan apa-apa". `useState<number>(0)` = "state bertipe angka".
 
 > Tips: jangan berlebihan memakai `any` (artinya "matikan pengecekan tipe"). Gunakan `unknown` atau definisikan tipenya.
 
@@ -874,7 +893,7 @@ app/
 └── api/
     └── produk/route.ts    → endpoint API "/api/produk"
 ```
-🔍 **Cara membaca:** **folder = segmen URL**, nama file spesial menentukan perannya (`page.tsx` = halaman, `layout.tsx` = pembungkus, `route.ts` = API). Folder dengan `[id]` = **bagian variabel** URL.
+🔍 **Penjelasan:** **folder = segmen URL**, nama file spesial menentukan perannya (`page.tsx` = halaman, `layout.tsx` = pembungkus, `route.ts` = API). Folder dengan `[id]` = **bagian variabel** URL.
 
 ```tsx
 // app/layout.tsx
@@ -890,7 +909,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   );
 }
 ```
-🔍 Baca: `children` = "isi halaman yang sedang dibuka", disisipkan di antara navbar dan footer. Layout tidak dimuat ulang saat berpindah halaman.
+🔍 Penjelasan: `children` = "isi halaman yang sedang dibuka", disisipkan di antara navbar dan footer. Layout tidak dimuat ulang saat berpindah halaman.
 
 ## 3.3 Server Component vs Client Component
 
@@ -907,7 +926,7 @@ export default async function HalamanProduk() {
   );
 }
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 1. Komponen ini `async`: **bisa `await` langsung** di badan komponen (hanya di Server Component).
 2. Ambil data dari database langsung, tidak perlu `useEffect`/`fetch` ke API sendiri.
 3. Hasilnya HTML jadi yang dikirim ke browser.
@@ -922,7 +941,7 @@ export default function TombolSuka() {
   return <button onClick={() => setSuka(!suka)}>{suka ? "❤️" : "🤍"}</button>;
 }
 ```
-🔍 Baca: baris `"use client"` di paling atas = "**file ini berjalan di browser**". Wajib jika memakai `useState`, `useEffect`, atau event (`onClick`).
+🔍 Penjelasan: baris `"use client"` di paling atas = "**file ini berjalan di browser**". Wajib jika memakai `useState`, `useEffect`, atau event (`onClick`).
 
 | | Server Component | Client Component |
 |---|---|---|
@@ -943,7 +962,7 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
   return <h1>{produk.nama}</h1>;
 }
 ```
-🔍 Baca: `params` berisi bagian variabel dari URL. Pada Next.js versi terbaru `params` berupa **Promise** sehingga perlu `await` (di versi lama langsung objek, cek dokumentasi versi yang kamu pakai). `Number(id)` karena URL selalu berupa teks.
+🔍 Penjelasan: `params` berisi bagian variabel dari URL. Pada Next.js versi terbaru `params` berupa **Promise** sehingga perlu `await` (di versi lama langsung objek, cek dokumentasi versi yang kamu pakai). `Number(id)` karena URL selalu berupa teks.
 
 ## 3.4 SSR vs SSG
 
@@ -957,7 +976,7 @@ const res = await fetch("https://api.example.com/harga", { cache: "no-store" });
 // ISR: statis, tapi disegarkan tiap 60 detik
 const res = await fetch("https://api.example.com/berita", { next: { revalidate: 60 } });
 ```
-🔍 **Cara membaca:** opsi di argumen kedua `fetch` menentukan strategi: **simpan** (`force-cache`), **jangan simpan** (`no-store`), atau **simpan sementara** (`revalidate: detik`). Perilaku default caching Next.js bisa berbeda antar versi, jadi selalu tuliskan eksplisit.
+🔍 **Penjelasan:** opsi di argumen kedua `fetch` menentukan strategi: **simpan** (`force-cache`), **jangan simpan** (`no-store`), atau **simpan sementara** (`revalidate: detik`). Perilaku default caching Next.js bisa berbeda antar versi, jadi selalu tuliskan eksplisit.
 
 ## 3.5 Server Actions & API Routes
 
@@ -985,7 +1004,7 @@ export default function Baru() {
   );
 }
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 1. `"use server"` = "fungsi di file ini **berjalan di server**".
 2. `formData.get("nama")` = ambil nilai input yang atribut `name`-nya `"nama"`. `as string` = "percayalah, ini teks".
 3. `revalidatePath("/produk")` = "data halaman `/produk` sudah basi, segarkan".
@@ -1009,7 +1028,7 @@ export async function POST(request: Request) {
   return NextResponse.json(produk, { status: 201 });
 }
 ```
-🔍 Baca: **nama fungsi = method HTTP** (`GET`, `POST`). `request.json()` = baca isi kiriman. `{ status: 201 }` = "berhasil dibuat". Kapan memilih? Server Action untuk form di aplikasimu sendiri; API Route bila ada pihak luar (mobile app, webhook) yang perlu memanggil.
+🔍 Penjelasan: **nama fungsi = method HTTP** (`GET`, `POST`). `request.json()` = baca isi kiriman. `{ status: 201 }` = "berhasil dibuat". Kapan memilih? Server Action untuk form di aplikasimu sendiri; API Route bila ada pihak luar (mobile app, webhook) yang perlu memanggil.
 
 ## 3.5b 🆕 Fitur Next.js yang Sering Dipakai
 - **`next/image`** (`<Image>`): optimasi gambar otomatis.
@@ -1034,7 +1053,7 @@ GROUP BY u.nama
 ORDER BY total_pesanan DESC
 LIMIT 5;
 ```
-🔍 **Cara membaca SQL (urutan logis, bukan urutan tulis):**
+🔍 **Urutan evaluasi SQL:**
 1. `FROM users u` → mulai dari tabel `users` (alias `u`).
 2. `JOIN pesanan p ON p.user_id = u.id` → **gabungkan** dengan tabel `pesanan` di mana kunci asingnya cocok.
 3. `WHERE p.status = 'selesai'` → **saring** baris.
@@ -1051,7 +1070,7 @@ Konsep tambahan: **Index** (mempercepat pencarian di kolom tertentu), **transaks
 users (1) ────< pesanan (banyak)          One-to-Many
 siswa (banyak) >────< ekskul (banyak)     Many-to-Many (lewat tabel siswa_ekskul)
 ```
-🔍 **Cara membaca diagram:** `1` = satu, `<` (kaki gagak) = banyak. Satu user punya banyak pesanan, tetapi satu pesanan hanya milik satu user. Many-to-Many butuh **tabel penghubung** yang menyimpan pasangan `siswa_id` + `ekskul_id`.
+🔍 **Relasi pada diagram:** `1` = satu, `<` (kaki gagak) = banyak. Satu user punya banyak pesanan, tetapi satu pesanan hanya milik satu user. Many-to-Many butuh **tabel penghubung** yang menyimpan pasangan `siswa_id` + `ekskul_id`.
 
 ## 4.3 Prisma ORM
 
@@ -1072,7 +1091,7 @@ model Pesanan {
   user    User     @relation(fields: [userId], references: [id])
 }
 ```
-🔍 **Cara membaca `schema.prisma`:** tiap baris di dalam `model` = `namaKolom Tipe [atribut]`.
+🔍 **Struktur schema Prisma:** tiap baris di dalam `model` = `namaKolom Tipe [atribut]`.
 - `@id` = primary key. `@default(autoincrement())` = nomor otomatis naik.
 - `@unique` = tidak boleh kembar. `String?` = boleh kosong (`null`).
 - `pesanan Pesanan[]` = "satu user punya **banyak** pesanan" (kolom virtual, bukan kolom di DB).
@@ -1095,7 +1114,7 @@ const semua = await prisma.user.findMany({
 await prisma.user.update({ where: { id: 1 }, data: { nama: "Budi S" } });
 await prisma.user.delete({ where: { id: 1 } });
 ```
-🔍 **Cara membaca query Prisma:** `prisma.NAMA_MODEL.AKSI({ opsi })`.
+🔍 **Pola query Prisma:** `prisma.NAMA_MODEL.AKSI({ opsi })`.
 - `create({ data })` = tambah. `findMany({ where, orderBy, include })` = baca banyak.
 - `where` = **syarat** (seperti `WHERE`). `include` = **ikut ambil relasi** (seperti `JOIN`). `orderBy` = urutan.
 - `update` dan `delete` **wajib** `where` agar tahu baris mana (tanpa itu akan error, kecuali memakai `updateMany`/`deleteMany`).
@@ -1123,7 +1142,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 ```
-🔍 Baca: `env("DATABASE_URL")` = "ambil nilai dari file `.env`", jadi password tidak tertulis di kode.
+🔍 Penjelasan: `env("DATABASE_URL")` = "ambil nilai dari file `.env`", jadi password tidak tertulis di kode.
 
 ## 4.5 Autentikasi & Otorisasi
 
@@ -1145,7 +1164,7 @@ await prisma.user.create({ data: { email, password: hash } });
 // Cek saat login
 const cocok = await bcrypt.compare(passwordDariForm, user.password);
 ```
-🔍 Baca: `hash(teks, 10)` = ubah jadi kode acak satu arah (angka 10 = tingkat "kerumitan"). `compare` = "apakah teks ini jika di-hash sama dengan hash tersimpan?" Password asli **tidak pernah disimpan**.
+🔍 Penjelasan: `hash(teks, 10)` = ubah jadi kode acak satu arah (angka 10 = tingkat "kerumitan"). `compare` = "apakah teks ini jika di-hash sama dengan hash tersimpan?" Password asli **tidak pernah disimpan**.
 
 **Protected route:**
 ```tsx
@@ -1159,7 +1178,7 @@ export default async function Dashboard() {
   return <h1>Halo, {session.user?.name}</h1>;
 }
 ```
-🔍 Baca: "Ambil sesi di server. **Jika belum login**, alihkan ke `/login`; jika sudah, tampilkan halaman." Pengecekan **di server** itu wajib; menyembunyikan menu di UI saja tidak cukup.
+🔍 Penjelasan: "Ambil sesi di server. **Jika belum login**, alihkan ke `/login`; jika sudah, tampilkan halaman." Pengecekan **di server** itu wajib; menyembunyikan menu di UI saja tidak cukup.
 
 > Autentikasi = "kamu siapa?" Otorisasi = "kamu boleh apa?" (contoh: hanya `role === "admin"` boleh menghapus produk). Keduanya dicek di server.
 
@@ -1181,7 +1200,7 @@ const pesanan = await prisma.pesanan.findFirst({
 });
 if (!pesanan) return notFound();
 ```
-🔍 Baca: "cari pesanan dengan `id` itu **DAN** pemiliknya adalah user yang sedang login." Tanpa `userId`, siapa pun bisa mengintip pesanan orang lain.
+🔍 Penjelasan: "cari pesanan dengan `id` itu **DAN** pemiliknya adalah user yang sedang login." Tanpa `userId`, siapa pun bisa mengintip pesanan orang lain.
 
 **🎯 Mini-proyek Phase 4:** aplikasi catatan/blog multi-user: register, login, CRUD data milik sendiri (Prisma + Supabase), halaman dashboard terproteksi, validasi Zod di server.
 
@@ -1205,7 +1224,7 @@ describe("hitungDiskon", () => {
   });
 });
 ```
-🔍 **Cara membaca:**
+🔍 **Penjelasan:**
 - `describe("...")` = **kelompok** tes ("yang sedang dites: `hitungDiskon`").
 - `it("...")` = **satu skenario**, ditulis seperti kalimat: "ia (fungsi ini) menghitung diskon 10%".
 - `expect(HASIL).toBe(HARAPAN)` = "**saya harapkan** hasil ini **sama dengan** itu". Jika tidak sama, tes gagal.
@@ -1243,7 +1262,7 @@ Pada `package.json`, pastikan ada:
 ```json
 "scripts": { "build": "prisma generate && next build" }
 ```
-🔍 Baca: sebelum membangun Next.js, buat dulu klien Prisma. Tanpa ini, build di Vercel bisa gagal.
+🔍 Penjelasan: sebelum membangun Next.js, buat dulu klien Prisma. Tanpa ini, build di Vercel bisa gagal.
 
 ---
 
@@ -1263,7 +1282,7 @@ function hitungHuruf(teks) {
 }
 hitungHuruf("halo");  // { h: 1, a: 1, l: 1, o: 1 }
 ```
-🔍 Baca: "Untuk tiap huruf: ambil hitungan sebelumnya (atau `0` jika belum ada), tambah 1, simpan lagi." Baris `hasil[huruf] = ...` memakai `huruf` sebagai **nama kunci**.
+🔍 Penjelasan: "Untuk tiap huruf: ambil hitungan sebelumnya (atau `0` jika belum ada), tambah 1, simpan lagi." Baris `hasil[huruf] = ...` memakai `huruf` sebagai **nama kunci**.
 
 ## 6.2 Bahasa Inggris Teknis
 - Biasakan membaca **dokumentasi resmi** (react.dev, nextjs.org/docs, prisma.io/docs).
@@ -1278,46 +1297,191 @@ hitungHuruf("halo");  // { h: 1, a: 1, l: 1, o: 1 }
 
 ---
 
-# GLOSARIUM RINGKAS
+# GLOSARIUM ISTILAH PEMROGRAMAN
 
-| Istilah | Arti Singkat |
+Istilah di bawah tetap menggunakan nama globalnya dalam bahasa Inggris. Definisi dan contoh ditulis dalam bahasa Indonesia. Beberapa istilah punya arti yang lebih spesifik bergantung pada bahasa atau tool; gunakan contoh di roadmap ini sebagai konteks, lalu cek dokumentasi tool yang sedang dipakai.
+
+## Istilah inti dengan penjelasan sederhana
+
+Bagian ini menjelaskan istilah yang sering muncul dengan bahasa sehari-hari terlebih dahulu. Analogi membantu memahami gambaran awal, tetapi bukan definisi teknis yang sempurna. Setelah memahami gambaran sederhananya, lanjutkan ke penjelasan lebih lengkap pada kelompok istilah di bawah.
+
+### Dasar membaca kode
+
+| Istilah | Arti sederhananya | Contoh dan cara memahaminya |
+|---|---|---|
+| **Program / Code** | Serangkaian instruksi yang memberi tahu komputer apa yang harus dilakukan. | `console.log("Halo")` adalah instruksi untuk menampilkan teks `"Halo"` di console. Komputer menjalankan instruksi sesuai aturan bahasa pemrogramannya. |
+| **Library / Framework** | `Library` adalah kumpulan kode siap pakai yang dipanggil oleh program kita. `Framework` menyediakan kerangka dan aturan kerja yang lebih besar; framework biasanya mengatur kapan kode kita dipanggil. | React sering disebut library UI; Next.js adalah framework yang menyediakan struktur aplikasi web di atas React. Keduanya membantu, tetapi tidak menggantikan pemahaman dasar JavaScript. |
+| **Package / Dependency** | `Package` adalah unit kode yang dapat dipasang dan digunakan. `Dependency` adalah package atau tool lain yang dibutuhkan proyek agar dapat bekerja. | Jika proyek menggunakan Axios, Axios tercatat sebagai dependency dan dipasang ke proyek. Versi dependency penting karena versi berbeda dapat memiliki perilaku berbeda. |
+| **Value** | Data atau nilai yang sedang dipakai program. | `"Budi"` adalah value berupa teks; `17` adalah value berupa angka; `true` adalah value boolean yang berarti benar. |
+| **Variable** | Nama yang dipakai agar sebuah value mudah disimpan dan dipakai lagi. Bayangkan label pada kotak penyimpanan. | `const nama = "Budi"` membuat label `nama` yang merujuk ke teks `"Budi"`. `const` tidak berarti isi object/array di dalamnya pasti tidak dapat diubah. |
+| **Function** | Sekumpulan instruksi bernama yang dapat dijalankan ketika dibutuhkan. Mirip resep: function menjelaskan langkah, pemanggilan function meminta langkah itu dijalankan. | `function tambah(a, b) { return a + b; }` mendefinisikan resep. `tambah(2, 3)` menjalankannya dan menghasilkan `5`. |
+| **Parameter / Argument** | `Parameter` adalah nama tempat untuk menerima masukan; `argument` adalah nilai yang benar-benar dikirim. | Pada `function sapa(nama)`, `nama` adalah parameter. Pada `sapa("Budi")`, `"Budi"` adalah argument yang diberikan. |
+| **Return value** | Hasil yang diberikan kembali oleh function setelah tugasnya selesai. | `return a + b` mengirim hasil penjumlahan keluar dari function supaya dapat disimpan atau dipakai oleh kode lain. `console.log(...)` hanya menampilkan nilai; itu tidak sama dengan `return`. |
+| **Object / Property / Method** | `Object` mengelompokkan data yang saling berkaitan. `Property` adalah data di dalamnya; `method` adalah tindakan/function milik object. | Dalam `user.nama`, `nama` adalah property. Dalam `user.sapa()`, `sapa` adalah method yang dipanggil. |
+| **Array** | Daftar berurutan yang menyimpan beberapa value dalam satu variable. | `const warna = ["merah", "biru"]`; `warna[0]` mengambil item pertama, yaitu `"merah"` (indeks array dimulai dari `0`). |
+| **Scope** | Batas wilayah kode yang menentukan variable mana yang boleh digunakan di suatu tempat. Bayangkan setiap function/block sebagai ruangan: variable lokal tersedia di ruangnya, tidak otomatis di semua ruang lain. | `const pesan = "Hai"` di dalam function tidak dapat langsung dipakai di luar function tersebut. |
+| **Callback** | Function yang diberikan kepada kode lain untuk dijalankan nanti atau pada saat tertentu. | `tombol.addEventListener("click", () => console.log("Diklik"))` memberikan function yang dijalankan ketika tombol diklik. |
+| **Event** | Sesuatu yang terjadi dan dapat ditanggapi oleh program, misalnya klik, pengetikan, atau selesainya request. | `"click"` pada `addEventListener("click", ...)` adalah nama event; callback yang diberikan dijalankan saat event itu terjadi. |
+| **Error / Exception** | Informasi bahwa suatu operasi gagal atau program menemui keadaan yang tidak dapat ditangani dengan cara biasa. | Jika kode mencoba membaca property dari `undefined`, JavaScript dapat menghasilkan `TypeError`. Pesan dan stack trace membantu mencari file/baris asal masalah. |
+
+### Data, halaman web, dan komunikasi
+
+| Istilah | Arti sederhananya | Contoh dan cara memahaminya |
+|---|---|---|
+| **Client / Server** | `Client` meminta sesuatu; `server` menerima permintaan itu, mengerjakan tugas, lalu memberi jawaban. Analogi: client seperti pelanggan dan server seperti dapur yang menyiapkan pesanan. | Browser meminta daftar produk ke server; server mengambil data lalu mengirimkannya kembali. Satu aplikasi dapat berperan sebagai client saat meminta data dan server saat melayani aplikasi lain. |
+| **Request / Response** | `Request` adalah pesan permintaan dari client. `response` adalah balasan server. | Browser mengirim `GET /api/produk`; server membalas dengan status `200` dan data produk. |
+| **API** | Cara yang disepakati agar dua program dapat saling meminta data atau menjalankan fungsi. Analogi: API seperti menu dan aturan pemesanan—client tahu apa yang bisa diminta tanpa perlu tahu cara dapur bekerja. | Aplikasi meminta `GET /api/produk` untuk membaca produk. API tidak selalu memakai HTTP, tetapi contoh di roadmap ini umumnya menggunakan HTTP. |
+| **Endpoint** | Jalur operasi tertentu pada API—bayangkan alamat tujuan beserta jenis permintaannya. | `GET /api/produk` meminta daftar produk, sementara `POST /api/produk` biasanya mengirim data untuk membuat produk. Method dan alamat bersama-sama menjelaskan operasi yang dimaksud. |
+| **HTTP Method** | Penanda jenis tindakan yang diminta dari server. | `GET` biasanya membaca, `POST` biasanya membuat/mengirim, `PATCH` biasanya mengubah sebagian, dan `DELETE` biasanya menghapus. Aturan tepatnya ditentukan oleh API. |
+| **HTTP** | Aturan komunikasi yang umum dipakai browser dan server untuk bertukar request dan response. `HTTPS` adalah HTTP yang dilindungi enkripsi koneksi TLS. | Saat browser membuka halaman atau mengambil data API, ia biasanya berkomunikasi menggunakan HTTP atau HTTPS. |
+| **URL / Origin** | `URL` adalah alamat lengkap resource di web. `Origin` adalah bagian yang menentukan asal sebuah halaman, yaitu gabungan protocol, hostname, dan port. | `https://contoh.com:443/produk` adalah URL. Untuk CORS, `https://contoh.com` berbeda origin dari `https://api.contoh.com` karena hostname berbeda. |
+| **HTTP Status Code** | Angka ringkas yang memberi tahu bagaimana server menangani request. | `200` berarti berhasil; `201` berarti data berhasil dibuat; `404` berarti resource tidak ditemukan; `500` menandakan masalah di server. Status membantu kita mengetahui jalur penanganan berikutnya. |
+| **Database / Table / Row / Column** | `Database` adalah tempat penyimpanan data terstruktur. `Table` seperti lembar data; `row` adalah satu catatan; `column` adalah satu jenis informasi pada tiap catatan. | Pada tabel `users`, satu row bisa mewakili satu user, sedangkan column `email` menyimpan alamat email user tersebut. |
+| **Relation** | Hubungan antara data pada beberapa table, biasanya melalui key yang sama. | `pesanan.user_id` dapat menunjuk ke `users.id`; dari situ database mengetahui user mana yang memiliki pesanan tersebut. |
+| **JSON** | Bentuk teks yang umum dipakai untuk mengirim data antarprogram. | `{"nama":"Budi","umur":17}` adalah teks JSON. Untuk menggunakannya sebagai object JavaScript, teks itu perlu diurai, misalnya dengan `JSON.parse()`. |
+| **DOM** | Bentuk terstruktur dari halaman HTML yang dapat dibaca dan diubah oleh JavaScript di browser. Bayangkan halaman sebagai pohon elemen, dengan elemen induk dan anak. | Tombol dan paragraf HTML menjadi node di DOM; JavaScript dapat menemukan tombol lalu menanggapi klik. React membantu mengatur perubahan UI tanpa kita mengubah DOM satu per satu. |
+| **Browser** | Aplikasi yang membuka dan menampilkan halaman web, seperti Chrome, Firefox, atau Edge. Browser juga menjalankan JavaScript halaman dan menyediakan alat pengembang. | Tab Console di browser DevTools menampilkan pesan `console.log` dan error dari halaman. |
+| **Loading / Error State** | Kondisi UI yang menjelaskan status pekerjaan kepada user: data sedang dimuat atau terjadi kegagalan. | Saat request berjalan, tampilkan `"Memuat..."`; jika request gagal, tampilkan pesan error agar user tahu data belum berhasil dimuat. |
+| **Responsive Design** | Cara membuat tampilan tetap mudah digunakan pada ukuran layar berbeda, seperti ponsel, tablet, dan desktop. | Layout dapat memakai satu kolom di layar kecil dan beberapa kolom di layar lebih lebar. |
+
+### React, TypeScript, dan aplikasi
+
+| Istilah | Arti sederhananya | Contoh dan cara memahaminya |
+|---|---|---|
+| **UI (User Interface)** | Bagian aplikasi yang dilihat atau digunakan orang, seperti halaman, tombol, menu, dan form. | Form login adalah UI: user mengisi email/password lalu menekan tombol masuk. |
+| **Component** | Bagian UI yang dibuat sebagai unit tersendiri agar dapat dipahami dan digunakan kembali. Mirip potongan Lego yang dapat disusun menjadi halaman. | `KartuProduk` dapat menampilkan satu produk; daftar produk bisa memakai component itu berkali-kali dengan data berbeda. |
+| **JSX** | Cara menulis gambaran UI React di dalam file JavaScript/TypeScript dengan bentuk yang mirip HTML. | `<h1>Halo</h1>` adalah JSX. JSX mirip HTML tetapi memiliki aturan JavaScript, misalnya memakai `className` alih-alih `class`. |
+| **Props** | Data masukan yang dikirim dari component induk ke component anak—mirip informasi yang diberikan kepada sebuah cetakan. | `<KartuProduk nama="Kaos" />` mengirim prop `nama` bernilai `"Kaos"` kepada component `KartuProduk`. Component anak sebaiknya tidak mengubah props secara langsung. |
+| **State** | Data yang dapat berubah selama aplikasi digunakan dan memengaruhi tampilan. | Nilai counter adalah state. Saat tombol menambah counter, React menerima nilai state baru lalu memperbarui tampilan yang berkaitan. |
+| **Render** | Proses React menentukan tampilan yang sesuai dengan props dan state saat itu. Ini tidak sama dengan memuat ulang seluruh halaman. | Jika `count` berubah dari `0` menjadi `1`, component dapat dirender lagi agar teks counter menampilkan `1`. |
+| **Hook** | Function React yang memberi component akses ke kemampuan seperti state dan effect. Namanya biasanya dimulai dengan `use`. | `useState(0)` menyediakan state awal; `useEffect(...)` menjalankan pekerjaan yang terhubung dengan perubahan/kemunculan component. Hook mengikuti aturan pemanggilan React. |
+| **TypeScript Type** | Keterangan yang membantu memeriksa jenis data yang diharapkan saat menulis kode. Mirip label pada paket yang menyatakan isinya. | `let umur: number = 17` memberi tahu TypeScript bahwa `umur` seharusnya angka. TypeScript membantu menemukan sebagian kesalahan sebelum program dijalankan, tetapi tidak otomatis memvalidasi data dari API saat runtime. |
+| **Route / Routing** | `Route` adalah alamat/pola alamat aplikasi; `routing` adalah proses memilih halaman atau handler yang cocok dengan alamat tersebut. | `/produk/5` dapat cocok dengan route dinamis `/produk/[id]`, dengan `id` bernilai `"5"`. |
+| **Server Component / Client Component** | Di Next.js App Router, ini membedakan batas kemampuan component. Server Component dapat bekerja dengan sumber daya di server; Client Component dapat menggunakan interaksi React seperti state dan event handler. | Tombol yang berubah saat diklik memerlukan kemampuan client. `"use client"` menandai module client, tetapi tidak berarti component hanya dirender di browser. |
+| **Build** | Langkah menyiapkan kode proyek agar dapat dijalankan atau diterbitkan. Tool dapat memeriksa kode, mengubah format tertentu, dan menghasilkan file siap deploy. | `next build` membuat hasil build Next.js; error saat build perlu diperbaiki sebelum aplikasi dapat dipublikasikan dengan benar. |
+| **Cache / Caching** | Menyimpan salinan data atau hasil untuk sementara supaya dapat digunakan lagi tanpa mengerjakan atau mengambil ulang semuanya. Cache perlu aturan kapan data dianggap usang dan diperbarui. | Halaman artikel yang jarang berubah dapat di-cache; harga yang harus selalu terbaru mungkin perlu strategi cache yang berbeda. |
+
+### Database, keamanan, dan kerja developer
+
+| Istilah | Arti sederhananya | Contoh dan cara memahaminya |
+|---|---|---|
+| **ORM** | Alat yang membantu program berbicara dengan database menggunakan fungsi/object, sehingga banyak pekerjaan SQL dapat ditulis melalui API bahasa pemrograman. ORM tidak membuat database hilang dan tidak membuat semua query otomatis cepat. | Prisma dapat menulis `prisma.user.findMany()` untuk membaca user. Memahami SQL tetap berguna saat memeriksa hasil atau mencari query yang lambat. |
+| **Schema / Migration** | `Schema` adalah rancangan bentuk data. `Migration` adalah catatan perubahan bertahap untuk membuat database mengikuti rancangan baru. | Menambahkan column `email` mengubah schema; migration mencatat perubahan yang perlu diterapkan pada database lokal atau production. |
+| **Authentication / Authorization** | `Authentication` menjawab “siapa kamu?”; `authorization` menjawab “apa yang boleh kamu lakukan?”. | Login memeriksa identitas user. Setelah login, server tetap harus memastikan user tersebut memang boleh menghapus produk tertentu. |
+| **Hashing** | Mengubah data menjadi bentuk ringkas satu arah untuk keperluan seperti menyimpan password dengan lebih aman. Hash password bukan password yang dienkripsi dan bisa dibalik. | Saat login, sistem membandingkan password yang dimasukkan dengan hash tersimpan menggunakan library password-hashing yang sesuai; password asli tidak perlu disimpan. |
+| **Validation** | Memeriksa apakah data sesuai aturan sebelum dipakai atau disimpan. Mengirim form ke server bukan jaminan data benar. | Untuk field `umur`, server dapat menolak teks kosong atau nilai yang bukan angka. Validasi harus dilakukan di server meskipun form juga divalidasi di browser. |
+| **Git Repository / Branch / Commit** | Repository menyimpan proyek dan riwayatnya; branch adalah jalur kerja terpisah; commit adalah satu catatan/snapshot perubahan. | Buat branch untuk fitur baru, simpan perubahan sebagai commit, lalu gabungkan setelah diperiksa. `commit` lokal belum sama dengan mengirim kode ke GitHub. |
+| **Pull Request (PR) / Code Review** | PR adalah permintaan untuk memasukkan perubahan branch ke branch lain. Code review adalah proses orang lain membaca dan memberi masukan pada perubahan tersebut. | Sebelum fitur digabung ke branch utama, rekan tim dapat memeriksa logika, meminta perubahan, dan memastikan pemeriksaan otomatis lulus. |
+| **Test / Testing** | Pemeriksaan untuk mengetahui apakah program berperilaku sesuai harapan. Test dapat menguji fungsi kecil atau alur aplikasi lengkap. | Test untuk `hitungDiskon(100000, 10)` bisa memeriksa apakah hasilnya `90000`. Jika hasil berbeda, test memberi tahu bahwa ada perilaku yang perlu diperiksa. |
+| **Deployment** | Mengirim dan menjalankan aplikasi di environment yang dapat diakses pengguna, bukan hanya di komputer developer. | Setelah deployment, aplikasi dapat dibuka lewat URL publik. Environment production perlu konfigurasi secret dan database yang benar. |
+| **CI/CD** | Otomatisasi yang memeriksa perubahan dan/atau merilis aplikasi saat kode diperbarui. | Setelah push, pipeline dapat menjalankan lint dan test; jika berhasil, sistem dapat melanjutkan deployment. CI/CD adalah rangkaian proses, bukan satu perintah tertentu. |
+| **Algorithm / Data Structure** | `Algorithm` adalah langkah teratur untuk menyelesaikan masalah. `Data structure` adalah cara menyimpan dan mengatur data agar operasi tertentu lebih mudah atau cepat. | Menghitung frekuensi huruf adalah algorithm; object atau `Map` dapat dipakai sebagai data structure untuk menyimpan huruf dan jumlah kemunculannya. |
+| **Production / Development** | `Development` adalah environment untuk membangun dan mencoba aplikasi. `Production` adalah environment yang melayani pengguna sungguhan. Keduanya dapat memiliki database, URL, dan konfigurasi berbeda. | Jangan menganggap data aman dihapus hanya karena perintah berhasil dijalankan; pastikan command ditujukan ke database development, bukan database production. |
+
+Setelah memahami penjelasan sederhananya, gunakan definisi yang lebih lengkap berikut saat ingin mengetahui detail teknis atau perbedaan istilah yang mirip.
+
+## JavaScript dan konsep umum
+
+| Istilah | Penjelasan |
 |---|---|
-| **Scope** | Wilayah di kode tempat variabel bisa diakses (global, fungsi, blok) |
-| **Closure** | Fungsi yang mengingat variabel dari scope asalnya |
-| **Async** | Tugas yang berjalan tanpa memblokir kode lain |
-| **Await** | "Tunggu hasil Promise di sini" (hanya di fungsi `async`) |
-| **Promise** | Janji hasil operasi async: pending, fulfilled, rejected |
-| **Callback** | Fungsi yang dikirim untuk dipanggil nanti |
-| **Event Loop** | Pengatur antrean tugas async saat call stack kosong |
-| **Immutable** | Tidak mengubah data asli; selalu buat salinan baru |
-| **Destructuring** | Membongkar objek/array ke variabel terpisah |
-| **Spread / Rest** | `...` untuk menyebar isi / mengumpulkan sisa |
-| **Module** | File yang membagikan kode via `export` dan dipakai via `import` |
-| **Component** | Potongan UI yang bisa dipakai ulang |
-| **Props** | Data dari komponen induk ke anak (read-only) |
-| **State** | Data internal yang memicu render ulang saat berubah |
-| **Hook** | Fungsi khusus React berawalan `use` |
-| **Render** | Proses menghasilkan tampilan dari komponen |
-| **Controlled component** | Input yang nilainya dikontrol state |
-| **Context** | Cara berbagi data ke banyak komponen tanpa props berantai |
-| **SSR / SSG / CSR / ISR** | Render di server per-request / saat build / di browser / statis yang disegarkan berkala |
-| **Server Action** | Fungsi server yang dipanggil langsung dari form/komponen |
-| **Middleware** | Kode yang berjalan sebelum request mencapai halaman |
-| **Type / Interface** | Bentuk/jenis data pada TypeScript |
-| **Generic** | Tipe fleksibel `<T>` |
-| **API / REST / Endpoint** | Antarmuka komunikasi / gaya API HTTP / alamat spesifik API |
-| **CORS** | Aturan browser untuk request lintas domain |
-| **ORM** | Pemetaan tabel database ke objek kode (Prisma) |
-| **Schema / Migration** | Rancangan struktur DB / perubahan struktur yang tercatat |
-| **CRUD** | Create, Read, Update, Delete |
-| **Primary / Foreign key** | Identitas unik baris / penunjuk ke tabel lain |
-| **Hashing** | Pengacakan satu arah untuk menyimpan password |
-| **Authentication / Authorization** | Verifikasi identitas / pengaturan hak akses |
-| **Environment variable** | Konfigurasi rahasia di luar kode (`.env`) |
-| **CI/CD** | Otomatisasi tes dan deploy tiap ada perubahan kode |
-| **Sandbox** | Mode uji coba yang aman (mis. pembayaran palsu) |
-| **Linter / Formatter** | Pendeteksi kode bermasalah (ESLint) / perapi format (Prettier) |
+| **Runtime** | Lingkungan yang menjalankan program. Browser dan Node.js sama-sama dapat menjalankan JavaScript, tetapi menyediakan kemampuan berbeda: browser menyediakan DOM, sedangkan Node.js menyediakan akses ke file system dan proses server. |
+| **Variable** | Nama yang merujuk ke sebuah nilai, misalnya `const harga = 50000`. `const` mencegah nama itu diisi ulang, tetapi tidak otomatis membuat isi object atau array menjadi immutable. |
+| **Function** | Blok kode yang dapat dipanggil untuk menjalankan tugas. Function dapat menerima input lewat `parameter` dan mengirim hasil kembali lewat `return`. |
+| **Parameter / Argument** | `Parameter` adalah nama penerima yang ditulis pada definisi function, misalnya `nama` di `function sapa(nama)`. `Argument` adalah nilai yang dikirim saat function dipanggil, misalnya `"Budi"` di `sapa("Budi")`. |
+| **Return value** | Nilai yang dikirim keluar oleh function melalui `return`. Jika tidak ada `return` eksplisit, hasil pemanggilan function biasanya `undefined`. |
+| **Expression / Statement** | `Expression` adalah potongan kode yang menghasilkan nilai, seperti `harga * jumlah`. `Statement` adalah instruksi yang menjalankan aksi, seperti `const total = harga * jumlah;` atau `if (...) { ... }`. |
+| **Property / Method** | `Property` adalah data pada object (`user.nama`); `method` adalah function yang menjadi bagian object (`user.sapa()`). Tanda `()` memanggil method. |
+| **Scope** | Aturan yang menentukan bagian kode mana yang dapat mengakses variable tertentu. `let` dan `const` mengikuti scope function atau block tempat keduanya dideklarasikan. |
+| **Closure** | Function beserta aksesnya ke variable dari lexical scope tempat function itu dibuat. Karena itu, function dapat tetap memakai variable tersebut setelah function pembungkusnya selesai berjalan. |
+| **Callback** | Function yang diberikan ke kode lain agar dapat dipanggil kemudian, misalnya ketika event terjadi atau operasi selesai. Contoh: function yang diberikan ke `addEventListener` atau `.map()`. |
+| **Synchronous / Asynchronous** | Operasi `synchronous` berjalan berurutan dan menahan langkah berikutnya sampai selesai. Operasi `asynchronous` memungkinkan program melanjutkan pekerjaan lain sambil menunggu hasil, misalnya saat mengambil data lewat network. |
+| **Promise** | Object yang mewakili hasil operasi asynchronous yang belum tentu selesai saat itu juga. Statusnya `pending` (belum selesai), `fulfilled` (berhasil), atau `rejected` (gagal). |
+| **`async` / `await`** | `async` menandai function yang hasilnya berupa `Promise`. `await` menunggu hasil Promise di dalam function `async`, sehingga alur kode lebih mudah dibaca; ia tidak menghentikan seluruh aplikasi atau browser. |
+| **Event Loop** | Mekanisme JavaScript yang mengatur kapan callback dari antrean asynchronous dapat dijalankan. Secara sederhana, callback dijalankan setelah pekerjaan synchronous yang sedang berada di `call stack` selesai. |
+| **Immutable / Immutability** | Data disebut immutable jika tidak diubah langsung setelah dibuat. Dalam React, membuat array atau object baru saat memperbarui state membantu React mengenali perubahan. |
+| **Destructuring** | Sintaks untuk mengambil nilai dari object atau array ke variable. Contoh: `const { nama } = user` mengambil property `nama` dari `user`. |
+| **Spread / Rest** | Sintaks `...` punya arti sesuai posisinya. `Spread` membentangkan isi array/object, seperti `[...items]`; `rest` mengumpulkan beberapa nilai ke satu array, seperti `function jumlah(...angka)`. |
+| **Module** | File JavaScript yang mengatur kode mana yang boleh digunakan file lain. `export` menyediakan nilai/function; `import` mengambilnya dari module lain. |
+| **JSON** | Format teks untuk bertukar data, biasanya menggunakan object, array, string, number, boolean, dan `null`. `JSON.parse()` mengubah teks JSON menjadi nilai JavaScript; `JSON.stringify()` melakukan kebalikannya. |
+
+## React dan Next.js
+
+| Istilah | Penjelasan |
+|---|---|
+| **UI (User Interface)** | Bagian aplikasi yang dilihat dan digunakan orang, seperti tombol, form, menu, dan daftar data. |
+| **Component** | Unit UI yang dapat digunakan kembali. Component React biasanya berupa function yang menghasilkan JSX. Component dapat menerima `props`, membaca `state`, lalu menghasilkan UI. |
+| **JSX** | Sintaks mirip HTML yang ditulis di dalam JavaScript/TypeScript untuk mendeskripsikan UI React. JSX bukan HTML biasa; misalnya atribut `class` ditulis sebagai `className`. |
+| **Props** | Input yang diberikan parent component kepada child component. Props diperlakukan sebagai read-only oleh component penerima; jika data perlu berubah, perubahan biasanya dikelola oleh state atau sumber data di parent. |
+| **State** | Data yang dimiliki atau dikelola component. Saat state diperbarui dengan cara React yang sesuai, React menjadwalkan render baru agar UI mencerminkan data terbaru. |
+| **Render** | Proses React memanggil component untuk mengetahui UI yang seharusnya ditampilkan. Render tidak selalu berarti seluruh halaman dimuat ulang; React membandingkan hasilnya dan memperbarui bagian DOM yang perlu. |
+| **Effect / Side Effect** | Pekerjaan yang berinteraksi dengan sesuatu di luar proses menghasilkan UI, seperti network request, timer, atau subscription. `useEffect` dipakai untuk menghubungkan pekerjaan tersebut dengan siklus hidup component; tidak semua logika perlu diletakkan di effect. |
+| **Hook** | Function React dengan aturan pemanggilan khusus yang memberi component akses ke fitur React, misalnya state dan effect. Hook bawaan seperti `useState` dan custom Hook seperti `useFetch` dipanggil di tingkat teratas component atau Hook lain. |
+| **Controlled Component** | Form element yang nilainya disimpan di state React, lalu diperbarui melalui event handler. Pola ini membuat nilai input dan state tetap sinkron. |
+| **Context** | Mekanisme React untuk menyediakan data kepada banyak component di bawah provider tanpa meneruskan props melalui setiap lapisan. Context cocok untuk data yang memang dibutuhkan lintas banyak bagian, bukan pengganti otomatis untuk semua state. |
+| **Routing / Route** | `Routing` adalah pemetaan URL ke tampilan atau handler aplikasi. Satu `route` adalah satu alamat atau pola alamat, misalnya `/produk/[id]`. |
+| **Server Component / Client Component** | Di Next.js App Router, Server Component dirender di server dan dapat mengakses resource server. Client Component mendukung interaksi browser seperti state dan event handler. Client Component tetap dapat ikut dirender di server pada proses awal; `"use client"` menandai batas module client, bukan berarti kodenya hanya pernah berjalan di browser. |
+| **SSR (Server-Side Rendering)** | Pembuatan HTML di server saat request ditangani. Istilah ini menjelaskan kapan/di mana HTML dirender, bukan apakah halaman akan selalu memakai data terbaru atau tidak. |
+| **SSG (Static Site Generation)** | Halaman dibuat sebagai output statis sebelum request pengguna, misalnya saat build. Hasilnya dapat disajikan tanpa merender ulang halaman untuk setiap request. |
+| **ISR (Incremental Static Regeneration)** | Pendekatan Next.js untuk memperbarui hasil yang di-cache setelah jeda atau aturan tertentu tanpa harus membangun ulang seluruh situs. Detail konfigurasi mengikuti versi Next.js. |
+| **Server Action** | Function server yang dapat dipanggil dari UI, termasuk melalui form. Input dari browser tetap harus divalidasi dan hak akses harus diperiksa di server; penanda server bukan pengganti keamanan. |
+| **Middleware** | Kode yang dijalankan pada tahap awal penanganan request untuk kebutuhan seperti pemeriksaan atau pengalihan. Middleware bukan tempat yang tepat untuk semua pekerjaan server; batas runtime dan API yang tersedia bergantung pada platform/framework. |
+
+## Web, HTTP, dan API
+
+| Istilah | Penjelasan |
+|---|---|
+| **Client / Server** | `Client` adalah pihak yang meminta layanan, seperti browser atau aplikasi mobile. `Server` adalah program yang menerima request, menjalankan logika, lalu mengirim response. Satu sistem dapat bertindak sebagai client dalam satu komunikasi dan server dalam komunikasi lain. |
+| **API (Application Programming Interface)** | Kontrak atau cara terstruktur agar satu software dapat meminta kemampuan/data dari software lain. API tidak selalu berbasis HTTP, tetapi roadmap ini terutama membahas HTTP API. |
+| **Endpoint** | Alamat dan operasi spesifik yang bisa dipanggil pada API, misalnya `GET /api/produk`. URL saja belum selalu menjelaskan seluruh endpoint; HTTP method juga bagian dari konteksnya. |
+| **Request / Response** | `Request` adalah pesan yang dikirim client ke server, termasuk method, URL, headers, dan terkadang body. `Response` adalah balasan server, termasuk status code, headers, dan terkadang body. |
+| **HTTP Method** | Menjelaskan jenis operasi yang diminta. `GET` umumnya membaca data, `POST` umumnya mengirim atau membuat data, `PUT`/`PATCH` mengubah data, dan `DELETE` menghapus data. Arti tepatnya ditentukan oleh kontrak API. |
+| **HTTP Status Code** | Angka yang memberi gambaran hasil request. `2xx` umumnya sukses, `3xx` berkaitan dengan pengalihan, `4xx` menunjukkan masalah pada request/izin client, dan `5xx` menunjukkan kegagalan server. Contoh: `201` dibuat, `401` belum terautentikasi, `403` tidak diizinkan, `404` tidak ditemukan. |
+| **Header** | Metadata pada HTTP request/response, misalnya `Content-Type: application/json` yang menjelaskan format body atau `Authorization` yang membawa informasi autentikasi. |
+| **CORS (Cross-Origin Resource Sharing)** | Aturan browser yang menentukan apakah JavaScript dari satu origin boleh membaca response dari origin lain. CORS bukan mekanisme autentikasi dan biasanya perlu dikonfigurasi pada server yang dituju. |
+| **DOM (Document Object Model)** | Representasi dokumen HTML sebagai struktur object yang dapat dibaca atau diubah oleh JavaScript di browser. React mengelola pembaruan UI melalui DOM, sehingga aplikasi React biasanya tidak mengubah DOM secara manual. |
+| **Environment Variable** | Nilai konfigurasi yang diberikan ke aplikasi dari environment saat dijalankan atau dibangun. Nilai server-only dapat berisi secret; variable dengan prefix `NEXT_PUBLIC_` di Next.js dapat masuk ke bundle browser dan tidak boleh berisi secret. |
+
+## TypeScript, database, dan keamanan
+
+| Istilah | Penjelasan |
+|---|---|
+| **Type / Type Annotation** | `Type` menjelaskan jenis nilai yang diharapkan. `Type annotation` adalah penulisan eksplisit seperti `nama: string`; TypeScript juga sering dapat menyimpulkan type dari nilai awal. |
+| **Interface / Type Alias** | Keduanya dapat memberi nama pada bentuk data. `interface` sering dipakai untuk bentuk object yang dapat diperluas; `type` juga mendukung union dan bentuk type lainnya. Keduanya bukan validasi otomatis terhadap data saat aplikasi berjalan. |
+| **Union Type** | Type yang mengizinkan salah satu dari beberapa pilihan, misalnya `"aktif" | "nonaktif"`. Nilai di luar pilihan tersebut akan ditolak oleh pemeriksaan TypeScript. |
+| **Generic** | Parameter type yang membuat function atau struktur data dapat bekerja dengan beberapa type sambil mempertahankan informasi type. Pada `function ambil<T>(nilai: T): T`, type output mengikuti type input. |
+| **Type Inference** | Kemampuan TypeScript menyimpulkan type dari konteks atau nilai yang tersedia, sehingga annotation tidak perlu ditulis di setiap variable. |
+| **SQL Query** | Instruksi SQL untuk membaca atau mengubah data database. Dalam query, `FROM` menentukan sumber tabel, `JOIN` menggabungkan baris terkait, `WHERE` menyaring baris, dan `GROUP BY` mengelompokkan baris. |
+| **Table / Row / Column** | `Table` menyimpan data sejenis; `row` adalah satu record/baris; `column` adalah satu field/atribut yang dimiliki setiap baris. |
+| **Primary Key / Foreign Key** | `Primary key` mengidentifikasi satu row secara unik. `Foreign key` menghubungkan row ke row pada tabel lain dan dapat membantu database menjaga integritas relasi. |
+| **Index** | Struktur tambahan yang membantu database menemukan atau mengurutkan data lebih cepat untuk pola query tertentu. Index memakai ruang penyimpanan dan dapat menambah biaya saat data ditulis, jadi tidak semua column perlu di-index. |
+| **Transaction** | Sekumpulan operasi database yang diperlakukan sebagai satu unit: berhasil bersama atau dibatalkan sesuai aturan transaksi. Ini berguna untuk menjaga data tetap konsisten ketika beberapa perubahan saling bergantung. |
+| **ORM (Object-Relational Mapper)** | Library yang menyediakan cara mengakses database melalui object/function dalam bahasa pemrograman. Prisma adalah ORM; memahami SQL tetap membantu saat menilai query, performa, dan hasilnya. |
+| **Schema / Migration** | `Schema` adalah definisi struktur data, seperti model, column, dan relation. `Migration` adalah perubahan schema yang dicatat sebagai langkah berurutan agar database dapat diperbarui secara terkontrol. |
+| **CRUD** | Singkatan `Create`, `Read`, `Update`, `Delete`: empat operasi dasar untuk membuat, membaca, memperbarui, dan menghapus data. |
+| **Authentication / Authorization** | `Authentication` memeriksa identitas (siapa user ini?). `Authorization` memeriksa izin (apa yang boleh dilakukan user ini?). Login saja tidak otomatis memberi izin untuk membaca atau mengubah semua data. |
+| **Session / Token** | `Session` menyimpan status login yang dapat dikenali server pada request berikutnya. `Token` adalah credential yang dibawa untuk membuktikan atau menyampaikan klaim tertentu; token yang dicuri dapat disalahgunakan, jadi penyimpanan dan masa berlakunya penting. |
+| **Hashing** | Mengubah input menjadi nilai turunan dengan fungsi satu arah. Password harus disimpan memakai password-hashing algorithm khusus seperti bcrypt/Argon2, bukan enkripsi yang dapat dibalik atau hash cepat biasa. |
+| **Validation / Sanitization** | `Validation` memeriksa apakah data memenuhi aturan yang diharapkan. `Sanitization` mengubah atau membatasi data untuk konteks penggunaannya. Keduanya berbeda dan tidak menggantikan encoding/output escaping yang sesuai. |
+| **SQL Injection** | Kerentanan ketika input tidak tepercaya ikut ditafsirkan sebagai bagian dari perintah SQL. Gunakan parameterized query atau ORM dengan pola aman; hindari membangun query dengan menyambungkan input mentah. |
+| **XSS (Cross-Site Scripting)** | Kerentanan ketika konten tidak tepercaya dijalankan sebagai script di browser pengguna lain. Hindari memasukkan HTML mentah tanpa sanitasi yang tepat; React escaping teks secara default, tetapi API seperti `dangerouslySetInnerHTML` mengubah risikonya. |
+| **IDOR (Insecure Direct Object Reference)** | Masalah authorization ketika seseorang dapat melihat atau mengubah object milik pihak lain hanya dengan mengganti ID pada request. Server harus memeriksa izin dan kepemilikan data untuk setiap operasi. |
+
+## Workflow dan kualitas kode
+
+| Istilah | Penjelasan |
+|---|---|
+| **Git Repository** | Folder proyek yang dilacak Git, termasuk riwayat perubahan. Repository lokal dapat dihubungkan dengan remote repository seperti yang disimpan di GitHub. |
+| **Branch** | Jalur kerja terpisah dalam repository. Branch membantu mengerjakan perubahan tanpa langsung mencampurnya ke branch utama. |
+| **Commit** | Snapshot perubahan yang disimpan di riwayat Git, biasanya disertai pesan yang menjelaskan tujuan perubahan. Commit lokal belum otomatis terkirim ke GitHub. |
+| **Pull Request (PR)** | Permintaan untuk meninjau dan menggabungkan perubahan dari satu branch ke branch lain. PR memfasilitasi code review, diskusi, dan pemeriksaan otomatis. |
+| **Merge / Merge Conflict** | `Merge` menggabungkan riwayat perubahan branch. `Merge conflict` terjadi ketika Git tidak dapat menentukan cara menggabungkan perubahan secara otomatis; developer perlu memilih atau menyusun hasil yang benar. |
+| **Code Review** | Pemeriksaan perubahan kode oleh developer lain untuk mengevaluasi ketepatan, keterbacaan, keamanan, dan kesesuaiannya dengan kebutuhan. Review bukan sekadar mencari kesalahan gaya. |
+| **Testing** | Pemeriksaan otomatis atau manual untuk memastikan perilaku aplikasi sesuai harapan. `Unit test` menguji bagian kecil; `integration test` memeriksa beberapa bagian bekerja bersama; `E2E test` menjalankan alur aplikasi seperti yang dilakukan user. |
+| **Linting / Formatting** | `Linting` memeriksa pola atau potensi masalah pada kode. `Formatting` merapikan tampilan kode secara konsisten. ESLint umumnya dipakai untuk linting; Prettier untuk formatting. |
+| **CI/CD** | `Continuous Integration / Continuous Delivery (atau Deployment)` adalah rangkaian otomatis untuk memeriksa dan/atau merilis perubahan kode. Pipeline dapat menjalankan test, build, lalu deployment sesuai konfigurasi proyek. |
+| **Deployment** | Proses menempatkan aplikasi/build ke environment yang dapat digunakan, misalnya server production. Deployment juga melibatkan konfigurasi environment, database, domain, dan pemantauan hasil. |
+| **Sandbox** | Environment atau mode terisolasi untuk mencoba integrasi tanpa memengaruhi data/layanan production. Contohnya test mode penyedia pembayaran. Sandbox tetap perlu diperlakukan dengan hati-hati dan bukan jaminan keamanan mutlak. |
 
 ---
 
-> *"Jangan membaca kode seperti membaca novel. Bacalah seperti membaca peta: cari pintu masuk, ikuti alurnya, dan tandai tempat yang membingungkan."* 💪
+> *"Pahami tujuan kode, lalu telusuri aliran kontrol dan data dengan aturan bahasa yang digunakan."* 💪
