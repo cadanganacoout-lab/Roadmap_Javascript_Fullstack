@@ -1,5 +1,95 @@
 # 🚀 ROADMAP FULL STACK JAVASCRIPT (Versi Lengkap + Panduan Memahami Kode)
 
+---
+
+# ⚠️ SYARAT DAN DASAR YANG WAJIB DIMILIKI!
+
+---
+
+## 📋 1. Prasyarat Dasar (Basic Requirements)
+
+Sebelum menulis baris kode pertama, pastikan kamu memiliki dan melatih fondasi non-teknis berikut:
+
+* **Logika Pemrograman & Problem Solving:** Pemahaman tentang alur logika, variabel, pengkondisian (*if-else*), perulangan (*loops*), dan pembuatan fungsi.
+* **Dasar Bahasa Inggris:** Minimal dapat membaca *error log*, dokumentasi resmi teknis, serta diskusi di komunitas (seperti Stack Overflow).
+* **Pengoperasian Komputer & Terminal:** Familiar dengan navigasi OS, pengoperasian dasar *Command Line Interface* (CLI / Terminal / Bash/Zsh), dan instalasi alat pengembangan (*software/tools*).
+
+---
+
+## 🏗️ 2. Dasar Utama (Fondasi Wajib)
+
+### A. Web Fundamentals (Dasar Web)
+1. **HTML5:**
+   * Struktur dokumen web dan elemen semantik (`<header>`, `<article>`, `<section>`, dll.).
+   * Penggunaan Form, Input, dan konsep Aksesibilitas Web dasar.
+2. **CSS3:**
+   * Layouting menggunakan **Flexbox** dan **CSS Grid**.
+   * Responsivitas desain dengan *Media Queries*.
+   * Konsep dasar Box Model (*margin, border, padding*).
+3. **JavaScript Fundamental (ES6+):**
+   * Tipe data, variabel (`let`, `const`), serta manipulasi Array dan Object.
+   * *Arrow Functions*, *Destructuring*, dan *Spread/Rest Operators*.
+   * Asynchronous JS: *Promises*, `async/await`, dan `fetch` API.
+   * Pemahaman konsep Event Loop dan Manipulasi DOM.
+
+### B. Tools & Version Control
+1. **Git & GitHub:**
+   * Perintah dasar: `git init`, `git add`, `git commit`, `git push`, `git pull`.
+   * Pemahaman tentang branching, merging, dan pengoperasian repositori remote.
+2. **Code Editor:**
+   * Penguasaan VS Code (konfigurasi, shortcut, ekstensi produktivitas, dan debugging dasar).
+3. **Node.js & Package Manager:**
+   * Memahami fungsi Node.js sebagai *JavaScript runtime*.
+   * Pengelolaan dependensi/library menggunakan `npm`, `yarn`, atau `pnpm`.
+
+---
+
+## 🗺️ 3. Peta Jalur Pengembangan Full-Stack
+
+```
+[Fondasi: HTML/CSS/JS ES6+ & Git]
+              │
+      ┌───────┴───────┐
+      ▼               ▼
+[Frontend Stack] [Backend Stack]
+  • React/Next.js   • Node.js & Express
+  • Tailwind CSS    • Database (PostgreSQL/MongoDB)
+      │               │
+      └───────┬───────┘
+              ▼
+    [Aplikasi Full-Stack]
+```
+
+### A. Sisi Frontend (Client-Side)
+* **Framework / Library UI:** React.js, Vue.js, atau Svelte.
+* **CSS Frameworks:** Tailwind CSS atau Bootstrap untuk efisiensi styling.
+* **State Management:** Context API, Redux Toolkit, atau Zustand.
+* **Build Tools & Type System:** Vite dan TypeScript (sangat direkomendasikan untuk pengembangan skala besar).
+
+### B. Sisi Backend (Server-Side)
+* **Node.js Environment:** Memahami arsitektur *event-driven* & *non-blocking I/O*.
+* **Framework Backend:** Express.js, Fastify, atau NestJS.
+* **API Design:** Merancang RESTful API atau GraphQL, penanganan *request/response*, JSON, dan HTTP Status Codes.
+* **Autentikasi & Keamanan:** JWT (JSON Web Tokens), OAuth, Hashing password (`bcrypt`), dan Session Management.
+
+### C. Database & ORM
+* **Relational Database (SQL):** PostgreSQL atau MySQL (pahami query DDL, DML, JOINs, serta indexing).
+* **Non-Relational Database (NoSQL):** MongoDB.
+* **ORM / Query Builders:** Prisma, Drizzle ORM, atau Sequelize untuk pemetaan database ke JavaScript/TypeScript.
+
+---
+
+## 🎯 4. Rencana Alur Belajar Bertahap (Roadmap Timeline)
+
+| Fase | Durasi Estimated | Fokus Pembelajaran | Output Proyek |
+| :--- | :--- | :--- | :--- |
+| **Fase 1** | Bulan 1–2 | HTML, CSS, JavaScript ES6+, & Git/GitHub | Landing Page Responsif, Mini App Interaktif |
+| **Fase 2** | Bulan 3–4 | Node.js, Express.js, & SQL/NoSQL Database | RESTful API CRUD dengan Autentikasi |
+| **Fase 3** | Bulan 5–6 | React.js / Next.js & Tailwind CSS | Web Dashboard / E-commerce Frontend |
+| **Fase 4** | Bulan 7+ | Integration, TypeScript, & Deployment | Aplikasi Full-Stack Terintegrasi (Deployed) |
+
+---
+
 ## 📌 DAFTAR ISI
 0. [Evaluasi: Apa yang Kurang dari Roadmap Awal](#0-evaluasi-apa-yang-kurang-dari-roadmap-awal)
 1. [Memahami dan Menelusuri Kode](#1-memahami-dan-menelusuri-kode)
