@@ -1,4 +1,4 @@
-# 🚀 ROADMAP FULL STACK JAVASCRIPT V2 (Versi Lengkap + Panduan Memahami Kode)
+# 🚀 ROADMAP FULL STACK JAVASCRIPT (Versi Lengkap + Panduan Memahami Kode)
 
 ## 📌 DAFTAR ISI
 0. [Evaluasi: Apa yang Kurang dari Roadmap Awal](#0-evaluasi-apa-yang-kurang-dari-roadmap-awal)
