@@ -1,23 +1,9 @@
 # 🚀 ROADMAP FULL STACK JAVASCRIPT V2 (Versi Lengkap + Panduan Memahami Kode)
 
-Dokumen ini adalah versi yang dilengkapi dari roadmap awal. Setiap materi punya:
-- **Penjelasan** singkat (apa & kenapa)
-- **Contoh kode**
-- **Penjelasan konsep dan alur contoh kode**
-
-Materi bertanda 🆕 adalah **tambahan baru** yang tidak ada di roadmap awal.
-
-### Cara memahami istilah di dokumen ini
-
-Istilah yang umum dipakai developer di seluruh dunia—seperti **scope**, **state**, **render**, **endpoint**, dan **migration**—sengaja tetap ditulis dalam bahasa Inggris. Istilah tersebut biasanya muncul dengan nama yang sama di dokumentasi, kode, pesan error, dan diskusi kerja. Penjelasannya ditulis dalam bahasa Indonesia agar maknanya mudah dipahami. Jika dua istilah mirip tetapi tidak sama, perbedaannya dijelaskan secara terpisah, bukan diterjemahkan menjadi satu kata yang berpotensi membingungkan.
-
-Roadmap ini bisa dibaca berurutan atau per topik. Untuk setiap contoh, coba kenali input, proses, dan output-nya; lalu cocokkan penjelasan dengan simbol atau baris kode yang disebut. Glosarium di bagian akhir memberi definisi yang lebih lengkap untuk istilah yang sering muncul.
-
----
-
 ## 📌 DAFTAR ISI
 0. [Evaluasi: Apa yang Kurang dari Roadmap Awal](#0-evaluasi-apa-yang-kurang-dari-roadmap-awal)
 1. [Memahami dan Menelusuri Kode](#1-memahami-dan-menelusuri-kode)
+   - [Operator dan Simbol Sintaks](#operator-dan-simbol-sintaks)
 2. [Phase 0 🆕: Fondasi Lingkungan Kerja](#phase-0--fondasi-lingkungan-kerja-minggu-1-2)
 3. [Phase 1: JavaScript Modern & Asynchronous](#phase-1-javascript-modern--asynchronous-bulan-1)
 4. [Phase 2: Tailwind & React](#phase-2-tailwind--react-bulan-2-3)
@@ -26,39 +12,6 @@ Roadmap ini bisa dibaca berurutan atau per topik. Untuk setiap contoh, coba kena
 7. [Phase 5: Capstone, Testing & Deployment](#phase-5-capstone-testing--deployment-bulan-8)
 8. [Phase 6 🆕: Persiapan Karier](#phase-6--persiapan-karier-berjalan-paralel)
 9. [Glosarium](#glosarium-istilah-pemrograman)
-
----
-
-# 0. Evaluasi: Apa yang Kurang dari Roadmap Awal
-
-Secara urutan, roadmap awal sudah bagus (JS → UI → framework → database → proyek). Tapi ada celah yang biasanya baru terasa saat sudah mulai kerja:
-
-| # | Yang Kurang | Kenapa Penting | Ditaruh di |
-|---|---|---|---|
-| 1 | **Terminal, Node.js & npm** | Semua tool (Next.js, Prisma, Git) dijalankan dari terminal. Tanpa ini, tutorial manapun akan macet di langkah 1. | Phase 0 |
-| 2 | **HTML/CSS/DOM refresher** | Roadmap langsung ke Tailwind & React, padahal React hanyalah cara lain mengelola DOM. | Phase 0 |
-| 3 | **Debugging & Browser DevTools** | Skill yang paling membedakan pemula dan developer: membaca error dan menelusuri bug. | Phase 0 |
-| 4 | **Modul `import`/`export`, JSON, optional chaining, template literal** | Muncul di setiap file Next.js tapi tidak disebut sama sekali. | Phase 1 |
-| 5 | **Scope & Closure** | Dasar untuk memahami hooks React. Kamu bertanya soal scope, jadi ini memang konsep kunci. | Phase 1 |
-| 6 | **HTTP dasar (method, status code, header, CORS)** | Fetch/Axios dan API Routes tidak akan paham tanpa ini. | Phase 1 |
-| 7 | **Hook lanjutan: `useRef`, Context, custom hook** | `useState` + `useEffect` saja tidak cukup untuk aplikasi nyata. | Phase 2 |
-| 8 | **Conditional rendering, `key` pada list, loading/error state** | Dipakai di setiap halaman yang menampilkan data. | Phase 2 |
-| 9 | **Validasi dengan Zod + React Hook Form** | Standar industri untuk form. Validasi manual cepat jadi berantakan. | Phase 2/3 |
-| 10 | **SQL mentah dasar (JOIN, GROUP BY, index)** | Prisma itu bungkus SQL. Saat query lambat atau error, kamu harus paham SQL di baliknya. | Phase 4 |
-| 11 | **Keamanan dasar (OWASP, XSS, SQL injection, CORS, rate limit)** | Roadmap hanya menyebut login. Aplikasi yang tidak aman tidak layak masuk portofolio. | Phase 4 |
-| 12 | **Testing dasar (Vitest/Jest, Playwright)** | Perusahaan menilai kemampuan menulis kode yang bisa dites. | Phase 5 |
-| 13 | **ESLint, Prettier, dan pesan commit yang rapi** | Standar kerja tim. Mudah dipelajari, dampak profesionalismenya besar. | Phase 0/5 |
-| 14 | **Git workflow tim (Pull Request, merge conflict)** | Di tempat PKL kamu pasti kerja bareng. `commit/push/branch` saja belum cukup. | Phase 1 |
-| 15 | **Dasar algoritma & struktur data** | Dipakai di tes teknis rekrutmen. Cukup dasar saja. | Phase 6 |
-| 16 | **Bahasa Inggris teknis** | Dokumentasi dan error message hampir seluruhnya berbahasa Inggris. | Phase 6 |
-| 17 | **CV, GitHub profile, LinkedIn, soft skill** | Tujuan akhir roadmap adalah dapat kerja, tapi persiapannya belum ada. | Phase 6 |
-
-### ⚠️ Inkonsistensi kecil di roadmap awal (perlu dirapikan)
-1. **Phase 5 menyebut MongoDB Atlas**, padahal seluruh stack memakai PostgreSQL. Pakai **Supabase (PostgreSQL)** saja agar konsisten.
-2. **`tailwind.config.js`**: pada Tailwind versi 4, kustomisasi banyak dipindah ke file CSS. Cek versi yang kamu pasang dan ikuti dokumentasinya.
-3. **Auth.js (NextAuth)**: ekosistem autentikasi di Next.js sedang berkembang (ada alternatif seperti Better Auth dan Supabase Auth). Cek dokumentasi terbaru sebelum memilih, dan pilih satu saja.
-4. **Beban Bulan 1 terlalu padat** (JS modern + async + fetch + Git dalam satu bulan sambil PKL). Karena itu saya tambahkan Phase 0 dan beri ruang ±2 minggu.
-5. **Tidak ada kriteria "selesai"** per fase. Di versi ini tiap fase punya **mini-proyek** sebagai tolok ukur.
 
 ---
 
@@ -75,8 +28,8 @@ Sebelum membaca detail, cari tahu apa tanggung jawab file atau bagian kode terse
 Di dalam satu function, instruksi biasanya dijalankan berurutan dari atas ke bawah, kecuali alur berubah karena `if`, loop, `return`, `throw`, atau operasi asynchronous. Bedakan juga deklarasi dengan pemanggilan: mendefinisikan function belum menjalankannya.
 
 ```js
-  function hitungTotal(harga, jumlah) {
-    const total = harga * jumlah;
+function hitungTotal(harga, jumlah) {
+  const total = harga * jumlah;
   return total;
 }
 
@@ -137,6 +90,310 @@ Contoh ini menunjukkan bahwa akses property `nama` gagal karena nilai di depanny
 ### 8. Gunakan penjelasan verbal sebagai alat bantu opsional
 
 Menjelaskan alur kepada rekan, menulis catatan, atau memakai teknik *rubber duck debugging* dapat membantu saat menemui bug. Teknik ini adalah alat bantu untuk mengurai masalah, bukan aturan wajib untuk membaca atau menulis setiap baris kode.
+
+## Operator dan Simbol Sintaks
+
+Bagian ini merangkum operator yang muncul di contoh JavaScript, TypeScript, JSX, SQL, dan Prisma pada roadmap. **Operator** adalah simbol atau kata yang melakukan operasi pada satu atau beberapa nilai (operand). Simbol yang bentuknya mirip operator belum tentu operator: misalnya `:` pada object memisahkan nama property dan nilainya, sedangkan `:` pada TypeScript memperkenalkan anotasi tipe. Karena arti simbol bergantung pada konteks, baca struktur di sekitarnya terlebih dahulu. Contoh di bawah memakai nama `harga`, `jumlah`, `user`, dan `produk` sebagai data ilustrasi; anggap nilai tersebut sudah tersedia.
+
+### Operator assignment dan aritmetika
+
+**Assignment `=`** memberikan nilai hasil ekspresi di sebelah kanan kepada variable atau property di sebelah kiri. JavaScript menghitung bagian kanan terlebih dahulu, baru melakukan assignment. Karena itu, `const total = harga * jumlah` berarti hitung perkalian, lalu simpan hasilnya ke `total`; tanda `=` di sini bukan pertanyaan “apakah nilainya sama?”. Untuk membandingkan kesamaan nilai, gunakan `===` sebagaimana dijelaskan pada bagian perbandingan.
+
+```js
+let jumlah = 2;
+jumlah = jumlah + 1;
+const total = 5000 * jumlah;
+```
+
+Pada baris kedua, nilai lama `jumlah` (2) dijumlahkan dengan 1, lalu hasil 3 ditetapkan kembali ke variable `jumlah`. Baris ketiga mengalikan harga 5000 dengan jumlah 3 sehingga `total` bernilai 15000. `let` mengizinkan assignment ulang, sedangkan nama yang dideklarasikan dengan `const` tidak boleh diberi nilai baru setelah deklarasi.
+
+**Operator aritmetika `+`, `-`, `*`, dan `/`** masing-masing digunakan untuk penjumlahan, pengurangan, perkalian, dan pembagian angka. `+` juga dapat menggabungkan string, sehingga arti hasilnya dipengaruhi tipe operand: `2 + 3` menghasilkan angka `5`, sedangkan `"Rp " + 5000` menghasilkan teks `"Rp 5000"`. Operator `*` dan `/` memiliki prioritas lebih tinggi daripada `+` dan `-`; gunakan tanda kurung jika urutan hitung perlu dibuat eksplisit.
+
+```js
+const subtotal = harga * jumlah;
+const total = subtotal * (1 + tarifPajak);
+const hargaSetelahDiskon = harga - diskon;
+const hargaPerBarang = total / jumlah;
+```
+
+Pada contoh pajak, `(1 + tarifPajak)` dihitung dahulu. Jika `harga = 5000`, `jumlah = 3`, dan `tarifPajak = 0.11`, maka `subtotal` menjadi `5000 * 3 = 15000`; faktor pajak menjadi `1 + 0.11 = 1.11`; dan `total` menjadi `15000 * 1.11 = 16650`. Jika dibagi kembali dengan `jumlah`, `hargaPerBarang` menjadi `16650 / 3 = 5550`. Tanda kurung `()` bukan operator aritmetika, melainkan pengelompokan yang memastikan bagian tersebut dievaluasi sebagai satu kesatuan. Pembagian angka dengan nol di JavaScript tidak melempar exception: hasilnya dapat menjadi `Infinity` atau `-Infinity` (bergantung pada tanda pembilang), sedangkan `0 / 0` menghasilkan `NaN`. Jika nol tidak valid dalam konteks program, periksa dulu nilainya, misalnya `if (jumlah === 0) throw new Error("Jumlah tidak boleh nol");`. Lihat [MDN: Division](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Division) dan [operator precedence](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_precedence).
+
+Tanda minus juga dapat dipakai sebagai **operator unary** (operator yang bekerja pada satu operand), bukan hanya pengurangan dua angka. Pada contoh `hitungDiskon(100000, -5)`, `-` membuat nilai `5` menjadi angka negatif `-5`; function menerima nilai itu sebagai argument kedua. Operasi ini berbeda dari `100 - 5`, yang memakai minus sebagai operator binary (mengurangi operand kanan dari operand kiri).
+
+### Operator perbandingan
+
+**Kesamaan ketat `===` dan ketidaksamaan ketat `!==`** membandingkan nilai sekaligus tipe datanya dan menghasilkan boolean (`true` atau `false`), tanpa konversi tipe otomatis. Gunakan keduanya untuk pemeriksaan kesamaan yang umum di JavaScript; jangan menyamakan `=` (assignment) dengan `===` (perbandingan). Sebagai contoh, `5 === "5"` bernilai `false` karena operand kiri angka dan operand kanan string, sedangkan `5 !== "5"` bernilai `true`. Operator longgar `==` dan `!=` melakukan *type coercion* (konversi tipe implisit) sebelum membandingkan, sehingga hasil seperti `5 == "5"` bernilai `true`; untuk menghindari kejutan semacam ini, gunakan `===`/`!==` kecuali ada alasan yang jelas memakai perbandingan longgar. Lihat [MDN: Strict equality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality) dan [Strict inequality](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_inequality).
+
+```js
+if (produk.stok === 0) {
+  console.log("Stok habis");
+}
+
+const selainProdukIni = produk.filter((item) => item.id !== id);
+```
+
+Kondisi pertama memeriksa apakah stok tepat bernilai angka nol. Kondisi kedua mempertahankan hanya item yang `id`-nya berbeda dari `id` yang hendak dihapus. Pada contoh-contoh ini, `===` dan `!==` tidak mengubah nilai yang dibandingkan; keduanya hanya menghasilkan nilai boolean yang dapat dipakai oleh `if`, `filter`, atau ekspresi lain.
+
+**Perbandingan urutan `<`, `>`, `<=`, dan `>=`** menghasilkan boolean berdasarkan hubungan urutan. Untuk angka, `<` berarti lebih kecil, `>` lebih besar, `<=` lebih kecil atau sama, dan `>=` lebih besar atau sama. Operator ini muncul, misalnya, ketika memfilter produk dengan stok positif (`item.stok > 0`) atau memeriksa batas nilai. Pada string, perbandingan dilakukan secara leksikografis (membandingkan urutan karakter), bukan dengan membaca teks sebagai angka: `"10" > "2"` bernilai `false` karena karakter pertama `"1"` mendahului `"2"`. Jika teks sebenarnya mewakili angka, konversikan dan validasi sebagai angka terlebih dahulu, misalnya `Number(teks)`, sebelum membandingkan. Lihat [MDN: Less than](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Less_than) dan [Greater than or equal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Greater_than_or_equal).
+
+```js
+const tersedia = produk.filter((item) => item.stok > 0);
+const cukupUmur = umur >= 17;
+```
+
+`filter` menjalankan callback untuk setiap item. Untuk `tersedia`, callback menghasilkan `true` hanya jika stok item lebih dari nol, sehingga item tanpa stok tidak ikut ke array hasil. Sementara itu, `cukupUmur` berisi `true` saat `umur` sekurang-kurangnya 17 dan `false` jika kurang dari 17.
+
+### Operator logika dan pemilihan nilai
+
+**AND logis `&&`** mengembalikan operand pertama jika operand itu *falsy* (dianggap salah dalam konteks boolean); jika operand pertama *truthy*, operator mengevaluasi dan mengembalikan operand kedua. Karena itu, bila kedua operand berupa kondisi boolean, hasilnya benar hanya saat keduanya benar. Dalam JavaScript, operator ini memakai *short-circuit* (evaluasi berhenti lebih awal): operand kanan tidak dievaluasi jika operand kiri falsy. Di JSX, pola `{kondisi && <Elemen />}` menampilkan elemen saat kondisi benar. Perhatikan bahwa jika operand kiri bernilai angka `0`, ekspresi menghasilkan `0` dan React menampilkannya sebagai teks; untuk kondisi numerik, tulis pemeriksaan eksplisit seperti `jumlah > 0 && ...`.
+
+```jsx
+{produk.stok === 0 && <span>(Habis)</span>}
+{produk.length > 0 && <Daftar produk={produk} />}
+```
+
+Pada baris pertama, elemen `<span>` hanya menjadi hasil ekspresi jika stok tepat nol; jika tidak, tidak ada elemen yang perlu ditampilkan. Pada baris kedua, pemeriksaan `produk.length > 0` mencegah hasil `0` muncul di UI ketika array kosong. Operator `&&` dapat mengendalikan ekspresi seperti ini, tetapi bukan pengganti `if` untuk semua alur program.
+
+**OR logis `||`** mengembalikan operand pertama yang *truthy*; jika operand pertama falsy, ia mengevaluasi dan mengembalikan operand kedua. Jika semua operand falsy, hasilnya adalah operand terakhir, bukan otomatis nilai boolean `false`. Nilai falsy JavaScript mencakup `0`, `-0`, `0n`, `""` (string kosong), `false`, `null`, `undefined`, dan `NaN`; nilai lain termasuk object dan array kosong dianggap truthy. Karena `0`, `false`, dan `""` kerap merupakan data sah, penggunaan `||` sebagai fallback dapat menggantinya secara tidak sengaja. Lihat [MDN: Truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) dan [Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy).
+
+```js
+const namaTampilan = input || "Tanpa nama";
+```
+
+Jika `input` adalah `"Budi"`, hasilnya `"Budi"` dan operand kanan tidak dievaluasi karena operand pertama truthy. Jika `input` adalah string kosong, hasilnya `"Tanpa nama"`. Begitu pula `0`, `false`, `null`, `undefined`, dan `NaN` menyebabkan fallback dipilih. Jika angka `0` merupakan nilai yang valid dan harus tetap dipakai, `||` bukan pilihan tepat; gunakan `??` agar fallback hanya dipakai untuk `null` atau `undefined`. Lihat [MDN: Logical OR](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR).
+
+**NOT logis `!`** membalik nilai truthiness: `!true` menjadi `false` dan `!false` menjadi `true`. Pada kondisi seperti `if (!res.ok)`, tanda `!` menyatakan “jika `res.ok` tidak benar”, sehingga blok menangani respons yang tidak sukses. `!` juga dapat mengonversi nilai ke boolean terbalik, jadi pahami nilai asalnya sebelum membaca hasilnya.
+
+```js
+if (!res.ok) {
+  throw new Error(`Gagal: ${res.status}`);
+}
+```
+
+`Response.ok` bernilai `true` untuk status HTTP sukses dalam rentang 200–299. Jika `res.ok` adalah `true`, `!res.ok` menjadi `false` dan blok dilewati. Jika `res.ok` adalah `false`, kondisinya menjadi `true` dan `throw` menghentikan jalur normal dengan melempar error. `throw` sendiri adalah keyword untuk melempar exception, bukan operator. Penting membedakan kegagalan HTTP dari kegagalan jaringan: `fetch` biasanya tetap menghasilkan `Response` untuk status 404/500, sehingga pengecekan ini diperlukan; kegagalan jaringan umumnya menolak Promise dan ditangani lewat `catch`.
+
+**Nullish coalescing `??`** memakai nilai di kiri jika nilainya bukan `null` dan bukan `undefined`; hanya jika nilainya *nullish* (salah satu dari dua nilai tersebut) barulah nilai kanan dipakai. Operator ini cocok untuk nilai default ketika `0`, `false`, atau `""` tetap merupakan data yang sah.
+
+```js
+const jumlahTampilan = jumlahInput ?? 0;
+const namaTampilan = namaInput ?? "Tanpa nama";
+```
+
+Jika `jumlahInput` bernilai `0`, `jumlahTampilan` tetap `0`; jika `jumlahInput` `null` atau `undefined`, hasilnya `0`. Hal itu berbeda dari `jumlahInput || 0`, yang juga akan memilih nilai kanan saat input `false`, `0`, atau string kosong. Hindari mencampur `??` dengan `&&` atau `||` dalam satu ekspresi tanpa tanda kurung; JavaScript membatasi campuran langsung tersebut agar maksud logikanya tidak ambigu.
+
+**Conditional / ternary `kondisi ? nilaiJikaBenar : nilaiJikaSalah`** memilih salah satu dari dua ekspresi berdasarkan kondisi dan menghasilkan nilai. Gunakan untuk keputusan singkat yang langsung menghasilkan UI atau data; untuk banyak cabang atau proses panjang, `if/else` biasanya lebih mudah dibaca.
+
+```jsx
+const label = stok > 0 ? "Tersedia" : "Habis";
+return <p>{aktif ? "Akun aktif" : "Akun nonaktif"}</p>;
+```
+
+Jika kondisi sebelum `?` bernilai benar, ekspresi di antara `?` dan `:` dipilih; jika salah, ekspresi setelah `:` dipilih. Pada contoh pertama, `label` berisi salah satu teks. Pada contoh kedua, ternary menjadi ekspresi JavaScript di dalam JSX dan menghasilkan teks yang dirender. Tanda `:` pada ternary memisahkan cabang benar dan cabang salah; fungsinya berbeda dari `:` yang menandai tipe TypeScript.
+
+### Operator akses, pemanggilan, dan pembentukan fungsi
+
+**Optional chaining `?.`** mencoba mengakses property atau memanggil method hanya jika nilai di sebelah kirinya bukan `null`/`undefined`. Jika nilai kiri nullish, rangkaian akses tersebut berhenti dan hasilnya `undefined`, alih-alih melempar `TypeError`. Operator ini melindungi akses bertingkat ketika data mungkin belum tersedia, tetapi tidak menggantikan validasi jika data wajib ada.
+
+```js
+const kota = user?.alamat?.kota;
+```
+
+JavaScript memeriksa `user` terlebih dahulu. Jika `user` nullish, `kota` menjadi `undefined` tanpa mencoba membaca `alamat`; jika `user` tersedia, JavaScript melanjutkan ke `alamat`, lalu membaca `kota` hanya bila `alamat` juga tersedia. Jika `kota` harus selalu ada untuk proses bisnis, tangani kondisi `undefined` secara eksplisit daripada membiarkannya merambat ke bagian program lain.
+
+**Akses property `.` dan akses property dinamis `[]`** mengambil nilai yang tersimpan pada object atau array. Titik dipakai ketika nama property diketahui saat menulis kode (`user.nama`); kurung siku dipakai ketika nama property disimpan sebagai nilai variable (`form[name]`) atau ketika mengakses elemen array berdasarkan indeks (`warna[0]`). Keduanya membaca data dan tidak dengan sendirinya memanggil fungsi.
+
+```js
+const nama = user.nama;
+const pertama = warna[0];
+const nilaiField = form[namaField];
+```
+
+Pada `warna[0]`, angka `0` adalah indeks item pertama karena indeks array dimulai dari nol. Pada `form[namaField]`, JavaScript mengevaluasi variable `namaField`, lalu menggunakan isi string-nya sebagai nama property; jika isinya `"email"`, ekspresi tersebut setara dengan `form.email`. Berbeda dengan itu, `form.namaField` selalu membaca property literal bernama `"namaField"`.
+
+**Pemanggilan function `()`** menjalankan function atau method dan mengirim argument di antara tanda kurung. Koma memisahkan beberapa argument, bukan operator hitung. Tanda kurung juga digunakan untuk mengelompokkan ekspresi dan parameter function; jadi maknanya ditentukan oleh bentuk di sekitarnya.
+
+```js
+const hasil = hitungTotal(5000, 3);
+const nama = user.nama.toLocaleUpperCase();
+```
+
+Pemanggilan `hitungTotal(5000, 3)` mengirim dua argument, yaitu `5000` dan `3`, ke parameter function. Pada baris kedua, `user.nama` diakses lebih dulu, lalu method `toLocaleUpperCase()` dipanggil pada nilai teks tersebut. Jika `user` atau `nama` mungkin tidak tersedia, akses biasa dapat gagal; gunakan pemeriksaan atau optional chaining sesuai kebutuhan.
+
+**Arrow `=>`** memisahkan parameter fungsi panah dari badan fungsi dan membentuk sebuah function value. Callback seperti `(item) => item.nama` lazim digunakan oleh method array. Jika badan setelah `=>` berupa satu ekspresi tanpa kurung kurawal, hasil ekspresi dikembalikan otomatis; jika menggunakan `{ ... }`, badan tersebut adalah blok dan perlu `return` eksplisit apabila ingin mengembalikan nilai.
+
+```js
+const ambilNama = (item) => item.nama;
+const tambah = (a, b) => a + b;
+const kuadrat = (angka) => {
+  return angka * angka;
+};
+```
+
+`ambilNama` menerima satu item dan mengembalikan property `nama`; `tambah` menerima dua parameter dan mengembalikan hasil penjumlahan. Pada `kuadrat`, kurung kurawal membentuk blok sehingga `return` diperlukan agar nilai perkalian keluar dari function. Perbedaan ini penting pada `.map()`: callback harus mengembalikan nilai baru agar array hasilnya berisi data yang diharapkan.
+
+**Spread/rest `...`** memiliki arti bergantung pada posisi. Sebagai *spread* (membentangkan elemen/property), ia menyalin elemen array atau property object ke dalam struktur baru atau argument pemanggilan. Sebagai *rest* (mengumpulkan sisa nilai), ia mengumpulkan argument atau property yang tersisa ke dalam array/object. Spread/rest menghasilkan salinan dangkal (*shallow copy*: object di tingkat terluar baru, tetapi object bertingkat masih dapat berbagi referensi).
+
+```js
+const salinanDaftar = [...daftar, itemBaru];
+const userBaru = { ...user, kota: "Malang" };
+
+function jumlahkan(...angka) {
+  return angka.reduce((total, nilai) => total + nilai, 0);
+}
+```
+
+Di `[...daftar, itemBaru]`, elemen `daftar` dibentangkan ke array baru dan `itemBaru` ditambahkan di akhir; array awal tidak dimutasi. Pada object, urutan property penting: `{ ...user, kota: "Malang" }` menyalin property `user`, lalu nilai `kota` ditimpa dengan `"Malang"`. Dalam definisi parameter `...angka`, rest mengumpulkan semua argument menjadi array sehingga `jumlahkan(1, 2, 3)` memproses `[1, 2, 3]`.
+
+**Interpolasi template literal `${...}`** menyisipkan hasil ekspresi JavaScript ke dalam string yang dibatasi backtick (`` ` ``). Bentuk ini memudahkan penyusunan teks yang berisi variable atau perhitungan dan menghindari rangkaian penggabungan string dengan `+`. Ekspresi di dalam `${}` dievaluasi saat template literal dibuat.
+
+```js
+const pesan = `Halo ${user.nama}, total belanja: Rp${harga * jumlah}`;
+```
+
+JavaScript membaca teks `"Halo "`, mengambil nilai `user.nama`, melanjutkan teks `", total belanja: Rp"`, menghitung `harga * jumlah`, lalu menyisipkan hasilnya. Template literal berbeda dari string dengan tanda kutip biasa karena mendukung interpolasi dan teks multi-baris.
+
+### Operator yang digunakan pada fase-fase berikutnya
+
+**`await`** menunggu Promise (object yang mewakili hasil asynchronous) di dalam function `async` atau pada top-level module yang mendukungnya, lalu menghasilkan nilai pemenuhan Promise. `await` menjeda kelanjutan function yang sedang berjalan, bukan menghentikan seluruh aplikasi. Jika Promise ditolak (*rejected*), `await` melempar error pada titik tersebut sehingga dapat ditangani dengan `try/catch`. Perlu diingat bahwa `fetch` menolak Promise untuk kegagalan jaringan, tetapi status HTTP seperti 404 atau 500 tetap menghasilkan `Response`; karena itu contoh roadmap memeriksa `res.ok` secara terpisah. Lihat [MDN: `await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await).
+
+```js
+const res = await fetch(`/api/users/${id}`);
+if (!res.ok) throw new Error(`Gagal: ${res.status}`);
+const data = await res.json();
+```
+
+Pertama, `fetch(...)` memulai request dan memberikan Promise. `await` menunggu sampai response tersedia lalu hasilnya disimpan di `res`. Pemeriksaan `!res.ok` melempar error bila status bukan rentang sukses HTTP; sesudahnya `res.json()` membaca dan mengurai body secara asynchronous, sehingga hasil parsing juga perlu ditunggu dengan `await`. Template literal pada URL menyisipkan nilai `id`.
+
+**`new`** adalah operator yang membuat instance (object yang dibuat berdasarkan constructor atau class) dengan memanggil constructor. Ia dipakai, misalnya, pada `new PrismaClient()` dan `new Error("...")`. `new` bukan bagian dari nama class dan tidak sama dengan pemanggilan biasa `PrismaClient()`; object hasil konstruksi dapat memiliki perilaku dan state yang ditentukan oleh class tersebut. Lihat [MDN: `new` operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new).
+
+```ts
+export const prisma = new PrismaClient();
+throw new Error("Field tidak valid");
+```
+
+Baris pertama membangun satu object client Prisma lalu mengekspornya agar module lain dapat menggunakannya. Baris kedua membangun object `Error`, lalu `throw` melemparkannya sehingga alur normal berhenti dan penanganan error dapat mengambil alih. `throw` adalah keyword (kata kunci bahasa), bukan operator.
+
+### Simbol tipe dan sintaks yang mirip operator
+
+**Titik dua `:` pada TypeScript** memperkenalkan anotasi tipe, misalnya `umur: number`; ia tidak membandingkan ataupun mengubah nilai. **Titik dua pada object literal** memisahkan key dan value, seperti `{ nama: "Budi" }`, sedangkan **titik dua pada ternary** memisahkan hasil saat kondisi salah. Konteks ini menjelaskan mengapa satu tanda baca tidak boleh diberi satu arti universal.
+
+```ts
+const umur: number = 17;
+const user = { nama: "Budi" };
+const label = aktif ? "Aktif" : "Nonaktif";
+```
+
+Pada baris pertama, `: number` memberi tahu pemeriksa TypeScript bahwa `umur` harus bertipe angka; annotation ini dihapus saat TypeScript ditranspilasi dan bukan validasi runtime. Pada object, `nama: "Budi"` mendefinisikan property. Pada ternary, `:` memisahkan cabang alternatif.
+
+**Tanda tanya `?` dan union `|` pada TypeScript** juga bukan operator runtime pada contoh-contoh ini. `email?: string` menandai property opsional, sehingga object `User` boleh tidak menyertakan `email`; `string | null` menyatakan nilai boleh berupa string atau `null`. Di Prisma, `String?` menandakan field nullable di skema database; arti dan dampaknya mengikuti aturan Prisma, bukan aturan operator JavaScript.
+
+```ts
+interface User {
+  id: number;
+  email?: string;
+}
+
+type Hasil = string | null;
+```
+
+`email?` tidak sama dengan `user?.email`: yang pertama mendeklarasikan property opsional pada tipe, sedangkan yang kedua (optional chaining) melakukan akses aman pada saat program berjalan. Union `|` juga berbeda dari OR logis `||`: `|` dalam type declaration menyatukan pilihan tipe, sementara `||` mengevaluasi nilai saat runtime.
+
+Keyword **`as` dalam type assertion** memberi tahu TypeScript cara memperlakukan suatu nilai pada pemeriksaan tipe, misalnya `formData.get("nama") as string`. Ini bukan konversi nilai saat runtime dan bukan jaminan bahwa nilainya benar-benar string; jika nilai aslinya bukan string, assertion tidak mengubahnya. Karena `FormData.get()` dapat mengembalikan `null`, contoh produksi sebaiknya memeriksa hasilnya atau memvalidasi data sebelum digunakan. Pada contoh Zod `z.infer<typeof skema>`, **`typeof` di posisi tipe** meminta TypeScript mengambil tipe dari variable `skema`; ini adalah type query (permintaan tipe saat kompilasi), bukan pemeriksaan `typeof` JavaScript yang menghasilkan string saat program berjalan.
+
+```ts
+const masukan = formData.get("nama");
+if (typeof masukan !== "string") {
+  throw new Error("Field nama wajib berupa teks");
+}
+const nama: string = masukan;
+```
+
+Di dalam `if`, `typeof masukan` saat runtime menghasilkan string yang menyatakan jenis nilai, misalnya `"string"` atau `"object"`; perbandingan `!== "string"` menolak nilai yang bukan string. Setelah kondisi tersebut, TypeScript dapat mempersempit tipe `masukan` menjadi `string`, sehingga assignment ke `nama` aman tanpa assertion paksa. Bedakan bentuk runtime `typeof masukan` dari bentuk tipe `typeof skema` di `z.infer<typeof skema>` berdasarkan posisinya.
+
+Pada contoh `FormData`, nilai `formData.get("nama")` bertipe `FormDataEntryValue | null`: ia dapat berupa string, file (`File`), atau `null` bila field tidak ditemukan. Karena itu, pemeriksaan `typeof masukan !== "string"` berguna untuk menolak file maupun nilai yang tidak ada. `typeof` runtime secara umum menghasilkan string nama tipe seperti `"string"`, `"number"`, `"boolean"`, `"undefined"`, atau `"object"`; ada pengecualian historis, misalnya `typeof null` menghasilkan `"object"`. Lihat [MDN: `typeof` operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) dan [TypeScript: `typeof` type operator](https://www.typescriptlang.org/docs/handbook/2/typeof-types.html).
+
+**Kurung sudut `<...>` pada generic TypeScript** menyatakan parameter tipe pada konteks tipe, seperti `Promise<User>` atau `ambilPertama<string>(...)`; ini bukan operator perbandingan pada contoh tersebut. Namun `<` dan `>` juga dapat menjadi operator pembanding dalam ekspresi angka, serta menjadi pembatas tag JSX, sehingga konteks sintaks sangat penting. Dalam TSX/JSX, penulisan generic pada arrow function dapat ambigu dengan tag; ikuti sintaks yang didukung versi TypeScript dan formatter proyek.
+
+```ts
+function ambilPertama<T>(arr: T[]): T {
+  return arr[0];
+}
+const nama = ambilPertama<string>(["Budi", "Sari"]);
+```
+
+`T` adalah parameter tipe yang ditentukan dari pemakaian function. Karena argument berupa `string[]`, hasil function bertipe `string`; `<string>` membuat pilihan tipe eksplisit, tetapi TypeScript sering dapat menyimpulkannya sehingga pemanggilan juga dapat ditulis `ambilPertama(["Budi", "Sari"])`.
+
+**Tanda kurung kurawal `{}`, kurung siku `[]`, koma, titik koma, dan titik** umumnya merupakan tanda sintaks/pemisah, bukan operator tunggal. Kurung kurawal dapat membentuk blok kode, object literal, destructuring, atau area ekspresi JavaScript dalam JSX; kurung siku dapat membentuk array, destructuring, indeks akses, atau nama property dinamis. Koma memisahkan item/argument/property, titik koma mengakhiri statement, dan titik mengakses property/method. Periksa konstruksi lengkap sebelum menentukan fungsinya.
+
+```js
+const { nama, kelas } = user;       // object destructuring
+const [pertama, kedua] = warna;    // array destructuring
+const siswa = { nama, kelas };     // object literal; shorthand property
+```
+
+Pada destructuring object, nama variable dicocokkan dengan nama property; pada destructuring array, posisi menentukan nilai yang diambil. Dalam object literal `{ nama, kelas }`, shorthand property berarti setara dengan `{ nama: nama, kelas: kelas }`. Kurung kurawal juga muncul sebagai blok pada `if` atau function, jadi bentuk kurung yang sama tidak selalu berarti object.
+
+### Operator dan kata kunci pada SQL
+
+**Operator perbandingan SQL `=` dan `>`** membandingkan nilai pada setiap baris dan menghasilkan kondisi yang dapat dipakai untuk memilih atau menggabungkan baris. Pada query roadmap, `p.user_id = u.id` mencocokkan foreign key pesanan dengan primary key user, sedangkan `p.status = 'selesai'` hanya menerima pesanan berstatus selesai. `>` berarti lebih besar; pada query contoh lain operator ini terlihat dalam JavaScript (`stok > 0`), bukan kondisi SQL. Jangan tertukar dengan `=` JavaScript yang melakukan assignment: arti operator ditentukan bahasa tempat ekspresi itu ditulis.
+
+**Operator logika SQL `AND`** menggabungkan syarat sehingga semua syarat harus terpenuhi agar baris lolos. Contohnya `WHERE id = 5 AND user_id = 12` hanya mencocokkan pesanan yang sekaligus memiliki ID 5 dan dimiliki user 12. Pada JavaScript, bentuk operasi logika sejenis ditulis `&&`; ejaan SQL `AND` adalah keyword SQL, bukan simbol `&&`.
+
+```sql
+SELECT p.id, p.status
+FROM pesanan p
+WHERE p.status = 'selesai'
+  AND p.total > 0;
+```
+
+Query tersebut memilih kolom `id` dan `status` dari tabel `pesanan`, lalu mempertahankan baris yang statusnya tepat `"selesai"` dan totalnya lebih besar dari nol. Kedua kondisi harus benar. Tanda koma di `SELECT` memisahkan daftar kolom; `FROM`, `WHERE`, dan `AND` adalah keyword SQL yang menyusun query, sedangkan `=` dan `>` adalah operator perbandingan.
+
+Pada query SQL yang ada di roadmap, `JOIN ... ON` menentukan kecocokan baris antartabel, `WHERE` menyaring baris, `GROUP BY` membentuk kelompok, `COUNT(...)` menghitung baris/nilai, `ORDER BY ... DESC` mengurutkan hasil dari nilai terbesar ke terkecil, dan `LIMIT` membatasi jumlah baris hasil. Sebagian besar kata tersebut adalah **keyword atau fungsi SQL**, bukan operator aritmetika. Alias `u` dan `p` setelah nama tabel, serta `AS total_pesanan`, memberi nama singkat agar query lebih mudah dibaca; alias tidak mengubah data sumber.
+
+```sql
+SELECT u.nama, COUNT(p.id) AS total_pesanan
+FROM users u
+JOIN pesanan p ON p.user_id = u.id
+WHERE p.status = 'selesai'
+GROUP BY u.nama
+ORDER BY total_pesanan DESC
+LIMIT 5;
+```
+
+Untuk memahami urutan logisnya, mulai dari `FROM users u` (sumber awal dan alias tabel), lalu `JOIN pesanan p ON ...` (pasangkan user dengan pesanan yang foreign key-nya cocok). `WHERE` hanya mempertahankan baris pesanan yang statusnya `'selesai'` sebelum pengelompokan. `GROUP BY u.nama` menggabungkan baris berdasarkan nilai nama; bila dua user berbeda memiliki nama sama, query ini akan menggabungkan pesanan mereka menjadi satu kelompok. Pada aplikasi nyata, kelompok yang benar-benar per user biasanya memakai `GROUP BY u.id, u.nama`. `COUNT(p.id)` menghitung pesanan dalam setiap kelompok. `AS total_pesanan` memberi nama hasil hitungan; `ORDER BY ... DESC` menempatkan jumlah terbesar lebih dahulu, dan `LIMIT 5` mengambil lima baris teratas. Walaupun `SELECT` tertulis di awal, pemilihan hasil secara logis terjadi setelah sumber, filter, dan pengelompokan ditentukan. Lihat dokumentasi PostgreSQL tentang [operator perbandingan](https://www.postgresql.org/docs/current/functions-comparison.html), [operator logika](https://www.postgresql.org/docs/current/functions-logical.html), dan [SELECT](https://www.postgresql.org/docs/current/sql-select.html).
+
+### Penanda sintaks tambahan pada contoh
+
+Tidak semua karakter yang tampak seperti operator melakukan perhitungan atau perbandingan. `@id`, `@default(...)`, `@unique`, dan `@relation(...)` dalam schema Prisma adalah **attribute** (metadata yang mengatur kolom/model), bukan operator JavaScript. `String?` dan `Pesanan[]` adalah notasi tipe Prisma untuk field nullable dan relasi berbentuk daftar. Di Tailwind, `hover:bg-blue-700` dan `md:px-8` memakai titik dua sebagai pemisah variant/class; ini bukan ternary atau anotasi TypeScript. Di JSX, `<KartuProduk ... />` adalah sintaks elemen, dan `className={...}` memakai kurung kurawal untuk menyisipkan ekspresi JavaScript.
+
+Pada `package.json`, karakter `^` dalam versi seperti `"axios": "^1.7.0"` juga bukan operator JavaScript. Itu adalah penanda rentang versi **semantic versioning** yang dipahami npm: untuk versi non-zero-major seperti `1.7.0`, npm dapat memasang versi yang kompatibel mulai `1.7.0` hingga sebelum `2.0.0` (pembaruan patch/minor, bukan major). Aturan detail mengikuti semantic versioning dan perilaku npm; lihat [npm: About semantic versioning](https://docs.npmjs.com/about-semantic-versioning).
+
+Penanda `<<<<<<<`, `=======`, dan `>>>>>>>` pada contoh *merge conflict* Git bukan operator maupun sintaks program. Git menambahkan teks tersebut ke file untuk menandai bagian yang belum berhasil digabung otomatis: bagian sebelum `=======` biasanya perubahan pada sisi `HEAD`, bagian setelahnya perubahan dari branch yang digabung, dan baris `>>>>>>>` menunjukkan nama/ujung sisi lain. Developer harus memilih atau menggabungkan isi yang benar lalu menghapus penanda sebelum menyimpan hasil. Lihat [GitHub Docs: Resolving a merge conflict](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts).
+
+Perhatikan juga perbedaan `delete` sebagai **nama method** dan `delete` sebagai operator JavaScript. Pada `prisma.user.delete({ where: { id: 1 } })`, `delete` adalah property method milik API Prisma yang dipanggil dengan `()`; ia bukan operator JavaScript `delete`, yang mencoba menghapus property tertentu dari object. Operator tersebut biasanya menghasilkan boolean; pada property yang tidak dapat dikonfigurasi, hasilnya `false` dalam mode non-strict dan dapat melempar `TypeError` dalam strict mode. Arti kata yang sama ditentukan oleh konteks sintaksnya. Lihat [MDN: `delete` operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete).
+
+Tanda kutip (`"..."` atau `'...'`) membatasi string; backtick membatasi template literal; tanda `#` pada contoh terminal menandai komentar shell; dan `//` pada JavaScript/TypeScript menandai komentar satu baris. Komentar tidak dijalankan sebagai instruksi. Dalam contoh JSX, `<!-- -->` adalah komentar HTML, sementara sintaks komentar di dalam ekspresi JSX biasanya `{/* komentar */}`. Contoh-contoh ini membantu membedakan tanda baca yang mengubah nilai dari tanda baca yang hanya menstrukturkan kode.
+
+### Contoh terpadu: membaca operator secara berurutan
+
+```js
+const namaTampilan = user?.nama ?? "Tanpa nama";
+const total = harga * jumlah;
+const tersedia = jumlah > 0 && total >= 10000;
+const label = tersedia ? `${namaTampilan}: Rp${total}` : "Belum tersedia";
+```
+
+Baris pertama memakai optional chaining untuk membaca `nama` dengan aman, lalu nullish coalescing untuk memberikan fallback hanya ketika hasilnya `null` atau `undefined`. Baris kedua menghitung total dengan perkalian. Baris ketiga membandingkan jumlah dengan nol dan total dengan 10000, kemudian `&&` mensyaratkan kedua hasil perbandingan bernilai benar. Baris terakhir menggunakan ternary: bila `tersedia` benar, template literal menyusun nama dan total; bila salah, hasilnya teks `"Belum tersedia"`. Assignment `=` menyimpan hasil setiap ekspresi pada variable di kiri. Dengan menelusuri per baris seperti ini, operator tidak perlu ditebak dari bentuk simbolnya saja.
+
+**Dokumentasi resmi untuk pendalaman:**
+
+- [MDN: Expressions and operators (JavaScript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators) — kategori operator, prioritas evaluasi, dan contoh JavaScript.
+- [MDN: Nullish coalescing operator `??`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing) dan [optional chaining `?.`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) — perbedaan fallback nullish dan akses aman.
+- [MDN: Arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) — parameter, badan fungsi, dan nilai balik implisit.
+- [TypeScript Handbook: Everyday Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html) — anotasi, optional property, dan union type.
+- [React: Writing Markup with JSX](https://react.dev/learn/writing-markup-with-jsx) — aturan sintaks JSX dan penyisipan ekspresi JavaScript.
+- [PostgreSQL: SQL Syntax](https://www.postgresql.org/docs/current/sql-syntax.html) — struktur query dan sintaks SQL PostgreSQL.
+- [Prisma: Prisma Schema](https://www.prisma.io/docs/orm/prisma-schema) — model, field, type, dan attribute pada schema Prisma.
 
 ---
 
