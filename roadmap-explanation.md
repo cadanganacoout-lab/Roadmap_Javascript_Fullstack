@@ -11,7 +11,8 @@
 6. [Phase 4: Database, Backend & Keamanan](#phase-4-database-backend--keamanan-bulan-6-7)
 7. [Phase 5: Capstone, Testing & Deployment](#phase-5-capstone-testing--deployment-bulan-8)
 8. [Phase 6 🆕: Persiapan Karier](#phase-6--persiapan-karier-berjalan-paralel)
-9. [Glosarium](#glosarium-istilah-pemrograman)
+9. [Panduan Rinci Setiap Poin Roadmap](#panduan-rinci-setiap-poin-roadmap)
+10. [Glosarium](#glosarium-istilah-pemrograman)
 
 ---
 
@@ -1551,6 +1552,400 @@ hitungHuruf("halo");  // { h: 1, a: 1, l: 1, o: 1 }
 - **LinkedIn**: foto, headline ("Aspiring Full Stack Developer | Next.js · TypeScript"), proyek.
 - **CV 1 halaman**: proyek (bukan hanya nilai), teknologi, link demo, link GitHub.
 - **Soft skill**: bertanya dengan baik (jelaskan apa yang sudah dicoba), menerima review kode, dan konsisten komunikasi di tempat PKL.
+
+---
+
+# PANDUAN RINCI SETIAP POIN ROADMAP
+
+Bagian ini memperjelas tujuan dan istilah penting pada **setiap poin bernomor**, dari 0.1 sampai 6.3. Gunakan bersama penjelasan dan contoh kode pada fase sebelumnya: tabel ini menerangkan apa yang perlu dipahami, mengapa dipelajari, dan tanda bahwa konsepnya sudah mulai dikuasai. Nama properti, opsi, dan simbol dalam contoh tetap harus dibaca menurut konteksnya—misalnya `name` pada HTML adalah atribut input, sedangkan `name` pada `package.json` adalah properti metadata proyek.
+
+## Referensi Keyword, Property, Operator, dan Sintaks JavaScript per Poin
+
+Bagian ini adalah panduan istilah kode yang dipakai pada contoh roadmap, bukan ringkasan tujuan belajar. **Keyword** adalah kata khusus bahasa seperti `const`, `return`, dan `await`; **property** adalah nilai bernama pada object seperti `res.ok`; **method** adalah function yang diakses dari object seperti `array.map()`; **operator** mengolah nilai seperti `===`, `&&`, dan `...`. Beberapa contoh memakai API React/Next.js atau sintaks HTML/SQL/Prisma, bukan keyword JavaScript; perbedaan itu disebutkan supaya tidak tertukar.
+
+### Phase 1: JavaScript Modern & Asynchronous
+
+#### 1.1 `let` dan `const`
+- **Analogi:** `const` seperti label kotak yang tidak boleh dipindah ke kotak lain; `let` seperti label yang boleh dipindah. Isi kotak object masih dapat berubah walaupun labelnya `const`.
+- `const` dan `let` adalah keyword deklarasi variable. `const` melarang variable di-assign ulang; `let` mengizinkannya. Keduanya memiliki block scope.
+- `=` adalah operator assignment: nilai di kanan disimpan ke nama di kiri. `nama = "Andi"` pada contoh adalah assignment ulang dan akan error bila `nama` dideklarasikan dengan `const`.
+- `// ...` memulai komentar satu baris; komentar tidak dieksekusi.
+- Pada array, `.push(nilai)` adalah method yang menambahkan item ke akhir array. `daftar.push(3)` mengubah isi array yang sama, bukan mengganti binding `daftar`.
+
+#### 1.2 Scope & Closure
+- **Analogi:** Scope seperti ruangan bertingkat: orang di ruangan dalam dapat melihat fasilitas ruangan luar, tetapi orang di luar tidak otomatis bisa melihat barang yang hanya ada di dalam. Closure seperti membawa kunci/akses ke ruangan asal saat keluar.
+- `function` mendeklarasikan function; `return` mengakhiri pemanggilan function dan mengirim nilai kembali ke pemanggil.
+- `{ ... }` pada function dan `if` membentuk blok. `if (true)` memakai kondisi boolean; `console.log(...)` memanggil method untuk menampilkan nilai.
+- `const lokal` dan `const blok` hanya dapat diakses dalam scope tempat deklarasinya serta scope di dalamnya. Mengaksesnya dari luar menyebabkan `ReferenceError`.
+- Pada `return function () { ... }`, function bagian dalam adalah nilai yang dikembalikan. Ia tetap dapat membaca dan memperbarui `hitung` dari scope pembungkusnya; ini yang disebut closure.
+- `hitung = hitung + 1` menggunakan assignment dan operator aritmetika `+`. `counterA()` memanggil function; tiap pemanggilan membaca nilai `hitung` terakhir yang sama.
+
+#### 1.3 Arrow Function & Shorthand
+- **Analogi:** Function adalah resep; parameter adalah tempat bahan dimasukkan. Arrow function menulis resep itu dengan ringkas, sedangkan `return` menyerahkan hasil masakan kepada pemanggil.
+- `=>` membentuk arrow function. `(a, b) => a + b` punya hasil implisit karena badannya satu expression; `(a, b) => { return a + b; }` memakai blok sehingga `return` ditulis.
+- `;` mengakhiri statement; `{}` pada `function`/blok menandai kumpulan statement, sedangkan `{}` dalam object literal membentuk object.
+- `const nama = "Budi", umur = 17` mendeklarasikan dua variable dengan satu `const`. Ini sah, tetapi deklarasi terpisah sering lebih mudah dibaca.
+- `{ nama, umur }` adalah shorthand property: sama dengan `{ nama: nama, umur: umur }`. `nama:` pada bentuk panjang memisahkan nama property dan nilai, bukan operator.
+- `() => ({ nama: "Budi" })` memakai tanda kurung agar `{...}` dikenali sebagai object yang dikembalikan, bukan blok function.
+
+#### 1.4 Destructuring
+- **Analogi:** Destructuring seperti mengambil barang dari laci berdasarkan label untuk object, atau berdasarkan urutan posisi untuk array.
+- `const { nama, kelas } = user` adalah object destructuring: ambil property `nama` dan `kelas` dari `user`, lalu buat variable dengan nama yang sama. `=` di sini menginisialisasi variable.
+- `const { alamat: { kota } } = user` mengambil property bertingkat. Tanda `:` pada pola destructuring memberi nama/struktur sumber, bukan anotasi tipe.
+- `const { umur = 17 } = user` memberi nilai default saat property `umur` bernilai `undefined` atau tidak tersedia; nilai `null` tidak memicu default ini.
+- `[pertama, , ketiga]` adalah array destructuring berdasarkan posisi. Koma kosong melewati elemen kedua; indeks array dimulai dari 0.
+
+#### 1.5 Spread & Rest
+- **Analogi:** Spread seperti menuangkan isi kotak ke tempat baru; rest seperti mengumpulkan barang-barang yang tersisa ke dalam satu kotak.
+- `...` adalah spread saat menyebarkan isi array/object, misalnya `[...a, 3]` atau `{ ...user }`.
+- `...` adalah rest saat mengumpulkan sisa argument/elemen menjadi satu array, misalnya `function jumlah(...angka)`.
+- `{ ...user, kota: "Malang" }` membuat object baru dari property `user`, lalu menetapkan/menimpa property `kota`. Jika nama property duplikat, nilai paling akhir yang dipakai.
+- `reduce((total, n) => total + n, 0)` memanggil method array `.reduce`; `total` adalah accumulator dan `0` adalah nilai awal. Koma di daftar argument memisahkan callback dan nilai awal, bukan operator.
+
+#### 1.6 Template Literal, Optional Chaining, Nullish Coalescing
+- **Analogi:** Template literal seperti mengisi bagian kosong pada formulir kalimat; `?.` seperti memeriksa apakah pintu berikutnya ada sebelum masuk; `??` seperti memakai nilai cadangan hanya jika tempat utama benar-benar kosong.
+- Backtick `` `...` `` membuat template literal; `${ekspresi}` mengevaluasi JavaScript lalu menyisipkan hasilnya ke string.
+- `?.` adalah optional chaining. `user?.alamat?.kota` berhenti dan menghasilkan `undefined` jika nilai di kiri `?.` adalah `null` atau `undefined`.
+- `??` adalah nullish coalescing: gunakan nilai kanan hanya jika nilai kiri `null`/`undefined`.
+- `||` adalah OR logis dan memilih nilai kanan bila nilai kiri falsy, termasuk `0`, `false`, dan `""`. Karena itu `??` dan `||` tidak selalu saling menggantikan.
+- `=` dalam `const kota = ...` tetap assignment/inisialisasi variable, bukan bagian dari operator `??`.
+
+#### 1.7 Modul `import` & `export`
+- **Analogi:** File module seperti ruang kerja dengan barang yang tidak otomatis bisa dipakai ruangan lain; `export` membuka barang tertentu, lalu `import` mengambilnya.
+- `export` dan `import` adalah keyword sistem module JavaScript. `export function ...` dan `export const ...` membuat ekspor bernama.
+- `export default` menandai ekspor default. Import default tidak memakai kurung kurawal; ekspor bernama ditulis dalam `{ ... }` dan nama harus cocok.
+- `from` adalah bagian dari sintaks import yang diikuti string path. `"./utils/harga.js"` adalah path relatif; `"axios"` adalah nama package.
+- `return` mengirim hasil dari function ke pemanggil. String `"Rp " + angka...` memakai `+` untuk menggabungkan teks; `.toLocaleString("id-ID")` adalah method angka untuk menghasilkan format lokal.
+
+#### 1.8 Array Methods
+- **Analogi:** Array methods seperti lini pengolahan barang: `map` mengganti setiap barang, `filter` memilih yang lolos syarat, `find` mengambil satu yang cocok, dan `reduce` menggabungkan semuanya menjadi satu hasil.
+- `.map(callback)` menjalankan callback untuk setiap item dan mengembalikan array hasil baru. `.filter(callback)` mempertahankan item ketika callback menghasilkan truthy. `.find(callback)` mengembalikan item cocok pertama atau `undefined`.
+- `.reduce(callback, nilaiAwal)` menggabungkan item menjadi satu hasil. Callback menerima accumulator dan item saat ini.
+- `p => p.nama` adalah callback arrow function dengan hasil implisit. `p.stok > 0` memakai operator perbandingan dan menghasilkan boolean.
+- `===` membandingkan nilai dan tipe secara ketat; `!==` membandingkan ketidaksamaan ketat. Pada `p.nama === "Topi"`, hasil boolean dipakai oleh `.find`.
+- `0` pada `reduce(..., 0)` adalah nilai awal jumlah, agar array kosong tetap menghasilkan angka 0.
+
+#### 1.9 HTTP Dasar & JSON
+- **Analogi:** HTTP seperti layanan pengiriman: method menjelaskan jenis layanan, header adalah label/petunjuk paket, body adalah isi paket, dan status adalah kabar hasil pengirimannya. JSON adalah format tulisan standar untuk mencatat isi paket.
+- `JSON.parse(teks)` dan `JSON.stringify(nilai)` adalah method pada object global `JSON`; yang pertama mengurai teks JSON menjadi nilai JavaScript, yang kedua membuat teks JSON.
+- `"nama"` dan `"umur"` pada JSON adalah nama property dalam format teks. JSON hanya mendukung bentuk data tertentu; function dan `undefined` bukan nilai JSON.
+- `GET`, `POST`, `PUT`, `PATCH`, dan `DELETE` di contoh HTTP adalah nilai method/protokol, bukan keyword JavaScript.
+- `Content-Type` dan `Authorization` adalah nama header HTTP; status seperti `200` adalah kode response. CORS adalah kebijakan browser mengenai origin, bukan operator atau fitur yang mengautentikasi user.
+
+#### 1.10 Asynchronous JavaScript
+- **Analogi:** Asynchronous seperti mengambil nomor antrean: program tidak harus berdiri menunggu, dapat mengerjakan hal lain lalu kembali saat hasil siap. Promise adalah tanda terima bahwa hasil akan tersedia atau gagal nanti.
+- `setTimeout(callback, 0)` adalah pemanggilan function API yang menjadwalkan callback; angka `0` meminta jeda minimum, bukan berarti callback berjalan sebelum kode sinkron selesai.
+- `.then(callback)` mendaftarkan langkah untuk hasil Promise; `.catch(callback)` menangani rejection; `.finally(callback)` menjalankan langkah akhir terlepas dari sukses/gagal.
+- `async` menandai function yang hasilnya selalu Promise. `await` menunggu hasil Promise di dalam function async; ia tidak menghentikan seluruh browser.
+- `try`, `catch`, dan `finally` adalah keyword untuk jalur error. `throw new Error(...)` melempar exception; `new` membuat instance object Error.
+- `if (!res.ok)` memakai `!` untuk membalik boolean property `ok`. `res.status` adalah property status HTTP; `res.ok` bernilai true untuk response HTTP sukses.
+- `Promise.all([...])` adalah method static pada `Promise`; daftar Promise dimulai bersamaan, hasilnya berupa array sesuai urutan input, dan satu rejection membuat keseluruhannya reject.
+- `[users, produk]` menerima hasil array dengan destructuring; posisi menentukan hasil mana yang masuk ke variable.
+
+#### 1.11 Fetch API & Axios
+- **Analogi:** `fetch` dan Axios seperti dua cara mengisi formulir permintaan ke server; keduanya mengirim alamat, instruksi, dan isi, lalu menerima paket balasan yang perlu diperiksa.
+- `fetch(url, options)` memanggil API untuk membuat request. Object options memiliki property `method`, `headers`, dan `body`; nama-nama ini bagian dari API Fetch, bukan keyword.
+- `headers: { "Content-Type": "application/json" }` menyatakan format body. `body: JSON.stringify(data)` mengubah object JavaScript menjadi teks untuk dikirim.
+- `await fetch(...)` menghasilkan object `Response`; `.json()` membaca body dan mengurai JSON, juga secara asynchronous.
+- `res.ok` dan `res.status` adalah property Response. Fetch tidak reject hanya karena status 404/500, jadi periksa `ok` sendiri.
+- `import axios from "axios"` mengimpor default export package Axios; `axios.post(url, data)` membuat request POST. `{ data }` adalah destructuring property `data` dari object response Axios.
+
+#### 1.12 Git & GitHub
+- **Analogi:** Git seperti buku catatan perubahan proyek; commit adalah satu catatan tersimpan, branch seperti jalur kerja terpisah, dan Pull Request seperti meminta rekan memeriksa perubahan sebelum digabung.
+- `git init`, `git add`, `git commit`, `git branch`, `git checkout`, dan `git push` adalah perintah Git di terminal, bukan sintaks JavaScript.
+- `-m` adalah opsi perintah commit untuk memberi pesan; `"feat: ..."` adalah string pesan commit. Prefix `feat:`, `fix:`, dan `docs:` adalah konvensi teks.
+- `.gitignore`, `.env`, `.next`, dan `node_modules` adalah nama file/folder; bukan keyword atau property JavaScript.
+- `<<<<<<<`, `=======`, `>>>>>>>` adalah penanda teks Git untuk merge conflict. Hapus penanda setelah memilih/menggabungkan isi, bukan biarkan sebagai kode.
+
+### Phase 2: Tailwind & React
+
+#### 2.1 Tailwind CSS
+- **Analogi:** Class Tailwind seperti label instruksi pada sebuah elemen: satu label untuk warna, satu untuk jarak, dan label bersyarat untuk hover atau ukuran layar.
+- `class` pada HTML dan `className` pada JSX adalah atribut/property untuk daftar class CSS, bukan keyword/operator JavaScript.
+- `bg-blue-600`, `text-white`, `px-4`, `py-2`, `rounded-lg`, dan `gap-4` adalah nama utility Tailwind. Spasi memisahkan beberapa class.
+- `hover:` dan `md:` adalah variant Tailwind: aturan diterapkan pada kondisi hover atau breakpoint medium ke atas. Titik dua di sini bukan ternary atau anotasi tipe.
+- `grid-cols-1`, `md:grid-cols-2`, dan `lg:grid-cols-3` menentukan jumlah kolom pada ukuran layar berbeda. Kelas tanpa prefix berlaku sebagai aturan dasar mobile-first.
+
+#### 2.2 React: JSX
+- **Analogi:** JSX seperti cetak biru tampilan yang boleh menyisipkan nilai JavaScript ke bagian tertentu; React memakai cetak biru itu untuk menentukan UI.
+- JSX memakai tag seperti `<h1>`; `className` adalah property JSX untuk class, dan `<img />` adalah elemen yang ditutup sendiri.
+- `{nama}` atau `{2 + 3}` menyisipkan expression JavaScript ke JSX. `{}` bukan object literal di sini; konteksnya adalah batas expression JSX.
+- `const` mendeklarasikan variable; `=` memberikan hasil JSX atau string kepadanya. JSX bukan string HTML.
+- Fragment `<>...</>` mengelompokkan beberapa elemen tanpa menambahkan elemen DOM pembungkus.
+
+#### 2.3 Komponen & Props
+- **Analogi:** Component seperti cetakan kartu; props adalah data yang diberikan untuk mengisi cetakan tersebut. Cetakan menerima data, tetapi tidak seharusnya mengubah kiriman dari pemiliknya.
+- `function KartuProduk(...)` mendeklarasikan component; nama berhuruf besar menandai component React.
+- `{ nama, harga, stok = 0 }` adalah destructuring parameter props. `stok = 0` adalah nilai default untuk prop yang tidak diberikan/`undefined`.
+- `<KartuProduk nama="Kaos" harga={50000} />`: `nama` dan `harga` adalah nama props; teks diberi tanda kutip, sedangkan angka/expression ditulis dalam `{}`.
+- `harga.toLocaleString("id-ID")` membaca property `harga` lalu memanggil method angka untuk format lokal.
+- `return (...)` mengembalikan JSX. Props adalah input read-only; untuk meminta perubahan, child memanggil callback prop yang disediakan parent.
+
+#### 2.4 Conditional Rendering & Rendering List
+- **Analogi:** Conditional rendering seperti memilih papan informasi yang sesuai keadaan (memuat, kosong, atau siap); `map` seperti mencetak satu label untuk setiap barang, sementara `key` adalah nomor identitas tiap label.
+- `if (kondisi) return ...` adalah conditional statement dan early return; `===` membandingkan nilai/tipe.
+- `.map((p) => (...))` mengubah setiap object produk menjadi elemen `<li>`. Property `p.id`, `p.nama`, dan `p.stok` mengambil nilai object.
+- `key={p.id}` adalah prop khusus React untuk identitas item list. React menggunakannya saat mencocokkan item antar-render; `key` tidak otomatis menjadi prop biasa yang dapat dibaca component anak.
+- `kondisi && <span>` memakai AND logis untuk menghasilkan elemen saat kondisi benar. Ternary `kondisi ? A : B` memilih satu dari dua expression.
+- Untuk daftar kosong, `produk.length === 0` membaca property panjang array. Jika memakai `produk.length && ...`, angka `0` dapat tampil di UI; lebih jelas gunakan perbandingan boolean eksplisit.
+
+#### 2.5 State: `useState`
+- **Analogi:** State seperti papan skor yang dikelola React. Meminta setter mengubah skor membuat React memperbarui tampilan papan; mengubah catatan diam-diam tanpa memberi tahu React tidak cukup.
+- `import { useState } from "react"` mengambil ekspor bernama React. `useState(0)` adalah pemanggilan Hook dengan nilai awal.
+- `const [count, setCount] = ...` memakai array destructuring: state saat ini lalu fungsi setter. Nama setter mengikuti konvensi `set` + nama state.
+- `onClick={...}` adalah prop event React. Nilainya function callback, bukan pemanggilan langsung saat render.
+- `() => setCount(count + 1)` membuat callback; `+` menghitung nilai baru. Untuk update berdasar state sebelumnya, `setCount((prev) => prev + 1)` memakai updater function.
+- `setProduk([...produk, baru])`, `.filter(...)`, dan `.map(...)` membentuk array baru. `{ ...p, selesai: true }` menyalin object lalu mengganti property `selesai`; `id !== idHapus` mempertahankan item lain.
+
+#### 2.6 Side Effect: `useEffect`
+- **Analogi:** Render adalah menggambar ulang layar; effect adalah pekerjaan setelah gambar siap, seperti memesan data atau memasang alarm. Dependency array adalah daftar hal yang bila berubah membuat pekerjaan itu dijalankan kembali.
+- `useEffect(callback, dependencies)` adalah Hook React. Callback effect berjalan setelah render dan dependency array menentukan kapan effect diulang.
+- `[]` adalah array dependency kosong; `[id]` adalah array dengan nilai yang dipantau; tanpa argumen kedua effect dapat dijalankan lagi setelah setiap render.
+- `async function muat()` mendefinisikan fungsi asynchronous di dalam effect. Callback `useEffect` sendiri tidak dibuat `async` karena callback effect diharapkan mengembalikan cleanup atau tidak mengembalikan apa pun.
+- `setProduk(await res.json())` menunggu parsing JSON lalu menyimpan data ke state. `setLoading(false)` berjalan pada blok `finally`.
+- `setError(e.message)` membaca property pesan error. Pada TypeScript, nilai catch dapat `unknown`, sehingga perlu diperiksa sebelum membaca `message`.
+- Contoh roadmap perlu mempertimbangkan cleanup/cancel saat request lama masih berjalan dan component dilepas; dependency `[]` berarti URL tidak berubah dalam contoh tersebut.
+
+#### 2.7 `useRef`, Context & Custom Hook
+- **Analogi:** Ref seperti catatan kecil yang bisa diperbarui tanpa menggambar ulang layar; Context seperti pengumuman yang dapat didengar komponen di sekitarnya; custom Hook seperti mengemas resep logika agar dapat dipakai ulang.
+- `useRef(null)` membuat object ref yang property `.current`-nya dapat menunjuk ke elemen DOM. `ref={inputRef}` menghubungkan ref dengan elemen.
+- `.focus()` adalah method DOM untuk memindahkan fokus ke input. `inputRef.current` bisa null sebelum elemen terpasang, sehingga kode produksi dapat perlu pemeriksaan null.
+- `createContext("terang")` membuat Context dengan nilai default; `<ThemeContext.Provider value="gelap">` menyediakan property `value` bagi descendant.
+- `useContext(ThemeContext)` membaca nilai Provider terdekat. Ternary `tema === "gelap" ? ... : ...` memilih class berdasarkan nilainya.
+- `function useFetch(url)` adalah custom Hook; awalan `use` mengikuti aturan React. `return { data, loading }` mengembalikan object dengan shorthand properties.
+- `.then(...)` dan `.finally(...)` membentuk rantai Promise. Error handling pada contoh ringkas ini perlu ditambahkan agar rejection tidak menjadi kegagalan tak tertangani.
+
+#### 2.8 Form Handling & Validasi
+- **Analogi:** Form adalah formulir yang nilainya disinkronkan dengan catatan state; validasi adalah pemeriksaan isian. Pemeriksaan di browser seperti petugas awal, tetapi server tetap harus memeriksa sendiri sebelum menerima data.
+- `e` adalah parameter event; `e.target` adalah elemen input yang memicu event. `name` dan `value` adalah property HTML input.
+- `const { name, value } = e.target` mengambil dua property; `setForm({ ...form, [name]: value })` menyalin object lalu memakai computed property name untuk memperbarui field terpilih.
+- `[name]` berbeda dari `name`: bentuk kurung siku mengevaluasi variable untuk menentukan nama property. `{ name: value }` menetapkan property literal `"name"`.
+- `onChange` dan `onSubmit` adalah prop event React. `e.preventDefault()` memanggil method event untuk mencegah submit bawaan browser.
+- `Object.keys(baru)` adalah method static yang mengembalikan array nama property; `.length === 0` memeriksa tidak ada error.
+- `z.object`, `z.string`, `.email`, `.min` adalah API Zod untuk menyusun validasi; `.infer` adalah tipe TypeScript Zod, bukan nilai JavaScript runtime.
+- `register("email")` menghubungkan input ke React Hook Form. `{...register("email")}` memakai JSX spread attributes untuk menyebarkan `name`, handler, dan ref yang dikembalikan.
+
+### Phase 3: TypeScript & Next.js
+
+#### 3.1 TypeScript Dasar
+- **Analogi:** Tipe TypeScript seperti label pada wadah yang menjelaskan isi yang diharapkan; label membantu menemukan kekeliruan saat menulis, tetapi tidak memeriksa paket dari luar ketika tiba saat runtime.
+- `: number`, `: string`, `: boolean`, dan `: string[]` adalah anotasi tipe TypeScript, bukan operator runtime JavaScript. `:` memisahkan nama variable/parameter dari tipe.
+- `interface` dan `type` adalah keyword TypeScript untuk mendeskripsikan tipe. `id: number` property wajib; `email?: string` property opsional.
+- `"aktif" | "nonaktif"` memakai union operator tipe `|` (dibaca “atau”), bukan OR logis runtime.
+- `function sapa(user: User, salam: string = "Halo"): string` berisi parameter bertipe, nilai default, dan anotasi tipe hasil setelah `)`.
+- `<T>` pada `function ambilPertama<T>` adalah parameter tipe generic. `T[]` berarti array item bertipe T; `Promise<User>` berarti Promise yang hasilnya User.
+- `any` melemahkan pemeriksaan tipe; `unknown` mewajibkan pemeriksaan/narrowing sebelum operasi. TypeScript menghapus tipe saat runtime sehingga data dari request tetap perlu validasi.
+- `() => void` dalam tipe props menyatakan function tanpa parameter yang hasilnya tidak dipakai; `useState<number>(0)` memberikan argumen generic pada Hook.
+
+#### 3.2 Next.js: File-based Routing
+- **Analogi:** Struktur folder seperti peta alamat: folder menentukan jalur, file khusus menentukan apa yang ditemui di alamat itu, dan `[id]` adalah bagian alamat yang nilainya berubah-ubah.
+- `app/`, `produk/`, `[id]/` adalah nama folder. `[id]` adalah pola route dinamis; bukan sintaks akses array JavaScript.
+- `page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`, dan `route.ts` adalah nama file khusus Next.js, bukan keyword bahasa.
+- `children` adalah prop yang memuat isi route; `React.ReactNode` adalah tipe React untuk konten yang dapat dirender.
+- `<html lang="id">` memakai atribut HTML `lang`; `{children}` menyisipkan nilai JavaScript ke JSX.
+- Pada route dinamis, `params` adalah nilai parameter route. Versi Next.js tertentu memberi `params` sebagai Promise, sehingga contoh memakai `await params`; ikuti tipe versi proyek.
+
+#### 3.3 Server Component vs Client Component
+- **Analogi:** Server Component seperti dapur belakang yang dapat memakai bahan rahasia; Client Component seperti meja layanan interaktif di depan pengguna. Informasi rahasia tidak boleh dibawa ke meja depan.
+- `"use client"` adalah directive string di awal module yang menetapkan batas client; `"use server"` pada contoh Server Action adalah directive server. Keduanya bukan keyword JavaScript umum.
+- `useState`, `useEffect`, dan `onClick` adalah Hook/prop React yang memerlukan kemampuan client. Component server dapat memakai `async`/`await` untuk data server sesuai kerangka Next.js.
+- `prisma.produk.findMany()` membaca model `produk` melalui Prisma Client; `await` menunggu hasilnya.
+- `.map((p) => <li key={p.id}>{p.nama}</li>)` menghasilkan list; `key` untuk identitas React, `p.id`/`p.nama` adalah field data.
+- `params: Promise<{ id: string }>` adalah anotasi tipe TypeScript. `Number(id)` memanggil fungsi global untuk mengonversi teks URL menjadi angka; hasilnya perlu dipastikan valid.
+- `if (!produk)` menguji nilai falsy/tidak ada. Nilai kosong array `[]` tetap truthy di JavaScript, jadi cek khusus bila ingin memperlakukan hasil kosong.
+
+#### 3.4 SSR vs SSG
+- **Analogi:** SSR seperti memasak pesanan saat pelanggan datang; SSG seperti menyiapkan hidangan lebih dulu; ISR seperti menyiapkan sebelumnya tetapi memperbarui persediaan secara berkala.
+- `fetch(url, { ... })` memakai object options. `cache` adalah property opsi Fetch Next.js dengan nilai string `"force-cache"` atau `"no-store"`.
+- `next` adalah property opsi khusus Next.js; `revalidate` menyatakan interval detik pada contoh. `{ next: { revalidate: 60 } }` adalah object bertingkat.
+- `const res = await fetch(...)` menyimpan Response. Strategi caching memengaruhi kapan data diambil ulang; bukan operator JavaScript dan dapat bergantung versi/konfigurasi Next.js.
+
+#### 3.5 Server Actions & API Routes
+- **Analogi:** Server Action seperti loket internal aplikasi untuk mengirim form ke server; API Route seperti alamat layanan resmi yang dapat dipanggil lewat HTTP. Keduanya tetap harus memeriksa siapa peminta dan apa yang dikirim.
+- `"use server"` adalah directive Next.js. `export async function` mengekspor function asynchronous yang dapat dipakai sebagai Server Action.
+- `FormData` adalah API Web; `.get("nama")` mengambil nilai field dan hasilnya `FormDataEntryValue | null`, bukan otomatis string.
+- `as string` adalah type assertion TypeScript. Ia tidak mengonversi atau memvalidasi nilai saat runtime; periksa `null`, jenis File/string, dan validasi isi.
+- `formData.get("nama")` adalah pemanggilan method; `"nama"` cocok dengan atribut `name="nama"` pada input.
+- `revalidatePath("/produk")` adalah function Next.js untuk meminta cache path diperbarui.
+- `action={buatProduk}` menghubungkan form ke action; `{status: 201}` adalah object opsi response dengan property `status`.
+- `export async function GET()`/`POST(request: Request)` menggunakan nama export yang dikenali Next.js sebagai HTTP method handler. `request.json()` membaca body; `NextResponse.json(data)` membentuk response JSON.
+- `data: body` dan `where: ...` adalah property object argument Prisma, bukan operator. Validasi body dan otorisasi harus dilakukan sebelum operasi database.
+
+#### 3.5b Fitur Next.js yang Sering Dipakai
+- **Analogi:** `Image` dan `Link` seperti perlengkapan khusus yang membantu menangani gambar dan perpindahan halaman; metadata seperti label pada sampul; environment variable seperti konfigurasi yang disimpan terpisah dari isi aplikasi.
+- `Image` dari `next/image` dan `Link` dari `next/link` adalah component yang diimport; `src`, `alt`, dan `href` adalah props yang diberikan.
+- `export const metadata = { title: ... }` mengekspor konfigurasi metadata Next.js; `title` adalah property object.
+- `process.env.NAMA` mengakses environment variable di sisi server. `NEXT_PUBLIC_` adalah konvensi prefix Next.js agar variable dapat diekspos ke client; jangan menyimpan credential/secret di dalamnya.
+
+### Phase 4: Database, Backend & Keamanan
+
+> Contoh di fase ini mencampur JavaScript/TypeScript dengan SQL dan Prisma Schema. Kata seperti `SELECT`, `WHERE`, `@id`, dan `@relation` bukan keyword JavaScript; penjelasannya di bawah menjaga konteks bahasanya.
+
+#### 4.1 SQL Dasar
+- **Analogi:** Query seperti instruksi mengolah lembar data: pilih sumber, cocokkan tabel, saring baris, kelompokkan, hitung, urutkan, lalu batasi hasil.
+- `SELECT`, `FROM`, `JOIN`, `ON`, `WHERE`, `GROUP BY`, `ORDER BY`, `LIMIT`, `AS`, `COUNT`, dan `DESC` adalah keyword/fungsi SQL. `=` di kondisi SQL membandingkan nilai menurut aturan SQL; jangan samakan dengan assignment `=` JavaScript.
+- `u` dan `p` adalah alias tabel; `u.nama` menunjuk kolom `nama` dari alias tabel `u`. `AS total_pesanan` memberi nama kolom hasil.
+- `COUNT(p.id)` menghitung nilai `id` yang tidak null di tiap group. `GROUP BY u.nama` mengelompokkan semua baris dengan nama sama; tambahkan `u.id` untuk membedakan user bernama sama.
+- String SQL ditulis dengan petik tunggal, misalnya `'selesai'`; `DESC` mengurutkan menurun; `LIMIT 5` membatasi hasil menjadi maksimal lima baris.
+
+#### 4.2 PostgreSQL & Relasi
+- **Analogi:** Relasi database seperti daftar rujukan antarlembar: foreign key menunjuk catatan induk, sementara tabel penghubung seperti daftar pasangan untuk menghubungkan banyak siswa dengan banyak kegiatan.
+- `(1)`, `<`, dan `>` pada diagram adalah notasi cardinality: `1` berarti satu, kaki gagak menandai banyak. Dalam SQL nyata relasi diwujudkan melalui primary key, foreign key, constraint, dan tabel.
+- `users`, `pesanan`, `siswa`, `ekskul`, `siswa_ekskul` adalah nama tabel ilustrasi, bukan variable JavaScript.
+- `user_id`, `siswa_id`, dan `ekskul_id` lazim menjadi kolom foreign key. Tabel penghubung menyimpan pasangan key untuk relasi many-to-many.
+
+#### 4.3 Prisma ORM
+- **Analogi:** Prisma seperti penerjemah antara object JavaScript dan tabel database: schema menjelaskan bentuk data, sedangkan method seperti `findMany` menerjemahkan maksud baca data menjadi query.
+- `model`, tipe field seperti `Int`, `String`, `DateTime`, dan tanda `?`/`[]` merupakan sintaks Prisma Schema: nullable dan relasi daftar. Bukan tipe atau operator JavaScript.
+- `@id`, `@default(...)`, `@unique`, dan `@relation(...)` adalah attribute Prisma. `fields: [userId]` dan `references: [id]` adalah argumen bernama attribute; `@` bukan decorator JavaScript di sini.
+- Dalam JavaScript/TypeScript, `new PrismaClient()` memakai `new` untuk membuat instance; `export const prisma` mengekspor satu client.
+- `prisma.user.create({ data: {...} })`, `.findMany({ where, orderBy, include })`, `.update(...)`, dan `.delete(...)` adalah pemanggilan method Prisma. `data`, `where`, `orderBy`, dan `include` adalah property opsi.
+- `contains` dan `mode` adalah property filter Prisma; `"insensitive"` memilih pencarian tanpa membedakan huruf besar/kecil. `orderBy: { id: "desc" }` mengurutkan ID menurun; `include: { pesanan: true }` meminta relasi ikut dimuat.
+- `await` menunggu operasi database; `where: { id: 1 }` membatasi target. `delete` pada `prisma.user.delete(...)` adalah method, bukan operator JavaScript `delete`.
+- `npx prisma ...` adalah perintah terminal. `migrate dev`, `generate`, dan `studio` adalah subperintah Prisma CLI.
+
+#### 4.4 Supabase
+- **Analogi:** Supabase menyediakan tempat database; `DATABASE_URL` seperti alamat dan kunci akses menuju tempat itu. Simpan kunci di konfigurasi rahasia, bukan ditempel di kode yang dibagikan.
+- `DATABASE_URL` adalah nama environment variable. Teks connection string mengandung alamat/credential dan harus dirahasiakan.
+- Pada Prisma Schema, `datasource`, `provider`, `url`, `env("DATABASE_URL")`, dan `"postgresql"` adalah sintaks/konfigurasi Prisma, bukan JavaScript. `env(...)` membaca environment variable untuk konfigurasi tool.
+- Dalam kode server, `process.env.DATABASE_URL` adalah pola umum untuk membaca environment; pastikan nilai tersedia dan hanya digunakan pada server.
+
+#### 4.5 Autentikasi & Otorisasi
+- **Analogi:** Autentikasi seperti memeriksa kartu identitas; otorisasi seperti memeriksa apakah pemegang kartu boleh memasuki ruangan tertentu.
+- `bcrypt.hash(password, 10)` dan `bcrypt.compare(...)` adalah method library. `10` adalah parameter cost factor sesuai API/library; ikuti panduan library dan kapasitas server.
+- `passwordDariForm`, `hash`, `email`, dan `user.password` adalah variable/property data. Simpan hash, bukan password asli.
+- `await` menunggu hash atau query; `prisma.user.create({ data: ... })` adalah operasi database.
+- `const session = await auth()` memperoleh sesi dari helper auth. `if (!session) redirect("/login")` memakai `!` untuk memeriksa ketiadaan sesi dan memanggil helper redirect.
+- `session.user?.name` memakai optional chaining. `role === "admin"` (contoh otorisasi) membandingkan role; pengecekan harus dilakukan server-side pada operasi yang dilindungi.
+
+#### 4.6 Keamanan Dasar
+- **Analogi:** Keamanan seperti menjaga gedung: validasi memeriksa barang yang dibawa, autentikasi memeriksa identitas, dan otorisasi memeriksa izin masuk ke ruangan/data tertentu.
+- `where: { id: Number(id), userId: session.user.id }` adalah object filter Prisma; kedua kondisi pada object where secara default harus cocok (AND). `Number(id)` mengonversi teks, tetapi input tetap perlu divalidasi.
+- `findFirst(...)` adalah method Prisma yang mencari record pertama yang memenuhi filter; `if (!pesanan)` menangani record yang tidak ditemukan.
+- `notFound()` adalah helper Next.js untuk menampilkan status not-found/route not-found; bukan keyword JavaScript.
+- SQL injection, XSS, CSRF, secret leakage, validasi, dan IDOR adalah kategori masalah keamanan, bukan operator. ORM, escaping React, atau middleware tidak menggantikan validasi input dan pemeriksaan izin yang sesuai.
+
+### Phase 5: Capstone, Testing & Deployment
+
+#### 5.1 Testing Dasar
+- **Analogi:** Test seperti daftar pemeriksaan sebelum menyerahkan barang: siapkan kondisi, jalankan tindakan, lalu cocokkan hasil dengan standar yang diharapkan.
+- `import { describe, it, expect } from "vitest"` mengimpor API test bernama. `describe`, `it`, dan `expect` adalah function framework test, bukan keyword JavaScript.
+- Callback `() => { ... }` menjadi isi test. `expect(hasil).toBe(harapan)` memanggil matcher untuk membandingkan hasil.
+- `expect(() => hitungDiskon(...)).toThrow()` memberikan function agar framework dapat menjalankannya dan memeriksa exception. Jika memanggil function sebelum `expect`, exception bisa terjadi di luar pemeriksaan.
+- `10` pada `hitungDiskon(100000, 10)` adalah argument persentase; `.toBe(90000)` menguji nilai tepat. Arrange/Act/Assert adalah pola menyusun tes, bukan keyword.
+
+#### 5.2 Capstone Project
+- **Analogi:** Capstone seperti produk contoh di etalase: bukan hanya harus terlihat, tetapi juga perlu berfungsi, aman dicoba, memiliki petunjuk, dan bisa diperiksa orang lain.
+- Checklist `- [ ]` adalah sintaks daftar tugas Markdown, bukan sintaks JavaScript. Isinya adalah kriteria aplikasi: auth/role, tabel relasional, validasi server, state UI, responsive, test, dokumentasi, demo, dan commit.
+- Dalam implementasi, `loading`, `error`, dan data kosong biasanya direpresentasikan sebagai state/nilai dan ditampilkan secara kondisional; role/izin harus dicek di server.
+- README, screenshot, link demo, dan riwayat commit adalah artefak proyek untuk membantu reviewer memeriksa aplikasi.
+
+#### 5.3 Deployment
+- **Analogi:** Deployment seperti memindahkan aplikasi dari meja kerja ke toko yang dibuka untuk umum; konfigurasi production adalah kunci toko, dan migration adalah perubahan tata ruang yang perlu dilakukan hati-hati.
+- `git push` dan `npx prisma migrate deploy` adalah perintah terminal. Yang pertama mengirim commit; yang kedua menerapkan migration yang sudah disiapkan ke database target.
+- `"scripts": { "build": "prisma generate && next build" }` adalah konfigurasi JSON `package.json`: `scripts` dan `build` adalah property; `"prisma generate && next build"` adalah string shell.
+- `&&` pada string perintah shell menjalankan perintah kedua hanya jika perintah pertama sukses. Ini bukan evaluasi `&&` JavaScript, walau simbolnya sama.
+- `DATABASE_URL` adalah environment variable rahasia; CI/CD dan dashboard hosting mengatur nilai production di luar source code.
+
+### Phase 6: Persiapan Karier
+
+#### 6.1 Dasar Algoritma & Struktur Data
+- **Analogi:** Algoritma seperti petunjuk langkah demi langkah; struktur data seperti cara menata bahan agar cepat ditemukan dan dihitung.
+- `for (const huruf of teks)` menggunakan keyword `for`, `const`, dan `of`: iterasi setiap karakter iterable `teks`, dengan variable baru `huruf` pada tiap langkah.
+- `const hasil = {}` membuat object kosong. `hasil[huruf]` memakai bracket notation/computed property access: nilai `huruf` menjadi nama key, bukan teks literal `"huruf"`.
+- `(hasil[huruf] || 0)` memakai OR logis sebagai fallback untuk nilai falsy. Karena jumlah yang tersimpan adalah angka positif atau belum ada, `0` adalah nilai awal yang sesuai.
+- `(hasil[huruf] || 0) + 1` membaca hitungan sebelumnya lalu menambah satu; `hasil[huruf] = ...` menyimpan nilai baru pada property tersebut.
+- `return hasil` mengembalikan object frekuensi. Pada sistem yang menerima key khusus/tidak tepercaya, gunakan `Map` atau object tanpa prototype untuk menghindari benturan key object.
+
+#### 6.2 Bahasa Inggris Teknis
+- **Analogi:** Membaca dokumentasi teknis seperti membaca peta: istilah kunci membantu menemukan bagian yang tepat, tetapi rute tetap perlu dicocokkan dengan versi dan kondisi proyek.
+- `undefined`, `not found`, `unexpected token`, dan `unauthorized` adalah kata/teks yang mungkin muncul di error, bukan keyword yang harus ditulis di kode.
+- Nama situs dokumentasi adalah sumber referensi. Saat membaca contoh kode, identifikasi syntax/API, versi library, dan pesan error lengkap sebelum menerapkan solusi.
+- README dan pesan commit adalah dokumen/teks proyek; gunakan istilah yang akurat, singkat, dan mudah dicari.
+
+#### 6.3 Profil Profesional
+- **Analogi:** Profil profesional seperti etalase karya: susun contoh terbaik, beri label yang jujur, dan sediakan petunjuk agar orang lain dapat mencoba atau menilai hasilnya.
+- GitHub profile README dan LinkedIn adalah halaman profil; headline, deskripsi, link repository/demo, serta CV adalah konten informasi, bukan konstruksi JavaScript.
+- `Next.js` dan `TypeScript` pada headline adalah nama teknologi. Cantumkan hanya kemampuan yang dapat dibuktikan lewat proyek atau pengalaman.
+- Saat meminta bantuan/review, sertakan tujuan, perilaku yang diharapkan, perilaku aktual, pesan error, dan langkah yang sudah dicoba; jangan mengirim secret seperti `.env`.
+
+## Phase 0: Fondasi Lingkungan Kerja
+
+| Poin | Penjelasan yang diperjelas | Tanda sudah dipahami |
+|---|---|---|
+| **0.1 Terminal / Command Line** | Terminal menerima perintah teks untuk berpindah folder, melihat file, membuat folder, dan menjalankan program. `pwd` menunjukkan lokasi saat ini; `ls` menampilkan isi folder; `cd` berpindah lokasi; `mkdir` membuat folder. Teks setelah `#` pada contoh adalah komentar untuk manusia. Perintah shell dapat berbeda antara macOS/Linux, PowerShell, dan Command Prompt, jadi gunakan padanan yang sesuai dengan terminalmu. | Bisa membuka folder proyek yang benar, menjalankan perintah di sana, dan memahami bahwa path relatif seperti `..` berarti folder induk. |
+| **0.2 Node.js & npm** | Node.js adalah runtime untuk menjalankan JavaScript di luar browser. npm mengelola package dan script proyek. Di `package.json`, `name` adalah identitas proyek; `scripts` adalah perintah bernama yang dapat dijalankan lewat npm; `dependencies` adalah package yang dibutuhkan aplikasi saat berjalan. Versi seperti `^1.7.0` adalah rentang versi yang diizinkan npm, bukan operator JavaScript. `node_modules` adalah hasil instalasi package; jangan commit karena dapat dibuat ulang dari manifest dan lockfile. | Bisa membedakan memasang package (`npm install`) dari menjalankan script (`npm run ...`), serta mengetahui bahwa `package.json` dan lockfile perlu disimpan di Git. |
+| **0.3 HTML, CSS & DOM Refresher** | HTML menyusun elemen dan makna halaman; CSS mengatur tampilannya; DOM adalah representasi elemen HTML sebagai pohon yang dapat dibaca atau diubah JavaScript. `getElementById` mencari satu elemen berdasarkan `id`; `addEventListener` memasang callback untuk event; `textContent` mengganti teks dengan aman sebagai teks biasa. Flexbox dan Grid mengatur tata letak, sedangkan margin, border, dan padding membentuk box model. Elemen semantik seperti `<main>` menjelaskan peran konten, bukan sekadar tampilannya. | Bisa menjelaskan hubungan HTML → DOM → JavaScript, membuat layout dasar, dan memilih elemen HTML berdasarkan maknanya. |
+| **0.4 Debugging & Browser DevTools** | Debugging adalah proses menemukan penyebab kesalahan, bukan menebak lalu mengubah kode secara acak. Console memperlihatkan pesan dan error JavaScript; Network menunjukkan request, status, waktu, dan respons; Elements membantu memeriksa DOM/CSS; Sources menyediakan breakpoint untuk menghentikan eksekusi dan memeriksa nilai variable. `console.log` berguna untuk memeriksa input dan hasil antara, tetapi breakpoint lebih tepat bila perlu melihat urutan eksekusi dan scope. | Bisa mengulang masalah, membaca pesan error, memeriksa nilai aktual, lalu menunjukkan titik pertama nilai tersebut berbeda dari yang diharapkan. |
+| **0.5 ESLint & Prettier** | Prettier merapikan bentuk kode secara konsisten, misalnya indentasi dan pemenggalan baris. ESLint memeriksa pola kode dan memberi peringatan/error untuk hal seperti variable tidak terpakai atau pola yang berisiko. Keduanya tidak menggantikan pemahaman kode dan tidak selalu mendeteksi bug logika. Format on save menjalankan formatter ketika file disimpan; aturan proyek sebaiknya diikuti bersama oleh seluruh tim. | Bisa membedakan masalah format dari masalah kualitas/pola kode dan menjalankan pemeriksaan proyek tanpa mengabaikan error yang bermakna. |
+
+## Phase 1: JavaScript Modern & Asynchronous
+
+| Poin | Penjelasan yang diperjelas | Tanda sudah dipahami |
+|---|---|---|
+| **1.1 `let` dan `const`** | Keduanya membuat binding variable dengan cakupan block. Gunakan `const` bila nama variable tidak perlu diberi nilai baru; gunakan `let` bila binding-nya memang akan diperbarui. `const` tidak membekukan object atau array: isinya masih bisa berubah, tetapi nama variable tidak dapat diarahkan ke object/array lain. Hindari `var` pada kode baru karena aturan scope dan hoisting-nya berbeda serta lebih mudah menimbulkan kebingungan. | Bisa memilih `const` atau `let` berdasarkan apakah binding akan di-assign ulang, bukan berdasarkan apakah nilai di dalam object bisa berubah. |
+| **1.2 Scope & Closure** | Scope menentukan di bagian mana suatu nama variable dapat digunakan. `let` dan `const` mengikuti lexical scope: kode di dalam dapat membaca scope pembungkusnya, tetapi scope luar tidak dapat membaca variable yang hanya dibuat di dalam. Closure terjadi saat function tetap menyimpan akses ke variable lexical tempat function itu dibuat, walaupun function pembuatnya sudah selesai. Closure berguna untuk mempertahankan state privat, callback, dan memahami mengapa function React dapat mengakses state/props dari render tertentu. | Bisa menemukan mengapa suatu nama menghasilkan `ReferenceError`, serta menjelaskan bagaimana counter pada contoh mengingat nilai `hitung` di antara pemanggilan. |
+| **1.3 Arrow Function & Shorthand** | Arrow function adalah cara menulis function sebagai expression. Bentuk `parameter => expression` otomatis mengembalikan hasil expression; bila memakai badan `{ ... }`, perlu `return` jika ingin mengembalikan nilai. Shorthand object `{ nama, umur }` setara dengan `{ nama: nama, umur: umur }` jika nama variable dan property sama. Arrow function juga memiliki aturan `this` yang berbeda dari function biasa; jangan menggantinya secara membabi buta ketika kode bergantung pada `this`. | Bisa membedakan badan expression dari badan blok, menambahkan `return` pada tempat yang tepat, dan membaca shorthand sebagai pasangan nama property/nilai. |
+| **1.4 Destructuring** | Destructuring mengambil nilai dari object atau array lalu menempatkannya ke variable. Pada object, nama di pola biasanya harus sama dengan nama property; pada array, posisi yang menentukan nilai. `alamat: { kota }` mengambil property bertingkat `kota`, sedangkan `umur = 17` memberi default jika property `umur` bernilai `undefined` atau tidak ada—bukan jika nilainya `null`. | Bisa mengurai pola object dan array, mengetahui sumber setiap variable hasil, serta membedakan default dari validasi data. |
+| **1.5 Spread & Rest** | Simbol `...` berarti spread saat menyebarkan isi array/object atau argument, dan rest saat mengumpulkan sisa nilai menjadi array/object. Urutan spread object penting: property yang ditulis belakangan menimpa property bernama sama. Salinan dengan spread bersifat **shallow** (dangkal): object di dalamnya masih dapat menunjuk ke object yang sama, sehingga perubahan data bertingkat perlu menyalin tiap tingkat yang diubah. | Bisa menjelaskan apakah `...` sedang menyebarkan atau mengumpulkan, memprediksi property mana yang menang, dan tidak menganggap spread membuat salinan mendalam. |
+| **1.6 Template Literal, Optional Chaining, Nullish Coalescing** | Template literal memakai backtick dan `${...}` untuk menyisipkan hasil ekspresi ke string. Optional chaining `?.` menghentikan akses jika nilai tepat di kirinya `null` atau `undefined`, lalu menghasilkan `undefined`; ia tidak otomatis memvalidasi bahwa data wajib tersedia. Nullish coalescing `??` memilih nilai default hanya untuk `null`/`undefined`; berbeda dari `||`, yang juga mengganti `0`, `false`, dan string kosong. | Bisa memilih `??` ketika nilai falsy seperti `0` tetap sah, dan tahu kapan akses opsional harus diikuti pemeriksaan/penanganan nilai kosong. |
+| **1.7 Modul `import` & `export`** | Module membagi kode ke beberapa file. `export` bernama mengeluarkan item dengan nama tertentu dan biasanya diambil memakai `{ nama }`; `export default` menyediakan satu ekspor utama yang dapat diimpor dengan nama pilihan. Path relatif seperti `./utils/harga.js` menunjuk file proyek, sedangkan nama package seperti `"axios"` dicari oleh resolver package. | Bisa mengekspor fungsi/data dari satu file, mengimpornya di file lain, dan mendiagnosis kesalahan path atau nama ekspor. |
+| **1.8 Array Methods** | `map` mengubah tiap item dan menghasilkan array baru dengan panjang sama; `filter` mempertahankan item yang lolos kondisi; `find` mengembalikan item cocok pertama atau `undefined`; `reduce` menggabungkan item menjadi satu hasil dengan accumulator dan nilai awal. Callback menerima item saat ini; parameter tambahannya dapat berupa index dan array sumber. `map`/`filter` tidak mengubah array asal, tetapi callback tetap bisa mengubah object item jika sengaja melakukan mutasi. | Bisa memilih method berdasarkan bentuk hasil yang diperlukan dan menerangkan hasil tiap iterasi, khususnya accumulator pada `reduce`. |
+| **1.9 HTTP Dasar & JSON** | HTTP mengatur pertukaran request/response. Method menyatakan maksud umum (`GET` baca, `POST` buat/kirim, `PUT` ganti, `PATCH` ubah sebagian, `DELETE` hapus), tetapi server yang menentukan perilaku endpoint sebenarnya. Status `2xx` sukses, `3xx` pengalihan, `4xx` masalah request/izin, dan `5xx` kegagalan server. Header membawa metadata; body membawa isi request/response. CORS adalah kebijakan browser untuk request lintas origin, bukan mekanisme autentikasi. JSON adalah format teks; `JSON.parse` mengurai teks, `JSON.stringify` mengubah data menjadi teks. | Bisa memeriksa method, URL, status, header, dan body sebuah request serta tidak menganggap JSON sebagai object sebelum di-parse. |
+| **1.10 Asynchronous JavaScript** | Kode sinkron berjalan sesuai urutan; pekerjaan asynchronous memberi kesempatan program melanjutkan pekerjaan lain sebelum hasilnya tersedia. Event loop mengatur kapan callback yang siap dijalankan mendapat giliran. Promise merepresentasikan hasil yang mungkin tersedia nanti, dengan status pending/fulfilled/rejected. `async` membuat function selalu mengembalikan Promise; `await` menunggu Promise di dalam function tersebut dan melempar rejection sebagai error. `try/catch/finally` menangani jalur sukses, gagal, dan pekerjaan yang harus selalu dilakukan. `Promise.all` memulai pekerjaan dalam daftar secara bersamaan dan menghasilkan array hasil sesuai urutan input; ia reject jika salah satu Promise reject. | Bisa membedakan urutan baris dari waktu selesainya request, menangani rejection, dan tahu kapan pekerjaan independen layak dijalankan dengan `Promise.all`. |
+| **1.11 Fetch API & Axios** | `fetch(url, options)` adalah API browser untuk membuat request; `method`, `headers`, dan `body` pada options mengatur request. Saat mengirim JSON, ubah object menjadi string dengan `JSON.stringify`; saat membaca response, panggil `res.json()`. `fetch` tidak otomatis melempar error untuk status HTTP seperti 404/500, jadi periksa `res.ok`. Axios menyederhanakan beberapa langkah, seperti serialisasi/parsing JSON dan pelaporan status non-sukses melalui rejection. Keduanya tetap memerlukan penanganan error jaringan dan validasi bentuk data. | Bisa mengirim request, membaca response, memeriksa status, dan membedakan error HTTP dari kegagalan jaringan atau parsing. |
+| **1.12 Git & GitHub** | Git mencatat perubahan sebagai riwayat lokal; GitHub menyimpan repository jarak jauh dan menyediakan kerja kolaboratif. `add` memilih perubahan untuk snapshot berikutnya, `commit` menyimpan snapshot, `push` mengirim commit ke remote, dan branch memisahkan pekerjaan. Pull Request meminta review dan penggabungan perubahan; merge conflict berarti Git tidak bisa memilih perubahan secara otomatis. `.gitignore` mencegah file tertentu seperti `.env` dan `node_modules` masuk ke riwayat. | Bisa membuat branch, commit perubahan yang terpilih, push branch, membaca conflict, serta memastikan secret dan file hasil instalasi tidak ikut di-commit. |
+
+## Phase 2: Tailwind & React
+
+| Poin | Penjelasan yang diperjelas | Tanda sudah dipahami |
+|---|---|---|
+| **2.1 Tailwind CSS** | Class Tailwind adalah utility yang masing-masing menerapkan satu atau beberapa deklarasi CSS. `bg-blue-600` mengatur background; `px-4` dan `py-2` mengatur padding horizontal/vertikal; `hover:` memberi aturan saat hover; `md:` mengaktifkan aturan pada breakpoint medium ke atas. Tanpa prefix, aturan berlaku di semua ukuran. Skala angka Tailwind mengikuti konfigurasi/desain framework dan tidak selalu sebaiknya dianggap konversi universal yang tetap. Urutan class di teks tidak selalu menentukan CSS mana yang menang; konflik mengikuti aturan CSS dan generator Tailwind. | Bisa menerjemahkan class menjadi efek visual, membaca variant/prefix, dan membuat layout yang tetap nyaman pada layar kecil maupun besar. |
+| **2.2 React: JSX** | JSX adalah sintaks untuk mendeskripsikan UI, lalu ditransformasikan menjadi pemanggilan React. Teks di antara tag tampil sebagai teks; `{...}` menyisipkan expression JavaScript. `className` digunakan untuk class CSS; elemen harus ditutup; hasil JSX umumnya perlu satu root (fragment `<>...</>` dapat menjadi root tanpa elemen tambahan). JSX bukan string HTML dan hanya menerima expression, bukan statement `if` langsung di dalam kurung kurawal. | Bisa membedakan teks dan expression, membuat elemen bersarang dengan tag tertutup, dan memilih conditional expression atau `if` di luar JSX sesuai kebutuhan. |
+| **2.3 Komponen & Props** | Component adalah function yang menghasilkan UI. Nama component berhuruf besar agar React membedakannya dari tag HTML. Props adalah object input dari parent ke child; destructuring seperti `{ nama, harga, stok = 0 }` mengambil property, dan nilai default dipakai bila prop tidak diberikan/bernilai `undefined`. Sintaks `<KartuProduk nama="Kaos" harga={50000} />` mengirim string langsung dan expression JavaScript melalui `{}`. Props sebaiknya diperlakukan read-only; perubahan data dilakukan oleh pemilik state atau callback yang diberikan parent. | Bisa membuat component reusable dengan input yang jelas, mengirim prop bertipe sesuai maksudnya, dan tidak mengubah props langsung. |
+| **2.4 Conditional Rendering & Rendering List** | `if` dan early return memilih tampilan untuk loading, data kosong, error, atau keadaan normal. `map` menghasilkan elemen untuk tiap item. `key` membantu React mencocokkan item antar-render; gunakan ID stabil dan unik dalam daftar tersebut, bukan nilai yang berubah atau index jika daftar dapat diurutkan/dihapus. `kondisi && elemen` cocok untuk tampilan opsional; ternary cocok untuk memilih satu dari dua hasil. | Bisa menangani keadaan UI yang berbeda dan memastikan setiap item list memiliki key stabil yang berasal dari identitas data. |
+| **2.5 State: `useState`** | State adalah data component yang ketika diperbarui meminta React merender ulang UI terkait. `useState(initialValue)` mengembalikan pasangan `[nilai, setter]`; nama `setCount` hanya konvensi. Update state tidak sama dengan mengubah variable lokal, dan React dapat mengelompokkan update. Bila nilai baru dihitung dari nilai sebelumnya, bentuk updater `setCount((sebelumnya) => sebelumnya + 1)` lebih aman. Array/object state sebaiknya diperbarui dengan membuat salinan baru agar React dapat mengenali perubahan. | Bisa memperbarui state tanpa mutasi langsung, menggunakan updater untuk perubahan berdasarkan nilai sebelumnya, dan memahami bahwa pemanggilan setter tidak langsung mengubah variable pada baris yang sama. |
+| **2.6 Side Effect: `useEffect`** | Effect menjalankan pekerjaan di luar perhitungan UI, misalnya mengambil data, memasang listener, atau sinkronisasi dengan sistem lain. Dependency array menentukan kapan effect dijalankan ulang: `[]` saat mount (dalam praktiknya perilaku development Strict Mode perlu dipahami), `[id]` saat mount dan saat `id` berubah, tanpa array setelah setiap render. Nilai yang dipakai effect dan dapat berubah umumnya perlu dicantumkan sebagai dependency. Effect dapat mengembalikan cleanup untuk melepas listener/timer atau membatalkan pekerjaan lama. Jangan jadikan callback effect `async`; buat dan panggil fungsi async di dalamnya. | Bisa menentukan dependency yang benar, mencegah loop akibat update yang memicu effect berulang, dan membersihkan pekerjaan saat dependency berubah atau component dilepas. |
+| **2.7 `useRef`, Context & Custom Hook** | `useRef` memberi object stabil dengan property `.current`; mengubahnya tidak memicu render, sehingga cocok untuk referensi DOM atau nilai mutable yang tidak perlu tampil di UI. Context membagikan nilai kepada component di bawah Provider terdekat, berguna untuk data bersama dan bukan pengganti semua state lokal. Custom Hook mengekstrak logika React yang dapat dipakai ulang; namanya diawali `use` dan tetap mengikuti Rules of Hooks. | Bisa memilih state untuk data yang memengaruhi UI, ref untuk nilai/DOM yang tidak memicu render, Context untuk data lintas pohon, dan custom hook untuk logika bersama. |
+| **2.8 Form Handling & Validasi** | Pada controlled input, `value` berasal dari state dan `onChange` memperbarui state; atribut `name` mengidentifikasi field yang diubah. `[name]` adalah computed property, sehingga field yang tepat diperbarui secara dinamis. `preventDefault` menghentikan submit bawaan browser. Validasi client membantu pengalaman pengguna, tetapi tidak dapat dipercaya sebagai batas keamanan karena request dapat dibuat tanpa UI; server wajib memvalidasi ulang. React Hook Form mengelola state/interaksi form, sedangkan Zod mendeskripsikan aturan dan memeriksa data; `z.infer` menghasilkan tipe statis dari schema tetapi bukan pengganti validasi runtime. | Bisa menjaga input dan state tetap sinkron, menampilkan error per field, serta memvalidasi payload lagi di server sebelum menyimpan atau memprosesnya. |
+
+## Phase 3: TypeScript & Next.js
+
+| Poin | Penjelasan yang diperjelas | Tanda sudah dipahami |
+|---|---|---|
+| **3.1 TypeScript Dasar** | Anotasi seperti `: number` memberi tahu pemeriksa tipe nilai yang diharapkan. `interface`/`type` mendeskripsikan bentuk data; `?` pada property berarti boleh tidak ada (`undefined`), sedangkan union dengan `null` menyatakan null sebagai nilai yang diizinkan. Union literal membatasi pilihan nilai. Tipe parameter dan tipe hasil function mendokumentasikan kontrak. Generic seperti `<T>` mempertahankan hubungan tipe antara input dan output. TypeScript memeriksa saat development/build; ia tidak otomatis memeriksa JSON/API saat runtime. `any` mematikan banyak pemeriksaan, sedangkan `unknown` mengharuskan pemeriksaan sebelum digunakan. | Bisa memberi tipe pada data/fungsi, membedakan property opsional dan nullable, serta memvalidasi data eksternal sebelum memperlakukannya sebagai tipe yang dipercaya. |
+| **3.2 Next.js: File-based Routing** | App Router membentuk URL dari struktur folder. `page.tsx` menyediakan UI route; `layout.tsx` membungkus route anak dan mempertahankan bagian UI saat navigasi; `loading.tsx` memberi fallback loading; `error.tsx` menyediakan UI pemulihan error; `route.ts` mendefinisikan handler HTTP. Folder `[id]` menangkap segmen URL dinamis. `children` adalah konten route yang ditempatkan layout. | Bisa memetakan URL ke file yang sesuai, memilih file khusus sesuai fungsi, dan mengambil parameter route dinamis dengan benar menurut versi Next.js. |
+| **3.3 Server Component vs Client Component** | Pada App Router, Server Component adalah default dan berjalan untuk menyiapkan UI di server; cocok untuk akses database/secret server serta pengambilan data tanpa mengirim logika interaktif ke browser. Client Component ditandai `"use client"` pada batas module yang membutuhkannya dan dapat memakai state, effect, serta event handler. `"use client"` bukan berarti hasilnya tidak pernah dirender di server; komponen tetap dapat diprerender. Jangan mengirim secret ke props/client bundle, dan pertahankan bagian client sekecil yang diperlukan. | Bisa menentukan bagian yang membutuhkan interaktivitas, menjaga akses database/secret di server, serta memahami batas server/client dan data yang melintasinya. |
+| **3.4 SSR vs SSG** | SSR menghasilkan halaman dengan data saat request sesuai strategi runtime; SSG menyajikan hasil yang sudah dibuat/cache untuk digunakan kembali; ISR memperbarui hasil cache secara berkala atau saat di-revalidate. `force-cache`, `no-store`, dan `next.revalidate` pada contoh mengatur perilaku cache `fetch` Next.js. Caching dapat berubah menurut versi dan konfigurasi framework, jadi keputusan harus dicek pada dokumentasi versi proyek. | Bisa memilih strategi sesuai seberapa sering data berubah dan seberapa mutakhir data harus terlihat, bukan sekadar memilih mode karena dianggap selalu lebih cepat. |
+| **3.5 Server Actions & API Routes** | Server Action menjalankan operasi server yang dapat dihubungkan ke form; `"use server"` menandai batas server. `FormData.get` mengembalikan nilai yang bisa berupa `string`, `File`, atau `null`; type assertion `as string` hanya memberi tahu TypeScript dan tidak memeriksa input sebenarnya. Validasi schema, otorisasi, dan penanganan error tetap diperlukan. `revalidatePath` meminta data/cache route diperbarui. API Route menggunakan nama export method seperti `GET`/`POST`; `request.json()` perlu divalidasi sebelum dipakai. Pilih Server Action untuk mutasi UI dalam aplikasi Next.js; API Route saat perlu endpoint HTTP yang dipanggil client atau sistem lain. Keduanya harus dianggap permukaan server yang perlu dilindungi. | Bisa memvalidasi input yang tidak tepercaya, memeriksa sesi/izin dalam operasi server, dan memilih mekanisme berdasarkan siapa yang akan memanggilnya. |
+| **3.5b Fitur Next.js yang Sering Dipakai** | `next/image` membantu mengoptimalkan penyajian gambar; `next/link` melakukan navigasi internal melalui router Next.js; `metadata` mendeskripsikan judul/informasi halaman untuk browser dan mesin pencari. Environment variable biasa digunakan di server; prefix `NEXT_PUBLIC_` membuat nilainya dapat dikirim ke browser, sehingga tidak boleh berisi secret. Nilai environment produksi diatur pada platform hosting, bukan disimpan dalam repository. | Bisa memilih komponen/framework API yang sesuai dan membedakan konfigurasi publik dari credential rahasia. |
+
+## Phase 4: Database, Backend & Keamanan
+
+| Poin | Penjelasan yang diperjelas | Tanda sudah dipahami |
+|---|---|---|
+| **4.1 SQL Dasar** | `FROM` menentukan sumber baris; `JOIN ... ON` memasangkan baris berdasarkan kondisi relasi; `WHERE` menyaring baris sebelum agregasi; `GROUP BY` membuat kelompok; `COUNT` menghitung nilai/baris; `ORDER BY` mengurutkan; `LIMIT` membatasi jumlah hasil. `AS` memberi alias untuk kolom hasil. Dalam query contoh, pengelompokan berdasarkan nama saja dapat mencampur user berbeda yang kebetulan bernama sama; gunakan ID bersama nama untuk identitas kelompok yang benar. Index dapat mempercepat pencarian tertentu dengan biaya penyimpanan dan pekerjaan saat menulis data. Transaksi membuat beberapa operasi berhasil bersama atau dibatalkan bersama. | Bisa menelusuri query, menjelaskan akibat JOIN/filter/grouping, dan memahami bahwa index serta transaksi menyelesaikan kebutuhan berbeda. |
+| **4.2 PostgreSQL & Relasi** | PostgreSQL adalah sistem database relasional. One-to-Many berarti satu baris induk berhubungan dengan banyak baris anak; foreign key biasanya berada di sisi “many”. Many-to-Many menghubungkan banyak baris pada kedua sisi dan biasanya memakai tabel penghubung dengan dua foreign key. Relasi database perlu constraint agar referensi tidak menunjuk data yang tidak ada; aturan hapus/perubahan relasi perlu dipilih sesuai kebutuhan. | Bisa menggambar cardinality relasi dan menentukan tabel/foreign key yang diperlukan, termasuk tabel penghubung many-to-many. |
+| **4.3 Prisma ORM** | `model` mendefinisikan entitas; setiap field menyatakan nama, tipe, optionality, dan attribute. `@id` adalah primary key; `@default(autoincrement())` membuat ID bertambah otomatis; `@unique` melarang duplikasi; `String?` mengizinkan null; `Pesanan[]` menyatakan relasi banyak yang bukan kolom daftar fisik. Pada `@relation(fields: [userId], references: [id])`, `fields` menunjuk field foreign key lokal dan `references` menunjuk key pada model terkait. CRUD: `create` menambah, `findMany` membaca banyak, `where` menyaring, `orderBy` mengurutkan, `include` memuat relasi, `update` mengubah, dan `delete` menghapus. `migrate dev` membuat/menerapkan perubahan schema untuk development; `generate` membangun Prisma Client; Studio membantu melihat/mengelola data. | Bisa menghubungkan schema ke tabel/relasi, membatasi operasi dengan `where`, membaca tipe hasil, dan menjalankan migration/generate sesuai lingkungan. |
+| **4.4 Supabase** | Supabase menyediakan layanan yang antara lain dapat menjadi hosting PostgreSQL. `DATABASE_URL` adalah connection string yang dipakai backend/ORM untuk terhubung; bagian-bagiannya mencakup host, port, database, user, dan credential. Simpan di environment variable, jangan di Git atau kode browser. `env("DATABASE_URL")` membuat schema mengambil nilai konfigurasi dari environment saat tool berjalan. Pisahkan credential lokal dan production serta batasi akses sesuai kebutuhan. | Bisa menghubungkan aplikasi server ke database tanpa menaruh password dalam source code dan tahu environment mana yang sedang digunakan. |
+| **4.5 Autentikasi & Otorisasi** | Autentikasi memeriksa identitas; otorisasi memeriksa izin terhadap aksi/data tertentu. Password disimpan sebagai hash password yang memang dirancang lambat dan memakai salt—bukan disimpan sebagai teks asli atau enkripsi yang dapat dibalik. Session/token menghubungkan request berikutnya dengan identitas yang sudah diverifikasi; cookie perlu dikonfigurasi aman. Pemeriksaan login dan izin harus dilakukan di server pada setiap operasi yang dilindungi, termasuk mutasi data. Jangan mengandalkan menyembunyikan tombol atau route dari UI. | Bisa menjelaskan alur register/login, menyimpan password dengan library yang tepat, dan memastikan akses data/aksi diperiksa terhadap user/role pada server. |
+| **4.6 Keamanan Dasar** | SQL injection terjadi saat input mengubah struktur query; gunakan parameterized query/ORM dan hindari merangkai SQL dari input mentah. XSS menjalankan konten tak tepercaya sebagai script; escaping membantu, sedangkan HTML mentah memerlukan sanitasi yang tepat. CSRF memalsukan request melalui sesi browser; gunakan perlindungan yang cocok dengan mekanisme cookie/framework. Secret yang bocor harus dianggap terkompromi dan dirotasi, bukan hanya dihapus dari versi terbaru. Validasi server memeriksa bentuk/nilai input, sedangkan otorisasi memeriksa hak akses. IDOR terjadi jika resource dicari hanya dari ID tanpa memeriksa kepemilikan/izin. | Bisa mengidentifikasi trust boundary, memvalidasi dan mengotorisasi setiap operasi server, serta tidak menganggap ORM/React/framework otomatis mengamankan seluruh aplikasi. |
+
+## Phase 5: Capstone, Testing & Deployment
+
+| Poin | Penjelasan yang diperjelas | Tanda sudah dipahami |
+|---|---|---|
+| **5.1 Testing Dasar** | Test menyatakan perilaku yang diharapkan dan memberi tahu jika perubahan merusaknya. `describe` mengelompokkan skenario; `it`/`test` menyebut perilaku yang diuji; `expect` membandingkan hasil aktual dengan harapan. Arrange menyiapkan input, Act menjalankan kode, Assert memeriksa hasil. Unit test menguji unit kecil; integration test menguji kerja sama bagian; E2E menjalankan alur mendekati penggunaan nyata. Pilih assertion yang benar-benar memeriksa nilai/efek yang penting—sekadar memastikan tidak error belum tentu membuktikan hasilnya benar. | Bisa menulis kasus normal, batas, dan gagal; menjalankan test; serta memahami bagian mana yang dijamin oleh tiap tingkat pengujian. |
+| **5.2 Capstone Project** | Capstone menggabungkan kemampuan fase sebelumnya menjadi aplikasi yang dapat dicoba. Autentikasi dan minimal dua role membuktikan pembatasan akses; empat tabel berelasi menunjukkan pemodelan data; validasi server melindungi operasi; loading/error/empty state memberi umpan balik UI; tampilan responsif mendukung ponsel; test melindungi logika penting; README menjelaskan tujuan, teknologi, screenshot, dan cara menjalankan; demo live memudahkan reviewer mencoba; riwayat commit yang teratur memperlihatkan perubahan yang dapat ditelusuri. Checklist adalah kriteria mutu, bukan sekadar fitur untuk dicentang tanpa implementasi yang berfungsi. | Orang lain dapat memahami, menjalankan, dan mencoba aplikasi; alur penting berfungsi; akses dan data ditangani dengan benar; dan repository memberi bukti proses pengerjaan. |
+| **5.3 Deployment** | Deployment menerbitkan aplikasi ke lingkungan yang dapat diakses pengguna. Repository GitHub menjadi sumber build; environment variables di dashboard hosting memasok konfigurasi dan secret; proses build memastikan aplikasi dapat dikompilasi untuk production. CI/CD otomatis menjalankan langkah deploy setelah perubahan dikirim. `prisma migrate deploy` menerapkan migration yang sudah dibuat ke database production dan tidak sama dengan alur development `migrate dev`. Script `"build": "prisma generate && next build"` menjalankan pembuatan Prisma Client sebelum Next.js membangun aplikasi. Rencana rollback/backup penting karena migration production memengaruhi data nyata. | Bisa memisahkan konfigurasi lokal/production, membaca log build/deploy, menerapkan migration yang benar, dan memastikan `.env` tidak masuk repository. |
+
+## Phase 6: Persiapan Karier
+
+| Poin | Penjelasan yang diperjelas | Tanda sudah dipahami |
+|---|---|---|
+| **6.1 Dasar Algoritma & Struktur Data** | Algoritma adalah langkah terstruktur untuk memecahkan masalah; struktur data adalah cara menyimpan/mengatur nilai agar operasi tertentu mudah dilakukan. Array cocok untuk urutan; object/`Map` dapat memetakan key ke nilai; loop menelusuri data; rekursi memecah masalah dengan pemanggilan diri dan wajib memiliki kondisi berhenti. Latihan sebaiknya mencakup memahami input/output, kasus batas, dan alasan solusi bekerja, bukan hanya menyalin jawaban. | Bisa menjelaskan pendekatan sebelum coding, menguji kasus sederhana dan batas, lalu menerangkan kompleksitas dasar secara intuitif. |
+| **6.2 Bahasa Inggris Teknis** | Dokumentasi, API, error, dan diskusi teknis sering memakai istilah Inggris. Tujuannya bukan kefasihan percakapan sempurna, tetapi kemampuan menemukan informasi, memahami instruksi/error, dan menjelaskan perubahan secara singkat. Saat membaca pesan error, identifikasi kata inti, file/baris, dan konteks; verifikasi solusi pada dokumentasi resmi, bukan menerjemahkan pesan secara harfiah saja. | Bisa mencari dokumentasi dengan kata kunci yang tepat dan menulis README/commit sederhana yang dapat dimengerti orang lain. |
+| **6.3 Profil Profesional** | GitHub profile README memperkenalkan fokus dan proyek terkuat; pin repository yang mudah dijalankan dan memiliki dokumentasi. LinkedIn menyajikan identitas profesional, headline spesifik, dan bukti proyek. CV satu halaman menonjolkan dampak/fitur yang dibuat, teknologi yang benar-benar dipakai, serta tautan demo/repository. Soft skill mencakup menyampaikan konteks saat meminta bantuan, merespons review dengan terbuka, dan memberi kabar progres/hambatan secara konsisten. | Reviewer dapat melihat kemampuan melalui proyek konkret, memahami kontribusimu, mengakses hasil kerja, dan berkomunikasi dengan jelas. |
 
 ---
 
