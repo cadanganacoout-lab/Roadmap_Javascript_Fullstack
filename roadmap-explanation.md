@@ -1,8 +1,8 @@
-# 🚀 ROADMAP FULL STACK JAVASCRIPT V2 (Versi Lengkap + Panduan Memahami Kode)
+# 🚀 ROADMAP FULL STACK JAVASCRIPT (Versi Lengkap + Panduan Memahami Kode)
 
 ---
 
-# Penjelasan Lengkap Operator dalam Roadmap Full Stack JavaScript V2
+# Penjelasan Lengkap Operator dalam Roadmap Full Stack JavaScript
 
 ## Pengantar
 
